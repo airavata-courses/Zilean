@@ -9,12 +9,12 @@ Spring 2022 Project Team
 ## Napkin Diagram  
 
 
-![Napkin Diagram] (https://github.com/airavata-courses/Zilean/blob/main/images/napkin.png)
+![Napkin](https://github.com/airavata-courses/Zilean/blob/main/images/napkin.png)
 
 ## Architecture Iterations
 ### Iteration 1
 
-![Architecture] (https://github.com/airavata-courses/Zilean/blob/main/images/architecture_1.png)
+![Architecture](https://github.com/airavata-courses/Zilean/blob/main/images/architecture_1.png)
 
 
 
