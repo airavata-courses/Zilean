@@ -1,0 +1,20 @@
+version: '3'
+services:
+  awsLocalstack:
+    image: localstack/localstack
+    container_name: localstack
+    network_mode: "bridge"
+    restart: always
+    ports:
+      - '4576:4576'
+    environment:
+      - SERVICES=sqs
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - AWS_REGION=us-west-1
+      - AWS_ACCESS_KEY_ID=AKIADUMMY123
+      - AWS_SECRET_ACCESS_KEY=AWSSECRETACCESSEY123
+      - TEST_AWS_ACCOUNT_ID=123456789012
+    volumes:
+      - './tmp/localstack:/tmp/localstack'
+      - '/var/run/docker.sock:/var/run/docker.sock'
