@@ -8,6 +8,14 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             type: DataTypes.INTEGER
         },
+        uuid: {
+            type: DataTypes.STRING(200),
+            allowNull: false
+        },
+        user_id: {
+            type: Sequelize.STRING(200),
+            allowNull: true
+        },
         request: {
             required: true,
             type: DataTypes.JSON
@@ -29,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATE
         }
 }, {
-    tableName: 'audit'
+    tableName: 'Audit'
 });
     return Audit;
 };

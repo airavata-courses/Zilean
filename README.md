@@ -11,3 +11,9 @@ Install Postgres 11.6
 
 
 
+## Developer Purpose Notes
+
+- Create migration 
+    -  sequelize migration:generate --name [migraton-name]
+
+
