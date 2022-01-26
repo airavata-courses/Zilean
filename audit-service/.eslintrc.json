@@ -18,16 +18,9 @@
     "import"
   ],
   "env": {
-    "node": true,
-    "mocha": true
+    "node": true
   },
   "globals": {
-    "SERVICE_URL": true,
-    "WEBAPP_URL": true,
-    "VERSION": true,
-    "ENV": true,
-    "PLATFORM_NAME": true,
-    "CDN_URL": true,
-    "LOADER_URL": true
+    "ENV": true
   }
 }

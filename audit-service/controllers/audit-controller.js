@@ -5,7 +5,6 @@ const responseHandler = require('response-handler');
 const auditController = {};
 
 auditController.getAuditList = async (req, res) => {
-    console.log('Here')
     try {
         const response = {
             "message": "Success"

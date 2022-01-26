@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const NotFoundError = require('./core/errors/not-found');
 const responseHandler = require('response-handler');
 const requestParser = require('request-parser');
+const db = require('./models/index')
 
 const logger = require('logger');
 
