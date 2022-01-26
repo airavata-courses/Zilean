@@ -10,7 +10,7 @@ Spring 2022 Project Team
 
 ![Napkin](https://github.com/airavata-courses/Zilean/blob/main/images/napkin.png)
 
-## Branching Diagram  
+## Branching Pattern  
 
 ![Napkin](https://github.com/airavata-courses/Zilean/blob/main/images/branching.png)
 
