@@ -8,8 +8,11 @@ Spring 2022 Project Team
 
 ## Napkin Diagram  
 
-
 ![Napkin](https://github.com/airavata-courses/Zilean/blob/main/images/napkin.png)
+
+## Branching Diagram  
+
+![Napkin](https://github.com/airavata-courses/Zilean/blob/main/images/branching.png)
 
 ## Architecture Iterations
 ### Iteration 1
