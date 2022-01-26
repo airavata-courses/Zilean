@@ -9,28 +9,25 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER
         },
         request: {
+            required: true,
             type: DataTypes.JSON
         },
         response: {
+            required: true,
             type: DataTypes.JSON
         }, 
         service_provider_identifier: {
+            required: true,
             type: DataTypes.TEXT
         },
         is_deleted: { 
+            default: false,
             type: DataTypes.BOOLEAN,
         },
         created_at: {
             allowNull: false,
             type: DataTypes.DATE
-        },
-        updated_at: {
-            allowNull: false,
-            type: DataTypes.DATE
-        },
-        service_identifier: {
-            type: DataTypes.STRING
-        },
+        }
 }, {
     tableName: 'audit'
 });

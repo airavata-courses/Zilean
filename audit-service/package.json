@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "db:migrate": "./node_modules/sequelize-cli/lib/sequelize db:migrate --config ./config/database.js",
+    "db:migrate": "set -a && . ./.env && ./node_modules/sequelize-cli/lib/sequelize db:migrate --config ./config/database.js",
     "db:test:migrate": "NODE_ENV=test npm run db:migrate",
     "db:all:migrate": "npm run db:migrate; npm run db:test:migrate",
     "db:migrate:undo": "./node_modules/sequelize-cli/lib/sequelize db:migrate:undo --config ./config/database.js",
@@ -24,8 +24,11 @@
     "logger": "file:core/logger",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.15",
+    "pg": "^8.7.1",
+    "request-parser": "file:core/request-parser",
     "response-handler": "file:core/response-handler",
-    "request-parser": "file:core/request-parser"
+    "sequelize": "^6.14.1",
+    "sequelize-cli": "^6.4.1"
   },
   "keywords": [
     "audit",
