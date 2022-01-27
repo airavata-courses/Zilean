@@ -60,7 +60,7 @@ function index() {
     setStation(station_value);
   };
 
-  const submitHandler= async(e)=>{
+  const submitHandler =  async (e)=>{
     e.preventDefault();
     // console.log(date);
     // console.log(time);
@@ -71,7 +71,7 @@ function index() {
         station:station
     }
 
-    await dispatch(postData(submitRequestBody));
+    await (postData(submitRequestBody));
 
   }
 
