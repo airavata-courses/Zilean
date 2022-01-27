@@ -1,22 +1,32 @@
-const { sqs } = require('../core/aws');
-const { AdvancedSqsConsumer } = require('advanced-sqs-consumer');
+const sqs = require('../core/aws').sqs;
 const logger = require('logger');
 const moment = require('moment-timezone');
 const _ = require('lodash');
 const appConfig = require('../config/app');
 const auditRepository = require('../repository/audit-repository');
 
-const app = AdvancedSqsConsumer.create({
+const { Consumer } = require('sqs-consumer');
+
+
+console.log(appConfig.audit_creation_queue_url);
+
+const app = Consumer.create({
     queueUrl: appConfig.audit_creation_queue_url,
-    logger,
-    maxRetryCount: 2,
     handleMessage: async (message) => {
-        logger.info('Audit Creation Worker:', message);
-        const data = JSON.parse(JSON.parse(message.Body).Message);
-        console.log(data);
-        logger.info(`Audit Creation Worker: userId: ${userId}`);
+        console.log(message.MessageId);
+        return true;
     },
     sqs
 });
 
+app.on('error', (err) => {
+    console.error(err);
+});
+
+app.on('processing_error', (err) => {
+    console.error(err);
+});
+
 app.start();
+
+

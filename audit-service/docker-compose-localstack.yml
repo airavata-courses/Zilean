@@ -1,18 +1,21 @@
 version: '3.0'
 services:
-  awsLocalstack:
+  localstack:
     image: localstack/localstack:latest
-    container_name: localstack
     restart: always
     ports:
+      - '4575:4575'
+      - '4576:4576'
+      - '4571:4571'
+      - '8085:8080'
       - '4566:4566'
     environment:
       - SERVICES=sqs
-      - DEBUG=1
-      - EDGE_PORT=4566
       - DATA_DIR=/tmp/localstack/data
-      - AWS_RAWS_DEFAULT_REGION=us-east-1
-      - AWS_REGION=us-east-1
+      - AWS_REGION=us-west-1
+      - AWS_ACCESS_KEY_ID=AKIADUMMY123
+      - AWS_SECRET_ACCESS_KEY=AWSSECRETACCESSEY123
+      - TEST_AWS_ACCOUNT_ID=123456789012
     volumes:
       - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"

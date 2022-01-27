@@ -15,5 +15,15 @@ auditController.getAuditList = async (req, res) => {
     }
 };
 
+auditController.createAudit = async (req, res) => {
+    try {
+        const response = await auditService.createAudit(req.body);
+        responseHandler.respond(response, res);
+    } catch (error) {
+        logger.error('Error while creating audit ', error);
+        responseHandler.handleError(error, res);
+    }
+};
+
 
 module.exports = auditController;
