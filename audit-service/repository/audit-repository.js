@@ -1,10 +1,24 @@
 const moment = require('moment-timezone');
 
 const db = require('../db/models');
-
+const ValuePaginator = require('../core/utils/value-paginator');
 const auditRepository = {};
 
-auditRepository.getAllAudits = async function () {
+auditRepository.getPaginatedAudits = async function (pageInfo) {
+
+    const auditDefaultSort = [{
+            key: 'created_at',
+            order: 'DESC'
+        },
+        {
+            key: 'id',
+            order: 'DESC'
+        }
+    ];
+
+    const valuePaginator = new ValuePaginator(db.audits, auditDefaultSort, {}, []);
+    return valuePaginator.paginate(pageInfo.cursor, parseInt(pageInfo.limit, 10));
+
     return await db.audits.findAll();
 };
 

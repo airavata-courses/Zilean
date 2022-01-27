@@ -3,12 +3,11 @@ const auditService = {};
 const uuid = require('uuid');
 const auditRepository = require('../repository/audit-repository');
 
-auditService.getAuditList = async () => {
-    const auditList = await auditRepository.getAllAudits();
-    return {
-        audits: auditList,
-        message: "Success"
-    }
+auditService.getAuditList = async (pageInfo) => {
+    return await auditRepository.getPaginatedAudits({
+        cursor: pageInfo.cursor,
+        limit: pageInfo.limit
+    });
 }
 
 auditService.createAudit = async (audit) => {

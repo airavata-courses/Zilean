@@ -7,7 +7,7 @@ const auditController = {};
 
 auditController.getAuditList = async (req, res) => {
     try {
-        const response = await auditService.getAuditList();
+        const response = await auditService.getAuditList(req.body);
         responseHandler.respond(response, res);
     } catch (error) {
         logger.error('Error while retrieving document list ', error);
