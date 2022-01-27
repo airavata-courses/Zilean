@@ -14,4 +14,4 @@ done
 
 echo 'Setting up local queues...'
 
-aws --endpoint-url=http://localhost:4576 sqs create-queue --queue-name=audit-sevice-audit-creation
+aws --endpoint-url=http://localhost:4566 sqs create-queue --queue-name=audit-sevice-audit-creation
