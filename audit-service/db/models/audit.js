@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-    const Audit = sequelize.define('Audit', {
+    const Audit = sequelize.define('audits', {
         id: {
             allowNull: false,
             autoIncrement: true,
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         user_id: {
-            type: Sequelize.STRING(200),
+            type: DataTypes.STRING(200),
             allowNull: true
         },
         request: {
@@ -35,9 +35,14 @@ module.exports = (sequelize, DataTypes) => {
         created_at: {
             allowNull: false,
             type: DataTypes.DATE
+        },
+        updated_at: {
+            allowNull: false,
+            type: DataTypes.DATE
         }
 }, {
-    tableName: 'Audit'
+    freezeTableName: true,
+    tableName: 'audits'
 });
     return Audit;
 };

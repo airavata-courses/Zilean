@@ -15,7 +15,9 @@ module.exports = {
         dialect: process.env.DB_CONNECTION,
         logging: process.env.SQL_LOGGING_ENABLED === 'true' ? console.log : false,
         define: {
-            underscored: true
+            underscored: true,
+            createdAt: "created_at",
+            updatedAt: "updated_at"
         },
         dialectOptions: {
             decimalNumbers: true,
@@ -38,7 +40,9 @@ module.exports = {
         dialect: process.env.DB_CONNECTION,
         logging: process.env.SQL_LOGGING_ENABLED === 'true' ? console.log : false,
         define: {
-            underscored: true
+            underscored: true,
+            createdAt: "created_at",
+            updatedAt: "updated_at"
         },
         dialectOptions: {
             decimalNumbers: true,
@@ -61,7 +65,9 @@ module.exports = {
         dialect: process.env.DB_CONNECTION,
         logging: process.env.SQL_LOGGING_ENABLED === 'true' ? console.log : false,
         define: {
-            underscored: true
+            underscored: true,
+            createdAt: "created_at",
+            updatedAt: "updated_at"
         },
         dialectOptions: {
             decimalNumbers: true,
@@ -75,28 +81,3 @@ module.exports = {
         }
     }
 }
-
-
-
-module.exports = {
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    dialect: process.env.DB_CONNECTION,
-    logging: process.env.SQL_LOGGING_ENABLED === 'true' ? console.log : false,
-    define: {
-        underscored: true
-    },
-    dialectOptions: {
-        decimalNumbers: true,
-    },
-    allowed_comparision_operators: ['gt', 'gte', 'lt', 'lte'],
-    pool: {
-        max: normalizeInt(process.env.DB_CONNECTION_POOL_MAX_CONNECTIONS, 5),
-        min: normalizeInt(process.env.DB_CONNECTION_POOL_MIN_CONNECTIONS, 0),
-        idle: normalizeInt(process.env.IDLE, 50000),
-        acquire: normalizeInt(process.env.ACQUIRE, 60000)
-    }
-};
