@@ -27,7 +27,7 @@ export const authSlice = createSlice({
       },
 
     setUserDetails: (state,action) => {
-        state.emailId = action.payload;
+        state.user_details = action.payload;
       },
 
     setIsAuthenticated: (state,action) => {
