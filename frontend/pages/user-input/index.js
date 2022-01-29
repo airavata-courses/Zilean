@@ -85,6 +85,7 @@ function index() {
             id="birthday"
             name="birthday"
             onChange={handleDateChange}
+            min="1992-01-01"
             max={`${yyyy}-${mm}-${dd}`}
             value={date}
           ></input>

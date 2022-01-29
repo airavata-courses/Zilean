@@ -18,7 +18,9 @@ function MainNavigation() {
 
   return (
     <header className={classes.header}>
+      <Link href='/'>
       <div className={classes.logo}>Weather App</div>
+      </Link>
       <nav className={classes.nav}>
         <ul>
           <li>
