@@ -27,5 +27,5 @@ Spring 2022 Project Team
 
 #### User & Session Architecture
 
-![User & Session Architecture](https://github.com/airavata-courses/Zilean/blob/main/images/user-session-architecture.png)
+![User and Session Architecture](https://github.com/airavata-courses/Zilean/blob/main/images/user-session-architecure.png)
 
