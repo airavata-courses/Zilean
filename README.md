@@ -20,5 +20,12 @@ Spring 2022 Project Team
 ![Architecture](https://github.com/airavata-courses/Zilean/blob/main/images/architecture_1.png)
 
 
+#### Weather Data Retrieval & Plotting Architecture 
 
+![Weather Data Retrieval and Plotting Architecture](https://github.com/airavata-courses/Zilean/blob/main/images/weather-data-architecture.png)
+
+
+#### User & Session Architecture
+
+![User & Session Architecture](https://github.com/airavata-courses/Zilean/blob/main/images/user-session-architecture.png)
 
