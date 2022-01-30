@@ -59,13 +59,6 @@ module.exports = () => {
                 }
             });
         }
-
-    try {
-        // req.user = JSON.parse(Buffer.from(req.headers['user'], 'base64').toString());
-    } catch (err) {
-        logger.debug('user not found in the request header', err);
-        req.user = null;
-    }
     next();
     };
 };
