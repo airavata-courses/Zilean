@@ -1,12 +1,13 @@
-# Zilean
-Spring 2022 Project Team
+# Audit Service
 
-- Rushikesh Pharate
-- Piyush Nalawade
-- Aishwarya Sinhasane
+## Database Setup 
 
+Install Postgres 11.6 
 
-## Napkin Diagram  
+- psql postgres
+- create database audit_service_test;
+- create user audit_service_test with encrypted password 'audit_service_test';
+- grant all privileges on database audit_service_test to audit_service_test;
 
 ![Napkin](https://github.com/airavata-courses/Zilean/blob/main/images/napkin.png)
 
@@ -19,6 +20,7 @@ Spring 2022 Project Team
 
 ![Architecture](https://github.com/airavata-courses/Zilean/blob/main/images/architecture_1.png)
 
+## Developer Purpose Notes
 
 #### Weather Data Retrieval & Plotting Architecture 
 
