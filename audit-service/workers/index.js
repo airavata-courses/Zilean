@@ -1,1 +1,0 @@
-require('./audit-creation-event-worker');
