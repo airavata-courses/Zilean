@@ -1,0 +1,32 @@
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import sys
+import requests
+
+from routes.audit import audit_api
+
+
+import os
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+from utils import gateway as gateway_util
+load_dotenv()
+
+# Defines the Flask app
+app = Flask(__name__)
+
+# Cross Origin Resource Sharing (CORS) is enabled for the app
+CORS(app)
+
+app.register_blueprint(audit_api)
+
+
+
+
+@app.route('/')
+def check():
+    return gateway_util.starter()
+
+if __name__ == '__main__':
+    app.run(host='localhost', port=5006)
