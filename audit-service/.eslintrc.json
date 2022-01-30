@@ -1,0 +1,26 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "allowImportExportEverywhere": true,
+    "codeFrame": false
+  },
+  "extends": "airbnb",
+  "rules": {
+    "strict": 0,
+    "comma-dangle": 0,
+    "no-console": "off",
+    "arrow-body-style": 0,
+    "function-paren-newline": "off",
+    "no-underscore-dangle": "off",
+    "max-len": [1, 120, 4]
+  },
+  "plugins": [
+    "import"
+  ],
+  "env": {
+    "node": true
+  },
+  "globals": {
+    "ENV": true
+  }
+}
