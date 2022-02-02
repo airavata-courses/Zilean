@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
 import Layout from "../components/layout/Layout";
 
+import PrivateRoute from "../utils/PrivateRoute";
 import { Provider } from "react-redux";
 import { store } from "../store/store";
 
@@ -17,7 +18,9 @@ function MyApp({ Component, pageProps }) {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Layout>
-          <Component {...pageProps} />
+          {/* <PrivateRoute/> */}
+            <Component {...pageProps} />
+          {/* </PrivateRoute> */}
         </Layout>
       </PersistGate>
     </Provider>

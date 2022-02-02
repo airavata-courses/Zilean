@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { usePostDataMutation } from '../../slices/plotDataApi';
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const stations = [
   "KABR",
@@ -24,6 +24,7 @@ function index() {
   const [station, setStation] = useState("");
 
   const dispatch = useDispatch();
+  const isAuthenticated=useSelector((state)=>state.authReducer.isAuthenticated)
 
   const [postData, {isLoading: postDataIsLoading, isSuccess: postDataIsSuccess, isError: postDataIsError, error: postDataError }] = usePostDataMutation();
 
@@ -37,6 +38,7 @@ function index() {
   const sec = String(today.getSeconds()); // => 51
 
   useEffect(() => {
+    if(isAuthenticated){
     let station_option = "<option value='0'>SelectStation</option>";
 
     for (let i = 0; i < stations.length; i++) {
@@ -44,6 +46,7 @@ function index() {
         "<option value='" + stations[i] + "'>" + stations[i] + "</option>";
     }
     document.getElementById("station-options").innerHTML = station_option;
+  }
   }, [document.getElementById("station-options")]);
 
   const handleDateChange = (e) => {
@@ -77,9 +80,11 @@ function index() {
 
   return (
     <div>
+      { isAuthenticated ?
       <form>
         <div className="mt-2 mb-2">
           <label htmlFor="birthday">Select Date:</label>
+          <span> {' '} </span>
           <input
             type="date"
             id="birthday"
@@ -92,6 +97,7 @@ function index() {
         </div>
         <div className="mt-2 mb-2">
           <label htmlFor="birthday">Select Time:</label>
+          <span> {' '} </span>
           <input
             type="time"
             id="birthday"
@@ -104,6 +110,7 @@ function index() {
 
         <div className="mt-2 mb-2">
           <label htmlFor="birthday">Select Station: </label>
+          <span> {' '} </span>
           <select
             className="custom-select"
             id="station-options"
@@ -116,7 +123,10 @@ function index() {
           Submit
         </button >
 
-      </form>
+      </form> :<div>
+      Please login/signup to plot weather data....
+      </div >
+}
     </div>
   );
 }

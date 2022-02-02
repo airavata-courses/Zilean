@@ -8,9 +8,7 @@ export const authApi = createApi({
 
         createUser: builder.mutation({
             query:({email,password})=>{
-            
-                console.log("Inside pageAPI createUser ",email,password);
-                
+                // console.log("Inside pageAPI createUser ",email,password);
                 return {
                     url:'pages/create/',
                     method:'POST',
@@ -27,7 +25,27 @@ export const authApi = createApi({
                       },
                 }
             },
-            invalidatesTags:['login'],
+            // invalidatesTags:['login'],
+        }),
+
+        logInUser: builder.mutation({
+            query:({username,password})=>{
+                console.log("Inside pageAPI createUser ",username,password);
+                return {
+                    url:'api/token/',
+                    method:'POST',
+                    body:{
+                        username: username,
+                        password: password,
+                    },
+                    headers:{
+                        // Authorization: `JWT ${data.access_token}`,
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                      },
+                }
+            },
+            // invalidatesTags:['login'],
         }),
 
         
@@ -79,5 +97,5 @@ export const authApi = createApi({
 });
 
 
-export const { useCreateUserMutation } = authApi;
+export const { useCreateUserMutation, useLogInUserMutation } = authApi;
 

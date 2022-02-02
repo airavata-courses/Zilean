@@ -6,7 +6,7 @@ const initialState = {
   isAuthenticated: false,
   access_token: "access_token",
   refresh_token: "refresh_token",
-  user_details: [],
+  user_details: {username:""},
 }
 
 export const authSlice = createSlice({
@@ -14,12 +14,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setAccessToken: (state,action) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
       state.access_token = action.payload;
-    //   state.access_token = "123456";
     },
 
     setRefreshToken: (state,action) => {
@@ -31,7 +26,7 @@ export const authSlice = createSlice({
       },
 
     setIsAuthenticated: (state,action) => {
-        state.user_details = action.payload;
+        state.isAuthenticated = action.payload;
       },
 
     setLogout:(state)=>{
@@ -39,7 +34,7 @@ export const authSlice = createSlice({
         state.isAuthenticated=false;
         state.access_token=null;
         state.refresh_token=null;
-        state.user_details=null;  
+        state.user_details={username: ''};  
     },
 
     /*
