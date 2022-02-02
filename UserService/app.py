@@ -18,7 +18,7 @@ uri = "mongodb://localhost:27017"
 db = MongoClient(uri)['User_service']
 #collection = 'Registration_data'
  
-@app.route("/register", methods=["POST"])
+@app.route("/v1/signup", methods=["GET"])
 def register():
     _email = request.json["email"]
     dbemail = db.Registration_data.find_one({"email": _email})
@@ -31,10 +31,10 @@ def register():
                            "email":request.json["email"],
                            "password":hash_password}
         db.Registration_data.insert_one(dc)
-        return jsonify(message="User added sucessfully"), 201
+        return jsonify(message="User registered sucessfully"), 201
 
 
-@app.route("/login", methods=["POST"])
+@app.route("/v1/login", methods=["GET"])
 def login():
     _email = request.json["email"]
     _password = request.json["password"]
@@ -51,4 +51,4 @@ def login():
         return jsonify(message="Bad Email"), 401
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host = "localhost",port=5005)
