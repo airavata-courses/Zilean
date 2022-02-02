@@ -21,7 +21,7 @@ https://documenter.getpostman.com/view/19319161/UVeDuTTk
 * Open session-service folder
 	* For Mac- 
 		* brew cask install eclipse-ide
-	* For windows
+	* For Windows-
 		* Direct download and run the .exe file
 			https://www.eclipse.org/downloads/packages/
 
