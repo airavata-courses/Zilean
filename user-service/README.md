@@ -19,9 +19,9 @@ https://documenter.getpostman.com/view/19319161/UVeDuTmK
 ## Steps
 
   * Open user-service folder 
-  * install flask
-  * install werkzeug.security
-  * install pymongo
+  * pip install flask
+  * pip install werkzeug.security
+  * pip install pymongo
   * run app.py file
 
 
