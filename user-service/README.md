@@ -1,21 +1,27 @@
-# Zilean
-Spring 2022 Project Team
+# User Service 
 
-- Rushikesh Pharate
-- Piyush Nalawade
-- Aishwarya Sinhasane
+## Database Setup 
 
+Install MongoDB 5.0
+Install MongoDB compass
 
-## Napkin Diagram  
+- Open MongoDB compass
+- create database User_service
 
+### Service port 
 
-![Napkin](https://github.com/airavata-courses/Zilean/blob/main/images/napkin.png)
+5005
 
-## Architecture Iterations
-### Iteration 1
+### API Documentation
 
-![Architecture](https://github.com/airavata-courses/Zilean/blob/main/images/architecture_1.png)
+https://documenter.getpostman.com/view/19319161/UVeDuTmK
 
+## Steps
 
+Open user-service folder 
+install flask
+install werkzeug.security
+install pymongo
+run app.py file
 
 
