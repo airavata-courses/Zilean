@@ -11,7 +11,11 @@ Spring 2022 Project Team
 ### To run weather-data-service microservice follow below steps:
 
 - go to the data-retrival-service folder
-- install all the dependencies in the requirements.txt/pipenv file
+- Install python version 3.6+
+- Install Pipenv
+  -- For MAC
+    --- brew install pipenv
+ 
 - install mongodb-compass, mongoDB and create a database table named "request-service". Also, create one collection named "requests"
 - now run ./manage.py runserver command --> it will start the localhost server on port 5003 
 
