@@ -8,8 +8,6 @@ const responseHandler = require('response-handler');
 const requestParser = require('request-parser');
 const db = require('./db/models/index')
 
-// require('./workers');
-
 const logger = require('logger');
 
 const routes = require('./routes/index');

@@ -4,14 +4,12 @@ services:
     env_file:
       - .env
     container_name: audit-service
-    network_mode: "bridge"
     build: .
     command: npm run start:dev
     ports:
       - "5001:5001"
     external_links:
       - postgres:postgres
-      # - localstack:localstack
     volumes:
       - "./:/usr/src/app"
       - /usr/src/app/node_modules

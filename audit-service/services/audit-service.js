@@ -1,12 +1,14 @@
 const auditService = {};
 
 const uuid = require('uuid');
+
+const appConfig = require('../config/app');
 const auditRepository = require('../repository/audit-repository');
 
 auditService.getAuditList = async (pageInfo) => {
     return await auditRepository.getPaginatedAudits({
         cursor: pageInfo.cursor,
-        limit: pageInfo.limit
+        limit: pageInfo.limit || appConfig.default_pagination_limit
     });
 }
 
