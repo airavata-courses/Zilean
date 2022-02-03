@@ -58,7 +58,7 @@ public class SessionAPI {
 				String newAccessToken = updateSession(userId);
 				jsonObject.put("status", 200);
 				jsonObject.put("message", "New Token Generated");
-				jsonObject.put("data",newAccessToken);
+				jsonObject.put("access_token",newAccessToken);
 				return jsonObject;
 			}
 		}
