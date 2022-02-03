@@ -27,6 +27,4 @@ public class SessionHistory {
 	public void setAccess_token(String access_token) {
 		this.access_token = access_token;
 	}
-
-	
 }
