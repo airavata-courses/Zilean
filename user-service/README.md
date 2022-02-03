@@ -21,7 +21,7 @@ Spring 2022 Project Team
       * virtualenv env
       * \path\to\env\Scripts\activate 
 * now run ./manage.py runserver command --> it will start the localhost server on port 5005
-* 
+
 ### Service port 
 
 5005
