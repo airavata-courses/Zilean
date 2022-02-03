@@ -11,7 +11,7 @@ AUDIT_SERVICE=os.environ.get('AUDIT_SERVICE')
 audit_api = Blueprint('audit_api', __name__)
 
 
-@audit_api.route('/v1/audit', methods=["POST"])
+@audit_api.route('/v1/audits', methods=["POST"])
 def createAudit():
     """
     Used to create an audit record
@@ -21,7 +21,7 @@ def createAudit():
     try:
         user_id = request.args.get('userid') or 1 
         response = requests.post(
-            f'{AUDIT_SERVICE}/v1/audit',
+            f'{AUDIT_SERVICE}/v1/audits',
             headers=request.headers,
             data=request.data
         )
@@ -32,7 +32,7 @@ def createAudit():
         return err.response.text, err.response.status_code
 
 
-@audit_api.route('/v1/audit', methods=["GET"])
+@audit_api.route('/v1/audits', methods=["GET"])
 def getPaginatedAudits(cursor=None, limit=10):
     """
     retrieving all active albums from the database.
@@ -41,7 +41,7 @@ def getPaginatedAudits(cursor=None, limit=10):
     """
     try:
         response = requests.get(
-            f'{AUDIT_SERVICE}/v1/audit'
+            f'{AUDIT_SERVICE}/v1/audits'
         )
         response.raise_for_status()
         return response.json(), response.status_code
