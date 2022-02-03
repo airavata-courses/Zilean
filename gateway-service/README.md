@@ -10,3 +10,6 @@ To run gateway microservice follow below steps:
         pip install -r requirements.txt
     ```
 now run python app.py command --> it will start the localhost server on port 5006
+
+
+Documentation: https://documenter.getpostman.com/view/4946631/UVeFP7Zo
