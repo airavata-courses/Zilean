@@ -74,13 +74,14 @@ public class SessionAPI {
 
 	@PostMapping("/logout")
 	public JSONObject removeAccessToken(@RequestBody JSONObject reqBody){
-		String userId = reqBody.get("user_id").toString();
+		String accessToken = reqBody.get("access_token").toString();
 		Query query = new Query();
-		query.addCriteria(Criteria.where("user_id").is(userId));
+		query.addCriteria(Criteria.where("access_token").is(accessToken));
 		Session sessionObject = mt.findOne(query, Session.class);
 		if (sessionObject != null) {
-			SessionHistory sessionHistoryObject = new SessionHistory(userId,sessionObject.access_token);
+			SessionHistory sessionHistoryObject = new SessionHistory(sessionObject.user_id, sessionObject.access_token);
 			mt.insert(sessionHistoryObject);
+			mt.remove(sessionObject);
 			JSONObject jsonObject = new JSONObject();
         	jsonObject.put("status", 200);
         	jsonObject.put("message", "Expired Token Stored");
