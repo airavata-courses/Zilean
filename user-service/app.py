@@ -20,13 +20,13 @@ db = MongoClient(uri)['user-service']
 @app.route("/v1/user/signup", methods=["POST"])
 def register():
     email = request.json["email"]
-    existingUser = db.users.find_one({"email": email})
+    existingUser = db.user.find_one({"email": email})
         
     if existingUser:
         return jsonify(message="User with email {email} Already Exist".format(email=email)), 409
 
     hash_password = generate_password_hash(request.json["password"])
-    db.users.insert_one({
+    db.user.insert_one({
         "email": request.json["email"],
         "password": hash_password
     })
@@ -38,7 +38,7 @@ def login():
     _email = request.json["email"]
     _password = request.json["password"]
 
-    dbemail = db.users.find_one({"email": _email})
+    dbemail = db.user.find_one({"email": _email})
 
     if dbemail['email'] == _email:
         if check_password_hash(dbemail["password"], _password):
