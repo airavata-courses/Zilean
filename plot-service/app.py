@@ -3,7 +3,6 @@ from flask_cors import CORS
 
 from routes.plot import plot_api
 
-
 # Defines the Flask app
 app = Flask(__name__)
 
