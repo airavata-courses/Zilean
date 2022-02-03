@@ -15,6 +15,7 @@ Spring 2022 Project Team
 * brew install maven
 * mvn -f pom.xml -X clean install
   - It will create .jar file 
+* install jdk-17
 * java -jar target/SessionService-0.0.1-SNAPSHOT.jar
 
 
