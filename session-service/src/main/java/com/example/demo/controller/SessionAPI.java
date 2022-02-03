@@ -81,7 +81,7 @@ public class SessionAPI {
 		if (sessionObject != null) {
 			SessionHistory sessionHistoryObject = new SessionHistory(sessionObject.user_id, sessionObject.access_token);
 			mt.insert(sessionHistoryObject);
-			mt.remove(sessionObject);
+			mt.remove(query, Session.class);
 			JSONObject jsonObject = new JSONObject();
         	jsonObject.put("status", 200);
         	jsonObject.put("message", "Expired Token Stored");
