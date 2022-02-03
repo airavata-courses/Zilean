@@ -19,7 +19,9 @@ https://documenter.getpostman.com/view/19319161/UVeDuTTk
 ## Steps
 
 * Open session-service folder
-* Run project as spring boot application.
-
+* brew install maven
+* mvn -f pom.xml -x clean install
+  * It will create .jar file 
+* java -jar target/SessionService-0.0.1-SNAPSHOT.jar
 
 
