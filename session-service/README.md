@@ -10,7 +10,7 @@ Spring 2022 Project Team
 ## Steps to run session service
 
 * Install MongoDB 5.0 and Install MongoDB compass
-* Create database session-service
+* Create database session-service and collection session
 * Open session-service folder
 * brew install maven
 * mvn -f pom.xml -x clean install
