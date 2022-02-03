@@ -23,7 +23,10 @@ def logoutUser():
         accessToken = request.headers.get('Access-Token')
         session_service_response = requests.post(
             f'{SESSION_SERVICE}/v1/session-service/logout',
-            headers=request.headers,
+            headers={
+                'Access-Token': accessToken,
+                'Content-Type': 'application/json'
+            },
             data=json.dumps({
                 "access_token": accessToken
             })

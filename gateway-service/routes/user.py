@@ -23,7 +23,9 @@ def createUser():
     try:
         response = requests.post(
             f'{USER_SERVICE}/v1/user/signup',
-            headers=request.headers,
+            headers={
+                'Content-Type': 'application/json'
+            },
             data=request.data
         )
         response.raise_for_status()
@@ -52,7 +54,9 @@ def checkUser():
 
         session_service_response = requests.post(
             f'{SESSION_SERVICE}/v1/session-service/create-session',
-            headers=request.headers,
+            headers={
+                'Content-Type': 'application/json'
+            },
             data=json.dumps({
                 'user_id': user_id
         }))
