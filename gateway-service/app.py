@@ -1,9 +1,9 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import sys
-import requests
 
 from routes.audit import audit_api
+from routes.user import user_api
 
 
 import os
@@ -20,8 +20,7 @@ app = Flask(__name__)
 CORS(app)
 
 app.register_blueprint(audit_api)
-
-
+app.register_blueprint(user_api)
 
 
 @app.route('/')
