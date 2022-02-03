@@ -6,7 +6,7 @@ Spring 2022 Project Team
 - Aishwarya Sinhasane
 
 ## User Service 
-## Steps
+## Below steps to run user-service
   * Install mongodb-compass, mongoDB and create a database table named "user-service".
   * go to the user-service folder
   * Install Pipenv 
@@ -20,16 +20,8 @@ Spring 2022 Project Team
       * cd user-service
       * virtualenv env
       * \path\to\env\Scripts\activate 
-* now run ./manage.py runserver command --> it will start the localhost server on port 5003 
-
-## Database Setup 
-
-Install MongoDB 5.0
-Install MongoDB compass
-
-- Open MongoDB compass
-- create database User_service
-
+* now run ./manage.py runserver command --> it will start the localhost server on port 5005
+* 
 ### Service port 
 
 5005
