@@ -4,8 +4,8 @@ const router = express.Router();
 
 const auditController = require('../controllers/audit-controller');
 
-router.get('/audit', auditController.getAuditList);
+router.get('/audits', auditController.getAuditList);
 
-router.post('/audit', auditController.createAudit);
+router.post('/audits', auditController.createAudit);
 
 module.exports = router;
