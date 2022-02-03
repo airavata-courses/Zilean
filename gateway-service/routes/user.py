@@ -34,7 +34,7 @@ def createUser():
         return err.response.text, err.response.status_code
 
 
-@user_api.route('/v1/user/login', methods=["GET"])
+@user_api.route('/v1/user/login', methods=["POST"])
 def checkUser():
     """
     Used to check user exists
