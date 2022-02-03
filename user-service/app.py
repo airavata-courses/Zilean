@@ -15,9 +15,8 @@ from pymongo import MongoClient
 app = Flask(__name__)
 
 uri = "mongodb://localhost:27017"
-db = MongoClient(uri)['User_service']
-#collection = 'Registration_data'
- 
+db = MongoClient(uri)['user-service']
+
 @app.route("/v1/signup", methods=["GET"])
 def register():
     _email = request.json["email"]
