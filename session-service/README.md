@@ -13,7 +13,7 @@ Spring 2022 Project Team
 * Create database session-service and collection session
 * Open session-service folder
 * brew install maven
-* mvn -f pom.xml -x clean install
+* mvn -f pom.xml -X clean install
   - It will create .jar file 
 * java -jar target/SessionService-0.0.1-SNAPSHOT.jar
 
