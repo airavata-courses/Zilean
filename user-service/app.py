@@ -1,4 +1,6 @@
+from uuid import uuid4
 from flask import Flask, jsonify, request
+import moment
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from pymongo import MongoClient
@@ -21,7 +23,10 @@ def register():
     hash_password = generate_password_hash(request.json["password"])
     db.user.insert_one({
         "email": request.json["email"],
-        "password": hash_password
+        "password": hash_password,
+        "uuid": uuid4(),
+        "updated_at": moment.utcnow(),
+        "created_at": moment.utcnow()
     })
     return jsonify(message="User registered sucessfully"), 200
 
