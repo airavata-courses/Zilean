@@ -6,7 +6,7 @@ Install MongoDB 5.0
 Install MongoDB compass
 
 - Open MongoDB compass
-- create database Session_data
+- create database Session-data
 
 ### Service port 
 
