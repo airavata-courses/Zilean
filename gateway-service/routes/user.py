@@ -1,3 +1,4 @@
+from turtle import pd
 import requests
 from flask import Blueprint, request, jsonify
 import sys
@@ -7,6 +8,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 USER_SERVICE=os.environ.get('USER_SERVICE')
+SESSION_SERVICE=os.environ.get('SESSION_SERVICE')
+
 
 user_api = Blueprint('user_api', __name__)
 
@@ -45,7 +48,18 @@ def checkUser():
             data=request.data
         )
         user_service_response.raise_for_status()
-        return user_service_response.json(), user_service_response.status_code
+
+        user_id = user_service_response.json().get('user_id')
+
+        session_service_response = requests.post(
+            f'{SESSION_SERVICE}/v1/session-service/create-session',
+            headers=request.headers,
+            data=json.dumps({
+                'user_id': user_id
+        }))
+        session_service_response.raise_for_status()
+
+        return session_service_response.json(), session_service_response.status_code
 
     except requests.exceptions.HTTPError as err:
         return err.response.text, err.response.status_code
