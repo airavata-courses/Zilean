@@ -1,4 +1,3 @@
-from turtle import pd
 import requests
 from flask import Blueprint, request, jsonify
 import sys
@@ -63,3 +62,4 @@ def checkUser():
 
     except requests.exceptions.HTTPError as err:
         return err.response.text, err.response.status_code
+

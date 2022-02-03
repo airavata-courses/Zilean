@@ -4,7 +4,7 @@ import sys
 
 from routes.audit import audit_api
 from routes.user import user_api
-
+from routes.session import session_api
 
 import os
 from os.path import join, dirname
@@ -21,6 +21,7 @@ CORS(app)
 
 app.register_blueprint(audit_api)
 app.register_blueprint(user_api)
+app.register_blueprint(session_api)
 
 
 @app.route('/')
