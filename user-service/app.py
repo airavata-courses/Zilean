@@ -22,9 +22,9 @@ def register():
     db.user.insert_one({
         "email": request.json.get("email"),
         "password": hash_password,
-        "uuid": uuid4(),
-        "updated_at": moment.utcnow(),
-        "created_at": moment.utcnow()
+        "uuid": str(uuid4()),
+        "updated_at": str(moment.utcnow()),
+        "created_at": str(moment.utcnow())
     })
     return jsonify(message="User registered sucessfully"), 200
 
