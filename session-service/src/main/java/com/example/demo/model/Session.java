@@ -4,20 +4,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Session {
-	public String email;
+	public String user_id;
 	public String access_token;
 
-	public Session(String email, String access_token) {
-		this.email = email;
+	public Session(String user_id, String access_token) {
+		this.user_id = user_id;
 		this.access_token  = access_token;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUserId() {
+		return user_id;
 	}
 
-	public void setEmail(String ID) {
-		this.email = ID;
+	public void setUserId(String ID) {
+		this.user_id = user_id;
 	}
 
 	public String getAccess_token() {
