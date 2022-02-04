@@ -102,7 +102,7 @@ public class SessionAPI {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("access_token").is(accessToken));
 		Session userExistingSession = mt.findOne(query, Session.class);
-		if (validateToken(userExistingSession.access_token)) {
+		if (userExistingSession != null && validateToken(userExistingSession.access_token)) {
 			Jws <Claims> claims = Jwts.parser().setSigningKey(SecretKey.API_SECRET_KEY).parseClaimsJws(userExistingSession.access_token);
 			jsonObject.put("status", 200);
 			jsonObject.put("message", "Valided");
