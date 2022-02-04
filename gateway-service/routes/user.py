@@ -6,8 +6,8 @@ import json
 import os
 from dotenv import load_dotenv
 from bson import json_util
-from kafka import KafkaProducer
-kafka_producer = KafkaProducer(bootstrap_servers='localhost:9092')
+
+from ..utils.kafka_producer import kafka_producer
 load_dotenv()
 
 

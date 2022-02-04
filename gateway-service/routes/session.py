@@ -8,7 +8,6 @@ load_dotenv()
 
 SESSION_SERVICE=os.environ.get('SESSION_SERVICE')
 
-
 session_api = Blueprint('session_api', __name__)
 
 

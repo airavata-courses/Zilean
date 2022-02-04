@@ -20,7 +20,6 @@ def createAudit():
     @return - json of the created audit with an http status code
     """
     try:
-
         session_service_response = check_user_session(request.headers.get('Access-Token'))
         audit_request_body = json.loads(request.data)
         response = requests.post(
