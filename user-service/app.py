@@ -1,6 +1,6 @@
 from uuid import uuid4
 from flask import Flask, jsonify, request
-import moment
+from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from pymongo import MongoClient
@@ -23,8 +23,8 @@ def register():
         "email": request.json.get("email"),
         "password": hash_password,
         "uuid": str(uuid4()),
-        "updated_at": str(moment.utcnow()),
-        "created_at": str(moment.utcnow())
+        "updated_at": datetime.utcnow(),
+        "created_at": datetime.utcnow()
     })
     return jsonify(message="User registered sucessfully"), 200
 
