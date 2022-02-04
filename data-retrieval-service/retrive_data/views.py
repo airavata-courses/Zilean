@@ -11,7 +11,6 @@ import requests
 import nexradaws
 from datetime import datetime
 from datetime import timedelta
-import tempfile
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -23,17 +22,17 @@ import uuid
 from datetime import datetime
 
 class RetriveData(APIView):
-    def get(self,request):
+    def post(self,request):
         try:
             date = request.data.get("date")
             time = request.data.get("time")
             station = request.data.get("station")
             user_id = request.data.get("user_id")
-            year, month,day=date.split("-")
-            hh, mm=time.split(":")
-            time_str=str(day)+'/'+str(month)+'/'+str(year)+' '+str(hh)+':'+str(mm)+':'+str(0.0)
+            day, month, year = date.split("-")
+            hh, mm = time.split(":")
+            time_str = str(day)+'/'+str(month)+'/'+str(year)+' '+str(hh)+':'+str(mm)+':'+str(0.0)
             date_format_str = '%d/%m/%Y %H:%M:%S.%f'
-            given_timestamp=datetime.strptime(time_str, date_format_str)
+            given_timestamp = datetime.strptime(time_str, date_format_str)
             start_time, end_time =given_timestamp-timedelta(minutes=5), given_timestamp+timedelta(minutes=5)
             conn = nexradaws.NexradAwsInterface()
             availscans = conn.get_avail_scans_in_range(start_time,end_time,station)
