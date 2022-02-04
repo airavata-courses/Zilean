@@ -5,6 +5,7 @@ import sys
 from routes.audit import audit_api
 from routes.user import user_api
 from routes.session import session_api
+from routes.data_retrieval import data_fetch_api
 
 import os
 from os.path import join, dirname
@@ -22,11 +23,11 @@ CORS(app)
 app.register_blueprint(audit_api)
 app.register_blueprint(user_api)
 app.register_blueprint(session_api)
-
+app.register_blueprint(data_fetch_api)
 
 @app.route('/')
 def check():
     return gateway_util.starter()
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=5006)
+    app.run(host='localhost', port=5006, debug=True)
