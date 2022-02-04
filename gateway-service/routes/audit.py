@@ -43,7 +43,7 @@ def createAudit():
 
 
 @audit_api.route('/v1/audits', methods=["GET"])
-def getPaginatedAudits(cursor=None, limit=10):
+def getPaginatedAudits():
     """
     retrieving all active albums from the database.
     @params - A GET request that fetches audit records in paginated manner from database.
@@ -58,7 +58,9 @@ def getPaginatedAudits(cursor=None, limit=10):
                 'Content-Type': 'application/json'
             },
             data=json.dumps({
-                "user_id": user_id
+                "user_id": user_id,
+                "cursor": request.args.get('cursor'),
+                "limit": request.args.get('limit') or 10
             })
         )
         response.raise_for_status()
