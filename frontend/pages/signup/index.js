@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import React {useState} from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { setAccessToken,setRefreshToken, setUserDetails, setIsAuthenticated, setLogout } from '../../slices/authSlice';
+// import { setAccessToken,setRefreshToken, setUserDetails, setIsAuthenticated, setLogout } from '../../slices/authSlice';
 
 import { useCreateUserMutation } from '../../slices/authApi';
+import { useRouter } from "next/router";
 
 function index() {
 
   const [email,setEmail] = useState()
   const [password,setPassword]=useState()
   const [retypePassword,setRetypePassword]=useState()
+
+  const router=useRouter()
 
   const [ createUser, { isLoading: createUserIsLoading, 
     isSuccess: createUserIsSuccess, 
@@ -52,26 +55,44 @@ function index() {
     e.preventDefault();
     if (password!=retypePassword){
       alert("Passwords do not match!");
+    }else if(!email.includes('@')){
+      alert("Email not valid")
+      
     }else{
+      
       await(createUser({"email":email, "password":password}));
 
     }
 
   }
 
+  useEffect(()=>{
+    if(createUserIsSuccess){
+      router.push('/login')
+    }
+
+  },[createUserIsSuccess])
+
 
   return (
     <div>
-      <form>
+      {createUserIsError && (
+        <div className="alert alert-danger" role="alert">
+          {/* here u can't directly posts  error as  createUserError because react can't render janascript object and createUserError is a object with 2 keys --> status and error. */}
+          {createUserError.status}:{createUserError.error}
+        </div>
+      )}
+      <form className="was-validated">
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Email address</label>
           <input
-            required
+            
             type="email"
             className="form-control"
             id="exampleInputEmail1"
             placeholder="Enter email"
             onChange={emailChangeHandler}
+            required
             
           />
           <small id="emailHelp" className="form-text text-muted">

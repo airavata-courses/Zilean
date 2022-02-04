@@ -4,9 +4,9 @@ import { PURGE } from "redux-persist";
 
 const initialState = {
   isAuthenticated: false,
-  access_token: "access_token",
-  refresh_token: "refresh_token",
-  user_details: {username:""},
+  access_token: "",
+  refresh_token: "",
+  user_details: {email:""},
 }
 
 export const authSlice = createSlice({

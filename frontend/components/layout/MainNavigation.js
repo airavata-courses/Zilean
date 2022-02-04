@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./MainNavigation.module.css";
 import Link from "next/dist/client/link";
 
@@ -6,21 +6,41 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../../slices/authSlice";
 import Router from "next/router";
 
+import { useLogOutUserMutation } from "../../slices/authApi";
+
 function MainNavigation() {
   const isAuthenticated = useSelector(
     (state) => state.authReducer.isAuthenticated
   );
 
-  const username = useSelector(
-    (state) => state.authReducer.user_details.username
-  );
+  const access_token = useSelector((state) => state.authReducer.access_token);
+  const email = useSelector((state) => state.authReducer.user_details.email);
+
+  const [
+    logOutUser,
+    {
+      isSuccess: logOutUserIsSuccess,
+      isLoading: logOutUserIsLoading,
+      isError: logOutUserIsError,
+      error: logOutUserError,
+    },
+  ] = useLogOutUserMutation();
 
   const dispatch = useDispatch();
-  const logOutHandler = (e) => {
+
+  const logOutHandler = async (e) => {
     e.preventDefault();
-    dispatch(setLogout());
-    Router.push("login/");
+    await logOutUser({ access_token: access_token });
   };
+
+  useEffect(() => {
+    if (logOutUserIsSuccess) {
+      dispatch(setLogout());
+      Router.push("login/");
+    }
+  }, [logOutUserIsSuccess]);
+  
+  // console.log(logOutUserError);
 
   return (
     <header className={classes.header}>
@@ -54,10 +74,7 @@ function MainNavigation() {
             <li>
               {" "}
               <Link href="/requests" passHref>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                >
+                <button type="button" className="btn btn-primary">
                   Requests
                 </button>
               </Link>
@@ -65,10 +82,7 @@ function MainNavigation() {
             <li>
               {" "}
               <Link href="/audit-history" passHref>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                >
+                <button type="button" className="btn btn-primary">
                   Audit History
                 </button>
               </Link>
@@ -76,9 +90,9 @@ function MainNavigation() {
             <li>
               {" "}
               {/* <Link href="#" passHref> */}
-                <button type="button" className="btn btn-outline-dark">
-                  {username}
-                </button>
+              <button type="button" className="btn btn-outline-dark">
+                {email}
+              </button>
               {/* </Link> */}
             </li>
             <li>
@@ -93,6 +107,10 @@ function MainNavigation() {
                 </button>
               </Link>
             </li>
+
+          { logOutUserIsError && <li>(
+                <small>Error Logging out</small>
+              )</li>}
           </ul>
         )}
       </nav>

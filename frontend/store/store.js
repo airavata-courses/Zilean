@@ -3,8 +3,14 @@ import { setupListeners } from '@reduxjs/toolkit/query'
 
 import { authApi } from '../slices/authApi';
 import { plotDataApi } from '../slices/plotDataApi';
+import {auditApi} from '../slices/auditApi';
+
+
 import authReducer from '../slices/authSlice';
 import plotDataReducer from '../slices/plotDataSlice';
+import auditReducer from '../slices/auditSlice';
+
+
 
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
@@ -17,8 +23,10 @@ const reducers = combineReducers({
   // Add the generated reducer as a specific top-level slice
   [authApi.reducerPath]: authApi.reducer,
   [plotDataApi.reducerPath]: plotDataApi.reducer,
+  [auditApi.reducerPath]: auditApi.reducer,
   authReducer,
   plotDataReducer,
+  auditReducer,
 })
 
 
@@ -29,8 +37,10 @@ const persistConfig = {
     blacklist: [
       authApi.reducerPath,
       plotDataApi.reducerPath,
+      auditApi.reducerPath,
       authReducer,
       plotDataReducer,
+      auditReducer,
     ],
   }
 
@@ -49,6 +59,7 @@ export const makeStore = () =>
       })
         .concat(authApi.middleware)
         .concat(plotDataApi.middleware)
+        .concat(auditApi.middleware)
     
   })
  

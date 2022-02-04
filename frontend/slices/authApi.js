@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const authApi = createApi({
     reducerPath: 'authApi',
-    baseQuery:fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000/' }),
+    baseQuery:fetchBaseQuery({ baseUrl: 'http://127.0.0.1:5006/v1/' }),
     tagTypes:['login','signup'],
     endpoints:  (builder) =>({
 
@@ -10,13 +10,11 @@ export const authApi = createApi({
             query:({email,password})=>{
                 // console.log("Inside pageAPI createUser ",email,password);
                 return {
-                    url:'pages/create/',
+                    url:'user/signup',
                     method:'POST',
                     body:{
-                        // pageName: data.pageName,
-                        // pageAuthor: data.pageAuthor,
-                        // pageEmail: data.pageEmail,
-                        // pageDescription: data.pageDescription
+                        email: email,
+                        password: password,
                     },
                     headers:{
                         // Authorization: `JWT ${data.access_token}`,
@@ -29,17 +27,32 @@ export const authApi = createApi({
         }),
 
         logInUser: builder.mutation({
-            query:({username,password})=>{
-                console.log("Inside pageAPI createUser ",username,password);
+            query:(data)=>{
+                // console.log("Inside authApi createUser ",data);
+                // console.log("Inside authApi createUser JSON.stringify(data) ",JSON.stringify(data));
                 return {
-                    url:'api/token/',
+                    url:'user/login',
                     method:'POST',
-                    body:{
-                        username: username,
-                        password: password,
-                    },
+                    body:data,
                     headers:{
                         // Authorization: `JWT ${data.access_token}`,
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                      },
+                }
+            },
+            // invalidatesTags:['login'],
+        }),
+
+        logOutUser: builder.mutation({
+            query:(data)=>{
+                // console.log("Inside authApi logout ",data);
+                return {
+                    url:'user/logout',
+                    method:'POST',
+                    body:data,
+                    headers:{
+                        "Access-Token": data.access_token,
                         Accept: "application/json",
                         "Content-Type": "application/json",
                       },
@@ -97,5 +110,5 @@ export const authApi = createApi({
 });
 
 
-export const { useCreateUserMutation, useLogInUserMutation } = authApi;
+export const { useCreateUserMutation, useLogInUserMutation,useLogOutUserMutation } = authApi;
 
