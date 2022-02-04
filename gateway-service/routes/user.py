@@ -7,7 +7,8 @@ import os
 from dotenv import load_dotenv
 from bson import json_util
 
-from ..utils.kafka_producer import kafka_producer
+sys.path.append(os.getcwd())
+from utils.kafka_producer import kafka_producer
 load_dotenv()
 
 
