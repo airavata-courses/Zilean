@@ -1,10 +1,17 @@
+from turtle import pd
 import requests
 from flask import Blueprint, request, jsonify
 import sys
 import json
 import os
 from dotenv import load_dotenv
+from bson import json_util
+from kafka import KafkaProducer
+kafka_producer = KafkaProducer(bootstrap_servers='localhost:9092')
 load_dotenv()
+
+
+
 
 USER_SERVICE=os.environ.get('USER_SERVICE')
 SESSION_SERVICE=os.environ.get('SESSION_SERVICE')
@@ -61,7 +68,12 @@ def checkUser():
                 'user_id': user_id
         }))
         session_service_response.raise_for_status()
-
+        kafka_producer.send('audit-queue', json.dumps({
+            "user_id": user_id,
+            "response": session_service_response.json(),
+            "request": request.data,
+            "service_provider_identifier": 'session-service'
+        }, default=json_util.default).encode('utf-8'))
         return session_service_response.json(), session_service_response.status_code
 
     except requests.exceptions.HTTPError as err:
