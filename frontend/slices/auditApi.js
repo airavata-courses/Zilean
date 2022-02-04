@@ -11,7 +11,7 @@ export const auditApi = createApi({
                 console.log("Inside auditApi getAudits ",data);
                 
                 return {
-                    url:'audits?cursor=&limit=10',
+                    url:'audits?cursor=&limit=10000',
                     method:'GET',
                     headers:{
                         "Access-Token": data.access_token,
