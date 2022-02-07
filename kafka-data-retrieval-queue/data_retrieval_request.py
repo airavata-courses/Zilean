@@ -1,4 +1,4 @@
-from turtle import pd
+
 from kafka import KafkaConsumer
 import io
 import base64
@@ -15,7 +15,7 @@ def data_retrieval_request(dret_req_message):
     try:
         print(dret_req_message)
         response = requests.post(
-            f'{DATA_RETRIEVAL_SERVICE}v1/retrieve-data',
+            f'{DATA_RETRIEVAL_SERVICE}/v1/retrieve-data',
             headers={
                 'Content-Type': 'application/json'
             },
@@ -33,7 +33,7 @@ def data_retrieval_request(dret_req_message):
 
 def main():
     try:
-        consumer = KafkaConsumer('data-retrieval-queue', bootstrap_servers=['localhost:9092'])
+        consumer = KafkaConsumer('data-retrieval-queue', bootstrap_servers=['localhost:29092'])
         while True:
             for message in consumer:
                 data_retrieval_request_message = json.loads(message.value)
