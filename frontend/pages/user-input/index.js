@@ -87,15 +87,27 @@ function index() {
   useEffect(() => {
     if(postDataIsSuccess){
       console.log("Success");
+    
       dispatch(incrementQueueCount(1))
       dispatch(setIsQueued(true))
-      router.push('/')
+      // router.push('/')
 
     }
   },[postDataIsSuccess]);
 
   return (
     <div>
+      { postDataIsSuccess &&
+        <div className="alert alert-success" role="success">
+        Your request will be processed. Keep checking requests tab.
+      </div>
+      }
+
+      { postDataIsError && 
+      <div className="alert alert-danger" role="danger">
+      Something went wrong.
+    </div>
+      }
       {isAuthenticated ? (
         <form>
           <div className="mt-2 mb-2">

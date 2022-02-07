@@ -1,7 +1,6 @@
 import React from 'react';
 import { useRouter } from "next/router";
 import {useSelector} from 'react-redux';
-;
 
 
 const index = () => {
@@ -11,7 +10,7 @@ const index = () => {
 
   return <div>
     {
-      curr_plot_link=="NEXRAD-S3-LINK-NOT-FOUND" ? <h3>NEXRAD-S3-LINK-NOT-FOUND</h3> : <img src={curr_plot_link}/>
+      curr_plot_link=="NEXRAD-S3-LINK-NOT-FOUND" ? <h3>NEXRAD-S3-LINK-NOT-FOUND</h3> : <img src={curr_plot_link} width="1000" height="500"/>
     }
     
   </div>;
