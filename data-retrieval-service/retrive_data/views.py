@@ -1,6 +1,3 @@
-# from resource import prlimit
-from importlib import import_module
-
 import uuid
 from django.shortcuts import render
 from django.conf import settings
@@ -39,23 +36,27 @@ class RetriveData(APIView):
             given_timestamp = datetime.strptime(time_str, date_format_str)
             start_time, end_time =given_timestamp-timedelta(minutes=5), given_timestamp+timedelta(minutes=5)
             conn = nexradaws.NexradAwsInterface()
-            availscans = conn.get_avail_scans_in_range(start_time,end_time,station)
-            url= 'https://s3.amazonaws.com/noaa-nexrad-level2/' + availscans[0].key
-            request_uuid = str(uuid.uuid4())
-            db['requests'].insert_one({
-                's3_link': url,
-                'user_id': user_id,
-                'created_at': datetime.utcnow(),
-                'updated_at': datetime.utcnow(),
-                'uuid': request_uuid
-            })
-            kafka_producer.send(
-                'plot-queue', 
-                json.dumps({
-                    "request_id": request_uuid,
-                    "s3_link": url,
-                    "user_id": user_id
-                }, default=json_util.default).encode('utf-8'))
-            return Response({"message":"Success"},status=status.HTTP_200_OK)
+            try:
+                availscans = conn.get_avail_scans_in_range(start_time,end_time,station)
+                url= 'https://s3.amazonaws.com/noaa-nexrad-level2/' + availscans[0].key
+            except Exception as e:
+                url= 'NEXRAD-S3-LINK-NOT-FOUND'
+            finally:
+                request_uuid = str(uuid.uuid4())
+                db['requests'].insert_one({
+                    's3_link': url,
+                    'user_id': user_id,
+                    'created_at': datetime.utcnow(),
+                    'updated_at': datetime.utcnow(),
+                    'uuid': request_uuid
+                })
+                kafka_producer.send(
+                    'plot-queue', 
+                    json.dumps({
+                        "request_id": request_uuid,
+                        "s3_link": url,
+                        "user_id": str(user_id)
+                    }, default=json_util.default).encode('utf-8'))
+                return Response({"message":"Success"},status=status.HTTP_200_OK)
         except Exception as err:
             return Response({"message":err},status=status.HTTP_400_BAD_REQUEST)
