@@ -19,7 +19,7 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('retrive-data/',include('retrive_data.urls')),
+    path('v1/retrieve-data',include('retrive_data.urls')),
 ]
 
 
