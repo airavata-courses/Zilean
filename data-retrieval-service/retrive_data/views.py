@@ -54,6 +54,7 @@ class RetriveData(APIView):
                 json.dumps({
                     "request_id": request_uuid,
                     "s3_link": url,
+                    "user_id": user_id
                 }, default=json_util.default).encode('utf-8'))
             return Response({"message":"Success"},status=status.HTTP_200_OK)
         except Exception as err:
