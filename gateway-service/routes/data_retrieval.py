@@ -3,8 +3,9 @@ from flask import Blueprint, request, jsonify
 import sys
 import json
 import os
+from bson import json_util
 
-sys.path.append(os.getcwd())
+# sys.path.append(os.getcwd())
 
 from utils.authenticate import check_user_session
 from utils.kafka_producer import kafka_producer
@@ -28,11 +29,11 @@ def createWeatherData():
         session_service_response = check_user_session(request.headers.get('Access-Token'))
         request_body = json.loads(request.data)
         kafka_producer.send('data-retrieval-queue', json.dumps({
-            "user_id": session_service_response.json().get('user_id'),
+            "user_id": session_service_response.get('user_id'),
             "date": request_body.get('date'),
             "time": request_body.get('time'),
             "station":request_body.get('station')
-        }))
+        }, default=json_util.default).encode('utf-8'))
         return {"message": "You request will be processed in short time"}, 200
     except requests.exceptions.HTTPError as err:
         return err.response.text, err.response.status_code

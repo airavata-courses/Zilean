@@ -1,4 +1,4 @@
-from turtle import pd
+
 import requests
 from flask import Blueprint, request, jsonify
 import sys
