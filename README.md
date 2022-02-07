@@ -1,10 +1,4 @@
-# Zilean
-
-
-![Logo](https://github.com/airavata-courses/Zilean/blob/main/images/logo/zilean-logo.png)
-
-
-
+![Logo](https://github.com/airavata-courses/Zilean/blob/main/images/assets/zilean-banner.png)
 
 ## Team 
 
