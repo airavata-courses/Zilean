@@ -1,3 +1,4 @@
+from turtle import pd
 import requests
 from flask import Blueprint, request
 import boto3
@@ -19,6 +20,8 @@ def create_plot():
     @return - json of the created plot image s3 link
     """
     try:
+        import pdb
+        pdb.set_trace()
         request_data = request.get_json()
         request_id = request_data.get('request_id')
         user_id = request_data.get('user_id')
@@ -31,31 +34,34 @@ def create_plot():
                 user_agent_extra='Resource'
             )
         )
-        for obj in s3.Bucket('noaa-nexrad-level2').objects.filter(Prefix=target_link):
+        for obj in s3.Bucket('noaa-nexrad-level2').objects.filter(Prefix=target_link.split('noaa-nexrad-level2/')[1]):
             f = Level2File(obj.get()['Body'])
-            plot_data(f)
-            with open('plot.png') as pltfile:
-                client = boto3.client(
-                    's3',
-                    region_name=os.environ.get('AWS_REGION'),
-                    aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'),
-                    aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY')
-                )
-                try:
-                    response = client.upload_file(
-                        f'{request_id}.png',
-                        'short-video-clips',
-                        'plot.png'
-                    )
-                except ClientError as e:
-                    return {
-                        "message": str(e)
-                    }
+            plot_data(f, request_id)
+            # with open(f'{request_id}.png') as pltfile:
+            #     # client = boto3.client(
+            #     #     's3',
+            #     #     region_name=os.environ.get('AWS_REGION'),
+            #     #     aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'),
+            #     #     aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY')
+            #     # )
+            #     # try:
+            #     #     # response = client.upload_file(
+            #     #     #     f'{request_id}.png',
+            #     #     #     'short-video-clips',
+            #     #     #     'plot.png'
+            #     #     # )
+            #     # except ClientError as e:
+            #     #     return {
+            #     #         "message": str(e)
+            #     #     }
+            #     pltfile.save()
         return {
             "message": "Success"
         }
 
     except Exception as err:
+        import pdb
+        pdb.set_trace()
         print(err)
         return {
             "message": str(err)

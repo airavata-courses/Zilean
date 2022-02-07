@@ -1,3 +1,4 @@
+from urllib import request
 import matplotlib
 matplotlib.pyplot.switch_backend('agg')
 import matplotlib.pyplot as plt
@@ -5,7 +6,9 @@ from metpy.plots import add_metpy_logo, add_timestamp
 import numpy as np
 
 
-def plot_data(f, user_id):
+def plot_data(f, request_id):
+    import pdb
+    pdb.set_trace()
     sweep = 0
     az = np.array([ray[0].az_angle for ray in f.sweeps[sweep]])
     diff = np.diff(az)
@@ -43,4 +46,6 @@ def plot_data(f, user_id):
         ax.set_xlim(-40, 20)
         ax.set_ylim(-30, 30)
         add_timestamp(ax, f.dt, y=0.02, high_contrast=True)
-    plt.savefig('plan')
+    import pdb
+    pdb.set_trace()
+    plt.savefig(f'{request_id}.png')
