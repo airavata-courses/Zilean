@@ -2,27 +2,21 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const plotDataApi = createApi({
     reducerPath: 'plotDataApi',
-    baseQuery:fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000/' }),
+    baseQuery:fetchBaseQuery({ baseUrl: 'http://localhost:5006/' }),
     // tagTypes:['login','signup'],
     endpoints:  (builder) =>({
 
         postData: builder.mutation({
-            query:(data)=>{
+            query:({access_token, ...data})=>{
             
                 console.log("Inside plotDataAPI post data ",data);
                 
                 return {
-                    url:'pages/create/',
+                    url:'v1/weather/request',
                     method:'POST',
-                    body:{
-                        // pageName: data.pageName,
-                        // pageAuthor: data.pageAuthor,
-                        // pageEmail: data.pageEmail,
-                        // pageDescription: data.pageDescription
-                    },
+                    body:data,
                     headers:{
-                        // Authorization: `JWT ${data.access_token}`,
-                        Accept: "application/json",
+                        "Access-Token": access_token,
                         "Content-Type": "application/json",
                       },
                 }

@@ -1,8 +1,6 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 
-
-
 const index = () => {
     const isAuthenticated=useSelector((state)=>state.authReducer.isAuthenticated)
 
@@ -11,6 +9,7 @@ const index = () => {
       {isAuthenticated ?
       <div>
           <p>Requests Page</p>
+          <img src='http://localhost:4566/plots/0de1e309-d849-4704-baca-eae36d1e4212.png'/>
       </div> : <div>
       Please login/signup to plot weather data....
       </div> }
