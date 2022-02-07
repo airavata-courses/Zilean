@@ -6,6 +6,7 @@ from routes.audit import audit_api
 from routes.user import user_api
 from routes.session import session_api
 from routes.data_retrieval import data_fetch_api
+from routes.plot import plot_api
 
 import os
 from os.path import join, dirname
@@ -24,6 +25,7 @@ app.register_blueprint(audit_api)
 app.register_blueprint(user_api)
 app.register_blueprint(session_api)
 app.register_blueprint(data_fetch_api)
+app.register_blueprint(plot_api)
 
 @app.route('/')
 def check():
