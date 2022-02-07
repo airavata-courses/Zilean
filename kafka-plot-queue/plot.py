@@ -12,7 +12,7 @@ def plot_queue(plot_message):
     try:
         print(plot_message)
         response = requests.post(
-            f'{PLOT_SERVICE}v1/plots',
+            f'{PLOT_SERVICE}/v1/plots',
             headers={
                 'Content-Type': 'application/json'
             },
@@ -29,7 +29,7 @@ def plot_queue(plot_message):
 
 def main():
     try:
-        consumer = KafkaConsumer('plot-queue', bootstrap_servers=['localhost:9092'])
+        consumer = KafkaConsumer('plot-queue', bootstrap_servers=['localhost:29092'])
         while True:
             for message in consumer:
                 plot_message = json.loads(message.value)
