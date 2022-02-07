@@ -24,6 +24,24 @@ export const plotDataApi = createApi({
             // invalidatesTags:['login'],
         }),
 
+        getRequestsHistory: builder.query({
+            query:(data)=>{
+
+                console.log("inside plorDataApi getRequestsHistory ",data);
+                return{
+                    url:'v1/plots',
+                    method:'GET',
+                    headers:{
+                        "Access-Token": data.access_token,
+                        "Access-Control-Allow-Origin":"*",
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                      },
+                }
+            },
+
+        }),
+
         
 
 
@@ -73,5 +91,5 @@ export const plotDataApi = createApi({
 });
 
 
-export const { usePostDataMutation } = plotDataApi;
+export const { usePostDataMutation, useGetRequestsHistoryQuery } = plotDataApi;
 

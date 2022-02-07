@@ -1,22 +1,15 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useRouter } from 'next/router';
 import { usePostDataMutation } from "../../slices/plotDataApi";
 
 import { useDispatch, useSelector } from "react-redux";
 
-const stations = [
-  "KABR",
-  "KAKQ",
-  "KAMX",
-  "KAPX",
-  "KATX",
-  "KBBX",
-  "KBGM",
-  "KBIS",
-  "KCLE",
-  "KCLX",
-];
+import { incrementQueueCount, decrementQueueCount, setIsQueued  } from '../../slices/plotDataSlice';
+
+
+const stations = ['KABR','KENX','KABX','KFDR','KAMA','PAHG','PGUA','KFFC','KEWX','KBBX','PABC','KBLX','KBGM','KBMX','KBIS','KCBX','KBOX','KBRO','KBUF','KCXX','RKSG','KFDX','KICX','KCLX','KRLX','KCYS','KLOT','KILN','KCLE','KCAE','KGWX','KCRP','KFWS','KDVN','KFTG','KDMX','KDTX','KDDC','KDOX','KDLH','KDYX','KEYX','KEVX','KEPZ','KLRX','KBHX','PAPD','KFSX','KHPX','KGRK','KPOE','KEOX','KSRX','KIWX','KAPX','KGGW','KGLD','KMVX','KGJX','KGRR','KTFX','KGRB','KGSP','KRMX','KUEX','KHDX','KCBW','KHGX','KHTX','KIND','KJKL','KJAN','KJAX','RODN','PHKN','KEAX','KBYX','PAKC','KMRX','RKJK','KARX','LPLA','KLCH','KESX','KDFX','KILX','KLZK','KVTX','KLVX','KLBB','KMQT','KMXX','KMAX','KMLB','KNQA','KAMX','PAIH','KMAF','KMKX','KMPX','KMBX','KMSX','KMOB','PHMO','KVAX','KMHX','KOHX','KLIX','KOKX','PAEC','KAKQ','KLNX','KTLX','KOAX','KPAH','KPDT','KDIX','KIWA','KPBZ','KSFX','KGYX','KRTX','KPUX','KRAX','KUDX','KRGX','KRIW','KFCX','KJGX','KDAX','KLSX','KMTX','KSJT','KNKX','KMUX','KHNX','TJUA','KSOX','KATX','KSHV','KFSD','PACG','PHKI','PHWA','KOTX','KSGF','KCCX','KLWX','KTLH','KTBW','KTWX','KEMX','KINX','KVNX','KVBX','KICT','KLTX','KYUX'];
 
 function index() {
   const [date, setDate] = useState("");
@@ -24,6 +17,7 @@ function index() {
   const [station, setStation] = useState("");
 
   const dispatch = useDispatch();
+  const router = useRouter()
   const isAuthenticated = useSelector(
     (state) => state.authReducer.isAuthenticated
   );
@@ -93,6 +87,10 @@ function index() {
   useEffect(() => {
     if(postDataIsSuccess){
       console.log("Success");
+      dispatch(incrementQueueCount(1))
+      dispatch(setIsQueued(true))
+      router.push('/')
+
     }
   },[postDataIsSuccess]);
 
