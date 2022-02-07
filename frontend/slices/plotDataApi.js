@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const plotDataApi = createApi({
     reducerPath: 'plotDataApi',
     baseQuery:fetchBaseQuery({ baseUrl: 'http://localhost:5006/' }),
-    // tagTypes:['login','signup'],
+    tagTypes:['requestsHistory'],
     endpoints:  (builder) =>({
 
         postData: builder.mutation({
@@ -21,7 +21,7 @@ export const plotDataApi = createApi({
                       },
                 }
             },
-            // invalidatesTags:['login'],
+            // invalidatesTags:['requestsHistory'],
         }),
 
         getRequestsHistory: builder.query({
@@ -39,7 +39,8 @@ export const plotDataApi = createApi({
                       },
                 }
             },
-
+            invalidatesTags:['requestsHistory'],
+                
         }),
 
         
