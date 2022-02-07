@@ -1,10 +1,18 @@
 # Zilean
+
+
+![Logo](https://github.com/airavata-courses/Zilean/blob/main/images/logo/zilean-logo.png)
+
+
+
+
+## Team 
+
 Spring 2022 Project Team
 
 - Rushikesh Pharate
 - Piyush Nalawade
 - Aishwarya Sinhasane
-
 
 ## Napkin Diagram  
 
