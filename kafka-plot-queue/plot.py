@@ -1,4 +1,4 @@
-from turtle import pd
+
 from kafka import KafkaConsumer
 import json
 import os
