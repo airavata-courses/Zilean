@@ -26,8 +26,6 @@ Spring 2022 Project Team
 Note: These are architecture discussions recorded please visit final architecture above.
 
 ![Architecture](https://github.com/airavata-courses/Zilean/blob/main/images/architecture/architecture_1.png)
-![Weather Data Retrieval and Plotting Architecture](https://github.com/airavata-courses/Zilean/blob/main/images/architecture/weather-data-architecture.png)
-![User and Session Architecture](https://github.com/airavata-courses/Zilean/blob/main/images/architecture/user-session-architecure.png)
 
 ## Technology Stack
 
