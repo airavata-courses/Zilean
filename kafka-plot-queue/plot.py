@@ -20,6 +20,7 @@ def plot_queue(plot_message):
                 "user_id":  plot_message.get('user_id'),
                 "request_id": plot_message.get('request_id'),
                 "s3_link": plot_message.get('s3_link'),
+                "original_request": plot_message.get('original_request'),
             })
         )
         response.raise_for_status()
