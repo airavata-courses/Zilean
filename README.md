@@ -61,21 +61,39 @@ $ git clone https://github.com/airavata-courses/zilean.git
 
 ```
 
+### Give permissions to sh files
+```
+$ chmod 755 zilean_setup.sh
+$ chmod 755 start.sh
+```
+
+
 ### Fetch all repositories  
 ```
-$ chmod 755 zilean.sh
-$ ./zilean.sh
+$ ./zilean_setup.sh
 ```
 
 ### Run Kafka
+
+Open new terminal in same tab
 ```
 $ cd docker
 $ docker compose -f kafka-docker-compose.yml up
 ```
 
+
 ### Run Localstack
+
+Open new terminal in same tab
 ```
+$ cd docker
 $ docker compose -f s3-localstack.yml up
+```
+
+### Configure AWS for localstack
+
+Open new terminal in same tab
+```
 $ aws configure 
 ```
 access key = foo
