@@ -1,3 +1,10 @@
+# Zilean
+Spring 2022 Project Team
+
+- Rushikesh Pharate
+- Piyush Nalawade
+- Aishwarya Sinhasane
+
 # User Service 
 ## Below steps to run user-service
   * Install mongodb-compass, mongoDB and create a database table named "user-service" with collection user.
