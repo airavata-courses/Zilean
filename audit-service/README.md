@@ -1,6 +1,13 @@
-# Audit Service 
+# Zilean
+Spring 2022 Project Team
 
-##Setup 
+- Rushikesh Pharate
+- Piyush Nalawade
+- Aishwarya Sinhasane
+
+## Audit Service 
+
+## Setup 
 
 ### Database Setup 
 
