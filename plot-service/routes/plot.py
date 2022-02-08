@@ -26,6 +26,7 @@ def create_plot():
         request_id = request_data.get('request_id')
         user_id = request_data.get('user_id')
         target_link = request_data.get('s3_link')
+        original_request = request_data.get("original_request")
 
         if target_link == 'NEXRAD-S3-LINK-NOT-FOUND':
             plot_link = 'NEXRAD-S3-LINK-NOT-FOUND'
@@ -72,12 +73,23 @@ def create_plot():
             'user_id': user_id,
             'created_at': datetime.utcnow(),
             'updated_at': datetime.utcnow(),
-            'request_id': request_id
+            'request_id': request_id,
+            'status': 'DATA_RETRIEVAL_FAILURE' if plot_link == 'NEXRAD-S3-LINK-NOT-FOUND' else 'PROCESSED' ,
+            'original_request': original_request
         })          
         return {
             "message": "Success"
         }
     except Exception as err:
+        db['plots'].insert_one({
+            'plot_link': 'NEXRAD-S3-LINK-NOT-FOUND',
+            'user_id': user_id,
+            'created_at': datetime.utcnow(),
+            'updated_at': datetime.utcnow(),
+            'request_id': request_id,
+            'status': 'IMAGE_PARSING_FAILURE',
+            'original_request': original_request
+        })      
         print(err)
         return {
             "message": str(err)
@@ -94,13 +106,15 @@ def get_plots():
     try:
         request_data = request.get_json()
         user_id = request_data.get('user_id')
-        plots = db['plots'].find({ 'user_id': user_id }, { 'plot_link': 1, 'request_id': 1, '_id': 0, 'created_at': 1})
+        plots = db['plots'].find({ 'user_id': user_id }, { 'plot_link': 1, 'request_id': 1, '_id': 0, 'created_at': 1, 'original_request': 1,'status': 1}).sort('created_at',-1)
         json_plots = []
         for plot in plots:
             json_plots.append({
                 "request_id": plot.get('request_id'),
                 "created_at": str(plot.get('created_at')),
-                "plot_link": plot.get('plot_link')
+                "plot_link": plot.get('plot_link'),
+                "request": plot.get('original_request'),
+                "status": plot.get('status')
             })  
         return {
             "message": "Success",
