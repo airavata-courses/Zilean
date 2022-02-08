@@ -104,6 +104,14 @@ $ cd docker
 $ docker compose -f mongo.yml up
 ```
 
+### Run PostgreSQL
+
+Open new terminal in same tab
+```
+$ cd docker
+$ docker compose -f postgresql.yml up
+```
+
 
 ### Configure AWS for localstack
 
