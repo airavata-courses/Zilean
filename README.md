@@ -38,6 +38,7 @@ Note: These are architecture discussions recorded please visit final architectur
 - SpringBoot (Java 15)
 - Flask (Python 3.8+)
 - Express (Node 10)
+- Django (Django 4+)
 - MongoDB 
 - PostgreSQL
 - Apache Kafka, Zookeeper
