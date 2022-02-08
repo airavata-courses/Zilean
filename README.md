@@ -135,7 +135,7 @@ $ # kafpq : kafka-plot-queue-service
 ### Manual Installations
 
 - [User Service](https://github.com/airavata-courses/Zilean/blob/main-user-service/user-service/README.md)
-- [Kafka Data Retrieval Queue](https://github.com/airavata-courses/Zilean/blob/main-data-retrieval-service/kafka-data-retrieval-queue/README.md)
+- [Kafka Data Retrieval Queue](https://github.com/airavata-courses/Zilean/blob/main-data-retrieval-queue/kafka-data-retrieval-queue/README.md)
 - [Kafka Audit Queue](https://github.com/airavata-courses/Zilean/blob/main-kafka-audit-queue/kafka-audit-queue/README.md)
 - [Kafka Plot Queue](https://github.com/airavata-courses/Zilean/blob/main-kafka-plot-queue/kafka-plot-queue/README.md)
 - [Session Service](https://github.com/airavata-courses/Zilean/blob/main-session-service/session-service/README.md)
