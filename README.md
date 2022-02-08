@@ -21,6 +21,11 @@ Spring 2022 Project Team
 
 ![Napkin](https://github.com/airavata-courses/Zilean/blob/main/images/branching.png)
 
+
+## Use Case Diagram
+
+![UseCase](https://github.com/airavata-courses/Zilean/blob/main/images/use-case.png)
+
 ## Architecture Discussions
 
 Note: These are architecture discussions recorded please visit final architecture above.
