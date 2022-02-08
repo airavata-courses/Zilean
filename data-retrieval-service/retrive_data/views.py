@@ -42,6 +42,11 @@ class RetriveData(APIView):
             except Exception as e:
                 url= 'NEXRAD-S3-LINK-NOT-FOUND'
             finally:
+                original_request={
+                    "date": date,
+                    "time": time,
+                    "station": station,
+                }
                 request_uuid = str(uuid.uuid4())
                 db['requests'].insert_one({
                     's3_link': url,
@@ -55,7 +60,8 @@ class RetriveData(APIView):
                     json.dumps({
                         "request_id": request_uuid,
                         "s3_link": url,
-                        "user_id": str(user_id)
+                        "user_id": str(user_id),
+                        "original_request": original_request,
                     }, default=json_util.default).encode('utf-8'))
                 return Response({"message":"Success"},status=status.HTTP_200_OK)
         except Exception as err:
