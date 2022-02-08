@@ -134,12 +134,12 @@ $ # kafpq : kafka-plot-queue-service
 
 ### Manual Installations
 
-- [!User Service](https://github.com/airavata-courses/Zilean/blob/main-user-service/user-service/README.md)
-- [!Kafka Data Retrieval Queue](https://github.com/airavata-courses/Zilean/blob/main-data-retrieval-service/kafka-data-retrieval-queue/README.md)
-- [!Kafka Audit Queue](https://github.com/airavata-courses/Zilean/blob/main-kafka-audit-queue/kafka-audit-queue/README.md)
-- [!Kafka Plot Queue](https://github.com/airavata-courses/Zilean/blob/main-kafka-plot-queue/kafka-plot-queue/README.md)
-- [!Session Service](https://github.com/airavata-courses/Zilean/blob/main-session-service/session-service/README.md)
-- [!Audit Service](https://github.com/airavata-courses/Zilean/blob/main-audit-service/audit-service/README.md)
-- [!Frontend](https://github.com/airavata-courses/Zilean/blob/main-frontend-service/frontend/README.md)
-- [!Plot Service](https://github.com/airavata-courses/Zilean/blob/main-plot-service/plot-service/README.md)
-- [!Data Retrieval Service](https://github.com/airavata-courses/Zilean/blob/main-data-retrieval-service/data-retrieval-service/README.md)
+- ![User Service](https://github.com/airavata-courses/Zilean/blob/main-user-service/user-service/README.md)
+- ![Kafka Data Retrieval Queue](https://github.com/airavata-courses/Zilean/blob/main-data-retrieval-service/kafka-data-retrieval-queue/README.md)
+- ![Kafka Audit Queue](https://github.com/airavata-courses/Zilean/blob/main-kafka-audit-queue/kafka-audit-queue/README.md)
+- ![Kafka Plot Queue](https://github.com/airavata-courses/Zilean/blob/main-kafka-plot-queue/kafka-plot-queue/README.md)
+- ![Session Service](https://github.com/airavata-courses/Zilean/blob/main-session-service/session-service/README.md)
+- ![Audit Service](https://github.com/airavata-courses/Zilean/blob/main-audit-service/audit-service/README.md)
+- ![Frontend](https://github.com/airavata-courses/Zilean/blob/main-frontend-service/frontend/README.md)
+- ![Plot Service](https://github.com/airavata-courses/Zilean/blob/main-plot-service/plot-service/README.md)
+- ![Data Retrieval Service](https://github.com/airavata-courses/Zilean/blob/main-data-retrieval-service/data-retrieval-service/README.md)
