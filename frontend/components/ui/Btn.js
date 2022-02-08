@@ -15,14 +15,16 @@ const Btn = (props) => {
 
     const onHistoryPlotHandler = (e)=>{
         e.preventDefault()
-        console.log("Clicked")
+        // console.log("Clicked")
         dispatch(setCurrPlotLink(props.link))
         router.push('/plot')
 
     }
 
   return <div>
-      <button type="button" className="btn btn-outline-info" onClick={onHistoryPlotHandler}>Plot</button>
+      {props.status=="PROCESSED" &&
+      <button disabled={!props.status=="PROCESSED"} type="button" className="btn btn-outline-info" onClick={onHistoryPlotHandler}>Plot</button>
+      }
   </div>;
 };
 

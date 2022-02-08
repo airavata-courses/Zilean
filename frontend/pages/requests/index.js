@@ -1,11 +1,15 @@
 import React from "react";
 import { useEffect } from "react";
+import {useRouter} from 'next/router';
+
 import { useSelector } from "react-redux";
 import { useGetRequestsHistoryQuery } from "../../slices/plotDataApi";
 
 import Btn from "../../components/ui/Btn";
 
 const index = () => {
+
+    const router = useRouter()
   const isAuthenticated = useSelector(
     (state) => state.authReducer.isAuthenticated
   );
@@ -27,23 +31,32 @@ const index = () => {
     }
   }, [getRequestsHostoryIsSuccess]);
 
-  const historyPlotHandler = (e) => {
+  const onPlotDataButtonHandler = (e) => {
     e.preventDefault();
-    console.log();
+    // console.log("Clicked");
+    router.push('/user-input');
   };
 
   return (
     <div>
       {isAuthenticated ? (
         <div>
-          <p>Requests Page</p>
-
-          {/* <img src='http://localhost:4566/plots/0de1e309-d849-4704-baca-eae36d1e4212.png'/> */}
+            <p>Want to plot more data??</p>
+            <span></span>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={onPlotDataButtonHandler}
+          >
+            Plot Data
+          </button>
 
           <table className="table">
             <thead className="thead-dark">
               <tr>
-                <th scope="col">Request Date and Time</th>
+                <th scope="col">Request</th>
+                <th scope="col">Date and Time</th>
+                <th scope="col">Status</th>
                 <th scope="col">Plot</th>
               </tr>
             </thead>
@@ -53,14 +66,16 @@ const index = () => {
                   //  return <div>{itm.service_provider_identifier}</div>
                   return (
                     <tr key={key}>
-                      <th scope="row">{itm.created_at}</th>
-                      <td><Btn link={itm.plot_link} key={key} /></td>
-
+                      <th scope="row">{itm.request ? JSON.stringify(itm.request) : 'Does not exist'}</th>
+                      <td>{itm.created_at}</td>
+                      <td>{itm.status ? itm.status : 'Does not exist'}</td>
+                      <td>   
+                        <Btn link={itm.plot_link} status={itm.status} key={key} />   
+                        
+                      </td>
                     </tr>
                   );
                 })}
-
-              
             </tbody>
           </table>
         </div>
