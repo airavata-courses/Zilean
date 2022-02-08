@@ -96,6 +96,15 @@ $ cd docker
 $ docker compose -f s3-localstack.yml up
 ```
 
+### Run Mongo DB
+
+Open new terminal in same tab
+```
+$ cd docker
+$ docker compose -f mongo.yml up
+```
+
+
 ### Configure AWS for localstack
 
 Open new terminal in same tab
