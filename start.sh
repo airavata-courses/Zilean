@@ -18,7 +18,7 @@ elif [ "$1" == "plot" ]; then
     cd plot-service && python3 -m venv env && source ./env/bin/activate &&  pip install -r requirements.txt && python app.py
 
 elif [ "$1" == "audit" ]; then
-    cd audit-service && npm install && npm start
+    cd audit-service && npm install && npm run db:all:migrate && npm start
 
 elif [ "$1" == "kafaq" ]; then
     cd kafka-audit-queue && python3 -m venv env  && source ./env/bin/activate &&  pip install -r requirements.txt && python insertaudit.py
