@@ -111,7 +111,7 @@ $ # session : session-serice
 $ # drs: data-retrieval-service
 $ # plot: plot-service
 $ # audit   : audit-service
-$ #  kafaq : kafka-audit-queue-service
-$ #  kafdq : kafka-data-retrieval-queue-service
-$ #  kafpq : kafka-plot-queue-service
+$ # kafaq : kafka-audit-queue-service
+$ # kafdq : kafka-data-retrieval-queue-service
+$ # kafpq : kafka-plot-queue-service
 ```
