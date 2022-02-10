@@ -60,6 +60,13 @@ def checkUser():
 
         user_id = user_service_response.json().get('user_id')
 
+        kafka_producer.send('audit-queue', json.dumps({
+            "user_id": user_id,
+            "response": user_service_response.json(),
+            "request": request.data,
+            "service_provider_identifier": 'user-service'
+        }, default=json_util.default).encode('utf-8'))
+
         session_service_response = requests.post(
             f'{SESSION_SERVICE}/v1/session-service/create-session',
             headers={
