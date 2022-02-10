@@ -62,8 +62,6 @@ Make sure you have these dependencies installed in your machine before installin
 - Node:10 
 - Python 3.8+
 - Java 15
-- MongoDB
-- PostgreSQL
 - Maven
 
 ### Repository 
@@ -122,6 +120,7 @@ $ docker compose -f postgresql.yml up
 
 Open new terminal in same tab
 ```
+$ brew install awscli
 $ aws configure 
 ```
 access key = foo
