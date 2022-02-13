@@ -5,7 +5,7 @@
 Spring 2022 Project Team
 
 
-- **Piyush Nalawade**: Piyush is a first year MS CS student specializing in Distributed Systems. He has 3 years of experience working for multiple large scale startups as a Software Developer, for building products from 0 to 1 and 1 to 10. He is well versed with backend developement. He has expertise in Node, Python, ExpressJS, Flask, Django, RESTful webservices, Caching, Event Driven Architectures along with AWS SQS,SNS and DynamoDB.
+- **Piyush Nalawade**: Piyush is a first year MS CS student specializing in Distributed Systems. He has 3 years of experience working for multiple large scale startups as a Software Engineer, Backend for building products from 0 to 1 to 10. He has expertise in Node, Python, RESTful webservices, Caching, Event Driven Architectures along with AWS cloud.
 
    [<img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />](https://www.linkedin.com/in/nalawadepiyush/)
    [<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />](https://github.com/impiyush83)
