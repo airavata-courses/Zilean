@@ -10,7 +10,11 @@ Spring 2022 Project Team
    [<img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />](https://www.linkedin.com/in/nalawadepiyush/)
    [<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />](https://github.com/impiyush83)
 
-- Rushikesh Pharate
+- **Rushikesh Pharate**: Rushikesh is a computer science graduate student at IU. He has a prior experience in developing full stack web application using various web technologies like Django, NextJS, Flask, ExpressJS etc. With this course, he intends to get hands on experience in developing fault tolerant, high available and scalable cloud native microservices based distribued systems.
+
+   [<img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />](https://www.linkedin.com/in/rushikeshpharate/)
+   [<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />](https://github.com/RushikeshPharate)
+   
 - Aishwarya Sinhasane
 
 ## Napkin Diagram  
