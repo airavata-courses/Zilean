@@ -10,3 +10,4 @@ RUN npm install
 COPY ./ ./
 # Default command that will run when we start an instace of the image
 CMD ["npm","run","dev"] 
+
