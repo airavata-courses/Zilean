@@ -28,12 +28,21 @@ def createWeatherData():
     try:
         session_service_response = check_user_session(request.headers.get('Access-Token'))
         request_body = json.loads(request.data)
+        user_id = session_service_response.get('user_id')
         kafka_producer.send('data-retrieval-queue', json.dumps({
-            "user_id": session_service_response.get('user_id'),
+            "user_id": user_id,
             "date": request_body.get('date'),
             "time": request_body.get('time'),
             "station":request_body.get('station')
         }, default=json_util.default).encode('utf-8'))
+        
+        kafka_producer.send('audit-queue', json.dumps({
+            "user_id": user_id,
+            "response": {},
+            "request": request.data,
+            "service_provider_identifier": 'data-retrieval-service'
+        }, default=json_util.default).encode('utf-8'))   
+        
         return {"message": "You request will be processed in short time"}, 200
     except requests.exceptions.HTTPError as err:
         return err.response.text, err.response.status_code

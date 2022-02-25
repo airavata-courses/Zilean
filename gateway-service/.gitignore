@@ -5,3 +5,4 @@ __pycache__
 .gitignore
 .idea
 .vscode
+.pytest_cache
