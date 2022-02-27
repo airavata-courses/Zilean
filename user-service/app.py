@@ -7,6 +7,7 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
+print("Connection string : ", os.environ.get('MONGO_URI'))
 uri = os.getenv('MONGO_URI') or "mongodb://localhost:27017"
 db = MongoClient(uri)['user-service']
 
@@ -48,4 +49,4 @@ def login():
         
 
 if __name__ == '__main__':
-    app.run(host = "localhost",port=5005)
+    app.run(host='0.0.0.0', port=5005)
