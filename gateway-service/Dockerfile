@@ -12,7 +12,7 @@ RUN apt-get update \
     && apt-get -y install libpq-dev gcc
 
 COPY ./requirements.txt ./
-RUN pip3 install -r requirements.txt
+RUN pip3 install --no-cache -r requirements.txt
 
 COPY ./ ./
 
