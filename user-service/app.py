@@ -2,12 +2,12 @@ from uuid import uuid4
 from flask import Flask, jsonify, request
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-
+import os
 from pymongo import MongoClient
 
 app = Flask(__name__)
 
-uri = "mongodb://localhost:27017"
+uri = os.getenv('MONGO_URI') or "mongodb://localhost:27017"
 db = MongoClient(uri)['user-service']
 
 @app.route("/v1/user/signup", methods=["POST"])
