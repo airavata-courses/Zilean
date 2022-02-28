@@ -1,0 +1,56 @@
+version: '3.1'
+
+services:
+
+  mongodb-container:
+    image: mongo
+    restart: always
+    volumes:
+      - './dockervolume/mongodb:/data/db'
+    ports:
+      - 27017:27017
+    networks:
+      - zilean-network
+
+  postgresql-container:
+    image: postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    volumes:
+      - './dockervolume/postgres:/data/db'
+    environment:
+      POSTGRES_PASSWORD: 'audit_service_test'
+      POSTGRES_DB: 'audit_service_test'
+      POSTGRES_USER: 'audit_service_test'
+    networks:
+      - zilean-network
+
+  user-container:
+    image: impiyush83/zilean-user:latest
+    restart: always
+    environment:
+      - MONGO_URI=mongodb://mongodb-container:27017
+    ports:
+      - 5005:5005
+    depends_on:
+      - mongodb-container
+    networks:
+      - zilean-network
+  
+  session-container:
+    image: impiyush83/zilean-session:latest
+    restart: always
+    environment:
+      - MONGO_URI=mongodb://mongodb-container:27017/session-service
+    ports:
+      - 5004:5004
+    depends_on:
+      - mongodb-container
+    networks:
+      - zilean-network
+
+networks:
+  zilean-network:
+    name: zilean-network
+    driver: bridge
