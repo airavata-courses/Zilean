@@ -6,6 +6,7 @@
     "db:migrate": "set -a && . ./.env && ./node_modules/sequelize-cli/lib/sequelize db:migrate --config ./config/database.js",
     "db:test:migrate": "NODE_ENV=test npm run db:migrate",
     "db:all:migrate": "set -a && . ./.env && ./node_modules/sequelize-cli/lib/sequelize db:migrate --config ./config/database.js",
+    "db:prod:all:migrate": "./node_modules/sequelize-cli/lib/sequelize db:migrate --config ./config/database.js",
     "db:migrate:undo": "./node_modules/sequelize-cli/lib/sequelize db:migrate:undo --config ./config/database.js",
     "db:test:migrate:undo": "NODE_ENV=test npm run db:migrate:undo",
     "db:all:migrate:undo": "npm run db:migrate:undo;npm run db:test:migrate:undo",
