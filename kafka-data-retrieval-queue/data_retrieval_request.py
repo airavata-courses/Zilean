@@ -33,7 +33,8 @@ def data_retrieval_request(dret_req_message):
 
 def main():
     try:
-        consumer = KafkaConsumer('data-retrieval-queue', bootstrap_servers=['localhost:29092'])
+        
+        consumer = KafkaConsumer('data-retrieval-queue', bootstrap_servers=[os.getenv('KAFKA_BROKER_URL') or 'localhost:29092'])
         while True:
             for message in consumer:
                 data_retrieval_request_message = json.loads(message.value)
