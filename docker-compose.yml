@@ -16,7 +16,7 @@ services:
     image: postgres
     restart: always
     ports:
-      - '5432:5432'
+      - '5433:5432'
     volumes:
       - './dockervolume/postgres:/data/db'
     environment:
@@ -67,7 +67,6 @@ services:
       - 5001:5001
     depends_on:
       - postgresql-container
-      - kafaq-container
     networks:
       - zilean-network
 
@@ -79,8 +78,34 @@ services:
       - AUDIT_SERVICE=http://audit-container:5001
     depends_on:
       - kafka-container
+      - audit-container
     networks:
       - zilean-network
+
+  kafdq-container:
+    image: rushikeshpharate/zilean-kafdq:latest
+    restart: always
+    environment:
+      - KAFKA_BROKER_URL=kafka-container:9092
+      - DATA_RETRIEVAL_SERVICE=http://data-retrieval-container:5003
+    depends_on:
+      - kafka-container
+      - data-retrieval-container
+    networks:
+      - zilean-network
+
+  kafpq-container:
+    image: rushikeshpharate/zilean-kafpq:latest
+    restart: always
+    environment:
+      - KAFKA_BROKER_URL=kafka-container:9092
+      - PLOT_SERVICE=http://plot-container:5002
+    depends_on:
+      - kafka-container
+      - plot-container
+    networks:
+      - zilean-network
+
 
   kafka-container:
     image: confluentinc/cp-kafka:latest
@@ -129,17 +154,67 @@ services:
       - AUDIT_SERVICE=http://audit-container:5001
       - SESSION_SERVICE=http://session-container:5004
       - USER_SERVICE=http://user-container:5005  
+      - PLOT_SERVICE=http://plot-container:5002  
       - KAFKA_BROKER_URL=kafka-container:9092
     depends_on:
       - session-container
       - user-container
       - audit-container
       - kafaq-container
+      - kafdq-container
+      - kafpq-container
+      - data-retrieval-container
+      - plot-container
     ports:
       - 5006:5006
     networks:
       - zilean-network
-    
+  
+  data-retrieval-container:
+    image: rushikeshpharate/zilean-data-retrieval-service:latest
+    restart: always 
+    environment: 
+      - KAFKA_BROKER_URL=kafka-container:9092
+      - MONGO_URI=mongodb://mongodb-container:27017
+    depends_on:
+      - kafka-container
+      - kafpq-container
+      - plot-container
+    ports:
+      - 5003:5003
+    networks:
+      - zilean-network
+  
+  localstack-container:
+    image: localstack/localstack:latest
+    environment: 
+      - AWS_DEFAULT_REGION=us-east-1
+      - EDGE_PORT=4566
+      - SERVICES=lambda,s3
+    ports: 
+      - '4566-4583:4566-4583'
+    volumes: 
+      - "${TEMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+  plot-container:
+    image: rushikeshpharate/zilean-plot:latest
+    restart: always 
+    environment: 
+      - KAFKA_BROKER_URL=kafka-container:9092
+      - MONGO_URI=mongodb://mongodb-container:27017
+      - AWS_ACCESS_KEY_ID=plot
+      - AWS_SECRET_ACCESS_KEY=plot
+      - AWS_REGION=us-east-1
+      - AWS_PROFILE=localstack
+      - USE_LOCAL=true
+      - S3_HOST=http://localstack-container:4566
+    depends_on:
+      - localstack-container
+    ports:
+      - 5002:5002
+    networks:
+      - zilean-network
 
 networks:
   zilean-network:
