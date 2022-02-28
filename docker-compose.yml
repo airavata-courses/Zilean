@@ -50,6 +50,97 @@ services:
     networks:
       - zilean-network
 
+  audit-container:
+    image: impiyush83/zilean-audit:latest
+    restart: always
+    environment:
+      - DB_USERNAME=audit_service_test
+      - DB_PASSWORD=audit_service_test
+      - DB_DATABASE=audit_service_test
+      - DB_HOST=postgresql-container
+      - DB_PORT=5432
+      - DB_CONNECTION=postgres
+      - DB_CONNECTION_POOL_MAX_CONNECTIONS=6
+      - DB_CONNECTION_POOL_MIN_CONNECTIONS=1
+      - SQL_LOGGING_ENABLED=true
+    ports:
+      - 5001:5001
+    depends_on:
+      - postgresql-container
+      - kafaq-container
+    networks:
+      - zilean-network
+
+  kafaq-container:
+    image: impiyush83/zilean-kafaq:latest
+    restart: always
+    environment:
+      - KAFKA_BROKER_URL=kafka-container:9092
+      - AUDIT_SERVICE=http://audit-container:5001
+    depends_on:
+      - kafka-container
+    networks:
+      - zilean-network
+
+  kafka-container:
+    image: confluentinc/cp-kafka:latest
+    restart: always
+    depends_on:
+      - zookeeper-container
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-container:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-container:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - zilean-network
+
+  zookeeper-container:
+    image: confluentinc/cp-zookeeper:latest
+    restart: always
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+    networks:
+      - zilean-network
+
+  frontend-container:
+    image: impiyush83/zilean-frontend:latest
+    restart: always 
+    environment:
+      - GATEWAY_SERVICE_URL=http://gateway-container:5006/
+    depends_on:
+      - gateway-container
+    ports:
+      - 3000:3000
+    networks:
+      - zilean-network
+
+  gateway-container:
+    image: impiyush83/zilean-gateway:latest
+    restart: always 
+    environment:
+      - AUDIT_SERVICE=http://audit-container:5001
+      - SESSION_SERVICE=http://session-container:5004
+      - USER_SERVICE=http://user-container:5005  
+      - KAFKA_BROKER_URL=kafka-container:9092
+    depends_on:
+      - session-container
+      - user-container
+      - audit-container
+      - kafaq-container
+    ports:
+      - 5006:5006
+    networks:
+      - zilean-network
+    
+
 networks:
   zilean-network:
     name: zilean-network
