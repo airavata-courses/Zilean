@@ -30,7 +30,7 @@ def plot_queue(plot_message):
 
 def main():
     try:
-        consumer = KafkaConsumer('plot-queue', bootstrap_servers=['localhost:29092'])
+        consumer = KafkaConsumer('plot-queue', bootstrap_servers=[ os.getenv("KAFKA_BROKER_URL") or 'localhost:29092'])
         while True:
             for message in consumer:
                 plot_message = json.loads(message.value)
