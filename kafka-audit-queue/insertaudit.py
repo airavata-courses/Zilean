@@ -31,7 +31,7 @@ def insert_audit(audit_message):
 
 def main():
     try:
-        consumer = KafkaConsumer('audit-queue', bootstrap_servers=['localhost:29092'])
+        consumer = KafkaConsumer('audit-queue', bootstrap_servers=[os.getenv('KAFKA_BROKER_URL') or 'localhost:29092'])
         while True:
             for message in consumer:
                 audit_message = json.loads(message.value)
