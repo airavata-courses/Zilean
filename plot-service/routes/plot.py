@@ -44,9 +44,9 @@ def create_plot():
                 with open(f'{request_id}.png') as pltfile:
                     
                     if os.environ.get('USE_LOCAL'):
-                        endpoint_url = 'http://localhost:4566'
+                        endpoint_url = os.getenv("S3_HOST") or 'http://localhost:4566'
                     else:
-                        endpoint_url = 'undefined'
+                        endpoint_url = os.getenv("S3_HOST") or 'http://localhost:4566'
                     boto3.setup_default_session(profile_name=os.environ.get('AWS_PROFILE'))
                     client = boto3.client(
                         "s3", 
@@ -60,7 +60,7 @@ def create_plot():
                     )
 
                     if os.environ.get('USE_LOCAL'):
-                        plot_link = f'http://localhost:4566/plots/{request_id}.png'
+                        plot_link = f'{endpoint_url}/plots/{request_id}.png'
                     else:
                         bucket_location = boto3.client('s3').get_bucket_location(Bucket='plots')                 
                         plot_link = "https://s3-{0}.amazonaws.com/{1}/{2}".format(
