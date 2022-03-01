@@ -4,6 +4,7 @@ import os
 import sys
 from django.core.management.commands.runserver import Command as runserver
 runserver.default_port = "5003"
+runserver.default_addr = "0.0.0.0"
 
 
 def main():
