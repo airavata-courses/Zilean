@@ -4,6 +4,7 @@ services:
 
   mongodb-container:
     image: mongo
+    container_name: mongodb-container
     restart: always
     volumes:
       - './dockervolume/mongodb:/data/db'
@@ -14,6 +15,7 @@ services:
 
   postgresql-container:
     image: postgres
+    container_name: postgresql-container
     restart: always
     ports:
       - '5433:5432'
@@ -28,6 +30,7 @@ services:
 
   user-container:
     image: impiyush83/zilean-user:latest
+    container_name: user-container
     restart: always
     environment:
       - MONGO_URI=mongodb://mongodb-container:27017
@@ -40,6 +43,7 @@ services:
   
   session-container:
     image: impiyush83/zilean-session:latest
+    container_name: session-container
     restart: always
     environment:
       - MONGO_URI=mongodb://mongodb-container:27017/session-service
@@ -52,6 +56,7 @@ services:
 
   audit-container:
     image: impiyush83/zilean-audit:latest
+    container_name: audit-container
     restart: always
     environment:
       - DB_USERNAME=audit_service_test
@@ -72,6 +77,7 @@ services:
 
   kafaq-container:
     image: impiyush83/zilean-kafaq:latest
+    container_name: kafaq-container
     restart: always
     environment:
       - KAFKA_BROKER_URL=kafka-container:9092
@@ -84,6 +90,7 @@ services:
 
   kafdq-container:
     image: rushikeshpharate/zilean-kafdq:latest
+    container_name: kafdq-container
     restart: always
     environment:
       - KAFKA_BROKER_URL=kafka-container:9092
@@ -96,6 +103,7 @@ services:
 
   kafpq-container:
     image: rushikeshpharate/zilean-kafpq:latest
+    container_name: kafpq-container
     restart: always
     environment:
       - KAFKA_BROKER_URL=kafka-container:9092
@@ -109,6 +117,7 @@ services:
 
   kafka-container:
     image: confluentinc/cp-kafka:latest
+    container_name: kafka-container
     restart: always
     depends_on:
       - zookeeper-container
@@ -126,6 +135,7 @@ services:
 
   zookeeper-container:
     image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper-container
     restart: always
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
@@ -137,6 +147,7 @@ services:
 
   frontend-container:
     image: impiyush83/zilean-frontend:latest
+    container_name: frontend-container
     restart: always 
     environment:
       - GATEWAY_SERVICE_URL=http://gateway-container:5006/
@@ -149,6 +160,7 @@ services:
 
   gateway-container:
     image: impiyush83/zilean-gateway:latest
+    container_name: gateway-container
     restart: always 
     environment:
       - AUDIT_SERVICE=http://audit-container:5001
@@ -172,6 +184,7 @@ services:
   
   data-retrieval-container:
     image: rushikeshpharate/zilean-data-retrieval-service:latest
+    container_name: data-retrieval-container
     restart: always 
     environment: 
       - KAFKA_BROKER_URL=kafka-container:9092
@@ -187,6 +200,7 @@ services:
   
   localstack-container:
     image: localstack/localstack:latest
+    container_name: localstack-container
     environment: 
       - AWS_DEFAULT_REGION=us-east-1
       - EDGE_PORT=4566
@@ -199,6 +213,7 @@ services:
 
   plot-container:
     image: rushikeshpharate/zilean-plot:latest
+    container_name: plot-container
     restart: always 
     environment: 
       - KAFKA_BROKER_URL=kafka-container:9092
