@@ -20,10 +20,11 @@ def retrieve_data():
     @return - success json
     """
     try:
-        date = request.data.get("date")
-        time = request.data.get("time")
-        station = request.data.get("station")
-        user_id = request.data.get("user_id")
+        request_data = json.loads(request.data)
+        date = request_data.get("date")
+        time = request_data.get("time")
+        station = request_data.get("station")
+        user_id = request_data.get("user_id")
         year, month, day = date.split("-")
         hh, mm = time.split(":")
         time_str = str(day)+'/'+str(month)+'/'+str(year)+' '+str(hh)+':'+str(mm)+':'+str(0.0)
