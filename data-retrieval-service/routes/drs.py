@@ -7,7 +7,7 @@ from bson import json_util
 import uuid
 import nexradaws
 from datetime import timedelta
-from ..utils.kafka_producer import kafka_producer
+from utils.kafka_producer import kafka_producer
 
 drs_api = Blueprint('drs_api', __name__)
 

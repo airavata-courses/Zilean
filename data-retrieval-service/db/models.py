@@ -1,6 +1,9 @@
 import os
 from pymongo import MongoClient
 
+from dotenv import load_dotenv
+load_dotenv()
+
 if os.environ.get('MONGO_URI'):
     uri=os.environ.get('MONGO_URI')
 else:   
