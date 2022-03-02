@@ -57,7 +57,17 @@ Note: These are architecture discussions recorded please visit final architectur
 - Docker 
 - Circle CI
 
-## Project Installation
+# Project Installation
+
+
+## Docker Installation 
+
+```
+$ git clone https://github.com/airavata-courses/zilean.git
+$ docker-compose up
+```
+
+## Manual Installation
 
 ### Dependencies
 
@@ -138,7 +148,7 @@ Create a local bucket naming 'plots'
 aws --endpoint-url=http://localhost:4566 s3 mb s3://plots
 ```
 
-### How to run
+### How to run (Manually)
 
 Start a service either by going to their respective folders or using the start script
 
@@ -163,7 +173,7 @@ $ # kafdq : kafka-data-retrieval-queue-service
 $ # kafpq : kafka-plot-queue-service
 ```
 
-### Manual Installations
+### Fire Services
 
 - [User Service](https://github.com/airavata-courses/Zilean/blob/main-user-service/user-service/README.md)
 - [Kafka Data Retrieval Queue](https://github.com/airavata-courses/Zilean/blob/main-data-retrieval-queue/kafka-data-retrieval-queue/README.md)
