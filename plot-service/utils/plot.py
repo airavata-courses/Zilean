@@ -45,3 +45,4 @@ def plot_data(f, request_id):
         ax.set_ylim(-30, 30)
         add_timestamp(ax, f.dt, y=0.02, high_contrast=True)
     plt.savefig(f'{request_id}.png')
+    plt.close()
