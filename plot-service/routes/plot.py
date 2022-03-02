@@ -47,7 +47,8 @@ def create_plot():
                         endpoint_url = os.getenv("S3_HOST") or 'http://localhost:4566'
                     else:
                         endpoint_url = os.getenv("S3_HOST") or 'http://localhost:4566'
-                    boto3.setup_default_session(profile_name=os.environ.get('AWS_PROFILE'))
+                    boto3.setup_default_session(aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
+                                    aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY'))
                     client = boto3.client(
                         "s3", 
                         region_name=os.environ.get('AWS_REGION'),
