@@ -12,7 +12,7 @@ elif [ "$1" == "session" ]; then
     cd session-service && rm -rf target && mvn clean && mvn clean install && cd target && java -jar -Dspring.profiles.active=local SessionService-0.0.1-SNAPSHOT.jar
 
 elif [ "$1" == "drs" ]; then
-    cd data-retrieval-service && python3 -m venv env && pwd && source ./env/bin/activate &&  pip install -r requirements.txt && ./manage.py runserver
+    cd data-retrieval-service && python3 -m venv env && pwd && source ./env/bin/activate &&  pip install -r requirements.txt && python app.py
 
 elif [ "$1" == "plot" ]; then
     cd plot-service && python3 -m venv env && source ./env/bin/activate &&  pip install -r requirements.txt && python app.py

@@ -183,7 +183,7 @@ services:
       - zilean-network
   
   data-retrieval-container:
-    image: rushikeshpharate/zilean-data-retrieval-service:latest
+    image: impiyush83/zilean-drs:latest
     container_name: data-retrieval-container
     restart: always 
     environment: 
@@ -206,13 +206,15 @@ services:
       - EDGE_PORT=4566
       - SERVICES=lambda,s3
     ports: 
-      - '4566-4583:4566-4583'
+      - '4566:4566'
     volumes: 
       - "${TEMPDIR:-/tmp/localstack}:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - zilean-network
 
   plot-container:
-    image: rushikeshpharate/zilean-plot:latest
+    image: impiyush83/zilean-plot:latest
     container_name: plot-container
     restart: always 
     environment: 
@@ -221,7 +223,6 @@ services:
       - AWS_ACCESS_KEY_ID=plot
       - AWS_SECRET_ACCESS_KEY=plot
       - AWS_REGION=us-east-1
-      - AWS_PROFILE=localstack
       - USE_LOCAL=true
       - S3_HOST=http://localstack-container:4566
     depends_on:
