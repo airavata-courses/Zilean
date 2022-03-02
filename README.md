@@ -65,6 +65,14 @@ Note: These are architecture discussions recorded please visit final architectur
 ```
 $ git clone https://github.com/airavata-courses/zilean.git
 $ docker-compose up
+$ docker exec -it audit-container /bin/sh    
+$ npm run db:prod:all:migrate
+$ exit
+$ docker exec -it localstack-container /bin/sh
+$ aws --endpoint-url=http://localhost:4566 s3 mb s3://plots
+$ exit
+
+Wait until all services are up ! 
 ```
 
 ## Manual Installation
