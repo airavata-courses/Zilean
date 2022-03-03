@@ -32,4 +32,4 @@ def check():
     return gateway_util.starter()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5006, debug=True)
+    app.run(host='0.0.0.0', port=os.getenv('PORT') or 5006, debug=True)
