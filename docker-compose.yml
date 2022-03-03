@@ -168,6 +168,7 @@ services:
       - USER_SERVICE=http://user-container:5005  
       - PLOT_SERVICE=http://plot-container:5002  
       - KAFKA_BROKER_URL=kafka-container:9092
+      - PORT=5006
     depends_on:
       - session-container
       - user-container
