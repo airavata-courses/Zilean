@@ -64,6 +64,7 @@ Note: These are architecture discussions recorded please visit final architectur
 
 ```
 $ git clone https://github.com/airavata-courses/zilean.git
+$ docker compose -f kafka-docker-compose.yml
 $ docker-compose up
 $ docker exec -it audit-container /bin/sh    
 $ npm run db:prod:all:migrate
