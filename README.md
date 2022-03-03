@@ -69,6 +69,8 @@ $ docker exec -it audit-container /bin/sh
 $ npm run db:prod:all:migrate
 $ exit
 $ docker exec -it localstack-container /bin/sh
+$ aws configure 
+$ plot plot enter enter 
 $ aws --endpoint-url=http://localhost:4566 s3 mb s3://plots
 $ exit
 
