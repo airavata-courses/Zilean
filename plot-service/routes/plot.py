@@ -29,19 +29,19 @@ def create_plot():
         original_request = request_data.get("original_request")
         plot_link = None
 
-
         existing_plot = db['plots'].find_one({
-            "target_link": target_link
+            "target_link": target_link,
+            "status": "PROCESSED"
         })
         if existing_plot:
             db['plots'].insert_one({
-            'plot_link': existing_plot.plot_link,
-            'target_link': existing_plot.target_link,
+            'plot_link': existing_plot['plot_link'],
+            'target_link': existing_plot['target_link'],
             'user_id': user_id,
             'created_at': datetime.utcnow(),
             'updated_at': datetime.utcnow(),
             'request_id': request_id,
-            'status': existing_plot.status,
+            'status': existing_plot['status'],
             'original_request': original_request
             })
             return {
@@ -88,14 +88,22 @@ def create_plot():
                             'plots',
                             f'{request_id}.png'
                         )
+
+        stat =  'UNKNOWN_ERROR'
+        if plot_link == 'NEXRAD-S3-LINK-NOT-FOUND':
+            stat =  'DATA_RETRIEVAL_FAILURE'
+        elif plot_link == '' or  plot_link == None:
+            stat = 'IMAGE_PARSING_FAILURE'
+        else:
+            stat = 'SUCCESS'
         db['plots'].insert_one({
             'plot_link': '' if not plot_link else plot_link,
-            'target_link': target_link
+            'target_link': target_link,
             'user_id': user_id,
             'created_at': datetime.utcnow(),
             'updated_at': datetime.utcnow(),
             'request_id': request_id,
-            'status': 'DATA_RETRIEVAL_FAILURE' if plot_link == 'NEXRAD-S3-LINK-NOT-FOUND' else 'PROCESSED' ,
+            'status': stat,
             'original_request': original_request
         })          
         return {
