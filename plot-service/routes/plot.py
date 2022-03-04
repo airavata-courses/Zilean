@@ -27,6 +27,26 @@ def create_plot():
         user_id = request_data.get('user_id')
         target_link = request_data.get('s3_link')
         original_request = request_data.get("original_request")
+        plot_link = None
+
+
+        existing_plot = db['plots'].find_one({
+            "target_link": target_link
+        })
+        if existing_plot:
+            db['plots'].insert_one({
+            'plot_link': existing_plot.plot_link,
+            'target_link': existing_plot.target_link,
+            'user_id': user_id,
+            'created_at': datetime.utcnow(),
+            'updated_at': datetime.utcnow(),
+            'request_id': request_id,
+            'status': existing_plot.status,
+            'original_request': original_request
+            })
+            return {
+                "message": "Success"
+            }   
 
         if target_link == 'NEXRAD-S3-LINK-NOT-FOUND':
             plot_link = 'NEXRAD-S3-LINK-NOT-FOUND'
@@ -69,7 +89,8 @@ def create_plot():
                             f'{request_id}.png'
                         )
         db['plots'].insert_one({
-            'plot_link': plot_link,
+            'plot_link': '' if not plot_link else plot_link,
+            'target_link': target_link
             'user_id': user_id,
             'created_at': datetime.utcnow(),
             'updated_at': datetime.utcnow(),
@@ -84,6 +105,7 @@ def create_plot():
         db['plots'].insert_one({
             'plot_link': 'NEXRAD-S3-LINK-NOT-FOUND',
             'user_id': user_id,
+            'target_link': target_link,
             'created_at': datetime.utcnow(),
             'updated_at': datetime.utcnow(),
             'request_id': request_id,
