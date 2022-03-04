@@ -1,0 +1,61 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: audit-container
+  name: audit-container
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: audit-container
+  template:
+    metadata:
+      labels:
+        app: audit-container
+    spec:
+      containers:
+      - image: impiyush83/zilean-audit
+        name: audit-container
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5001
+        env:
+          - name: DB_USERNAME
+            value: "audit_service_test"
+          - name: DB_PASSWORD
+            value: "audit_service_test"
+          - name: DB_DATABASE
+            value: "audit_service_test"
+          - name: DB_HOST
+            value: "postgresql-container"
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_CONNECTION
+            value: "postgres"
+          - name: DB_CONNECTION_POOL_MAX_CONNECTIONS
+            value: "6"
+          - name: DB_CONNECTION_POOL_MIN_CONNECTIONS
+            value: "1"
+          - name: SQL_LOGGING_ENABLED
+            value: "true"
+      
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: audit-container
+  name: audit-container
+spec: 
+  type: LoadBalancer
+  selector: 
+    app: audit-container
+  ports:
+  - port: 5001
+    targetPort: 5001
+    nodePort: 30003
+

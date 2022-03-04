@@ -1,0 +1,43 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: session-container
+  name: session-container
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: session-container
+  template:
+    metadata:
+      labels:
+        app: session-container
+    spec:
+      containers:
+      - image: impiyush83/zilean-session
+        name: session-container
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5004
+        env:
+          - name: MONGO_URI
+            value: "mongodb+srv://admin:admin@cluster0.nc3qc.mongodb.net/session-service?retryWrites=true&w=majority"
+
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: session-container
+  name: session-container
+spec: 
+  type: LoadBalancer
+  selector: 
+    app: session-container
+  ports:
+  - port: 5004
+    targetPort: 5004
+    nodePort: 30002
