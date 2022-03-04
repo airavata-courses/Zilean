@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: plot-container
+  name: plot-container
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: plot-container
+  template:
+    metadata:
+      labels:
+        app: plot-container
+    spec:
+      containers:
+      - image: impiyush83/zilean-plot
+        name: plot-container
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5002
+        env:
+          - name: MONGO_URI
+            value: "mongodb://mongodb-container:27017"
+          - name: AWS_ACCESS_KEY_ID
+            value: "plot"
+          - name: AWS_SECRET_ACCESS_KEY
+            value: "plot"
+          - name: AWS_REGION
+            value: "us-east-1"
+          - name: USE_LOCAL
+            value: "true"
+          - name: S3_HOST
+            value: "http://localstack-container:4566"
+
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: plot-container
+  name: plot-container
+spec: 
+  type: LoadBalancer
+  selector: 
+    app: plot-container
+  ports:
+  - port: 5002
+    targetPort: 5002
+    nodePort: 30004
