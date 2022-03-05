@@ -60,16 +60,11 @@ spec:
           volumeMounts:
             - mountPath: /tmp/localstack
               name: localstack-container-claim0
-            - mountPath: /var/run/docker.sock
-              name: localstack-container-claim1
       restartPolicy: Always
       volumes:
         - name: localstack-container-claim0
           persistentVolumeClaim:
             claimName: localstack-container-claim0
-        - name: localstack-container-claim1
-          persistentVolumeClaim:
-            claimName: localstack-container-claim1
 
 ---
 
@@ -85,22 +80,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 100Mi
-status: {}
-
---- 
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  creationTimestamp: null
-  labels:
-    io.kompose.service: localstack-container-claim1
-  name: localstack-container-claim1
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
+      storage: 500Mi
 status: {}

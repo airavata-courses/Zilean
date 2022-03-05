@@ -24,15 +24,21 @@ spec:
           - name: MONGO_URI
             value: "mongodb://mongodb-container:27017"
           - name: AWS_ACCESS_KEY_ID
-            value: "plot"
+            valueFrom: 
+              secretKeyRef: 
+                name: awskey
+                key: AWS_ACCESS_KEY_ID
           - name: AWS_SECRET_ACCESS_KEY
-            value: "plot"
+            valueFrom: 
+              secretKeyRef: 
+                name: awssecret
+                key: AWS_SECRET_ACCESS_KEY
           - name: AWS_REGION
             value: "us-east-1"
-          - name: USE_LOCAL
-            value: "true"
           - name: S3_HOST
-            value: "http://localstack-container:4566"
+            value: "https://s3.amazonaws.com"
+          - name: S3_BUCKET
+            value: "plots-1"
 
       restartPolicy: Always
 ---
@@ -47,6 +53,6 @@ spec:
   selector: 
     app: plot-container
   ports:
-  - port: 5002
+  - port: 5012
     targetPort: 5002
-    nodePort: 30004
+    nodePort: 30002

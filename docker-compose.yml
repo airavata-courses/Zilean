@@ -174,12 +174,11 @@ services:
     environment: 
       - AWS_DEFAULT_REGION=us-east-1
       - EDGE_PORT=4566
-      - SERVICES=lambda,s3
+      - SERVICES=s3
     ports: 
       - '4566:4566'
     volumes: 
       - "${TEMPDIR:-/tmp/localstack}:/tmp/localstack"
-      - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
       - zilean-network
 
@@ -194,6 +193,7 @@ services:
       - AWS_SECRET_ACCESS_KEY=plot
       - AWS_REGION=us-east-1
       - USE_LOCAL=true
+      - S3_BUCKET=plots
       - S3_HOST=http://localstack-container:4566
     depends_on:
       - localstack-container
