@@ -76,7 +76,8 @@ def create_plot():
                     response = client.upload_file(
                         f'{request_id}.png',
                         os.getenv('S3_BUCKET'),
-                        f'{request_id}.png'
+                        f'{request_id}.png',
+                        ExtraArgs={'ACL': 'public-read'}
                     )
 
                     if bool(os.environ.get('USE_LOCAL')):
