@@ -192,7 +192,7 @@ services:
       - AWS_ACCESS_KEY_ID=plot
       - AWS_SECRET_ACCESS_KEY=plot
       - AWS_REGION=us-east-1
-      - USE_LOCAL=true
+      - USE_LOCAL=True
       - S3_BUCKET=plots
       - S3_HOST=http://localstack-container:4566
     depends_on:
