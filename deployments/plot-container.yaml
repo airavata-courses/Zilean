@@ -39,6 +39,8 @@ spec:
             value: "https://s3.amazonaws.com"
           - name: S3_BUCKET
             value: "plots-1"
+          - name: USE_LOCAL
+            value: "False"
 
       restartPolicy: Always
 ---
