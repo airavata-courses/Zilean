@@ -7,7 +7,7 @@ Spring 2022 Project Team
 
 To run plot microservice follow below steps:
 
-* Go to the gateway-service folder
+* Go to the plot-service folder
 * Install Pipenv
 * For MAC
     ```
