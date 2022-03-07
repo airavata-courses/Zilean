@@ -59,3 +59,18 @@ spec:
     targetPort: 5001
     nodePort: 30001
 
+---
+
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: audit-container-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: audit-container
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 50

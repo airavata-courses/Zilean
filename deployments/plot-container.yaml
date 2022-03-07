@@ -58,3 +58,18 @@ spec:
   - port: 5012
     targetPort: 5002
     nodePort: 30002
+
+---
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: plot-container-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: plot-container
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 50
