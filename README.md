@@ -55,6 +55,7 @@ Note: These are architecture discussions recorded please visit final architectur
 - AWS S3
 - Localstack
 - Docker 
+- Kubernetes
 - Circle CI
 
 # Project Installation
