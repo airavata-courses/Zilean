@@ -2,9 +2,9 @@ version: 2.1
 
 jobs:
     build:
-        working_directory: ~/audit-service
+        working_directory: ~/zilean/audit-service
         docker:
-            - image: "cimg/node:17.8.0"
+            - image: "cimg/node:10"
         steps:
             - checkout
             - run: npm install
