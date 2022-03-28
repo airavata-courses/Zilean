@@ -7,5 +7,4 @@ jobs:
             - image: "cimg/node:16.14.2"
         steps:
             - checkout
-            - run: npm install
-            - run: npm run start
+            - run: cd audit-service && npm install && npm run start
