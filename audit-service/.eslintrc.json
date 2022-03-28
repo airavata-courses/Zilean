@@ -4,7 +4,6 @@
     "allowImportExportEverywhere": true,
     "codeFrame": false
   },
-  "extends": "airbnb",
   "rules": {
     "strict": 0,
     "comma-dangle": 0,
