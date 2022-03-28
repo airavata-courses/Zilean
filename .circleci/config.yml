@@ -1,0 +1,11 @@
+version: 2.1
+
+jobs:
+    build:
+        working_directory: ~/audit-service
+        docker:
+            - image: "cimg/node:17.8.0"
+        steps:
+            - checkout
+            - run: npm install
+            - run: npm run start
