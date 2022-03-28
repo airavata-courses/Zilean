@@ -1,5 +1,4 @@
 arrow==1.2.2
-backports.zoneinfo==0.2.1
 click==8.0.3
 dateparser==1.1.0
 dnspython==2.2.0
