@@ -1,0 +1,10 @@
+version: 2.1
+
+jobs:
+  build:
+    working_directory: ~/zilean/session-service
+    docker:
+      - image: "cimg/openjdk:11.0.13"
+    steps:
+      - checkout
+      - run: cd session-service && mvn package -Dmaven.test.skip -f pom.xml
