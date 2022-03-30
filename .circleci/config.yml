@@ -1,5 +1,14 @@
 version: 2.1
 
+
+workflows:
+  build:
+    jobs:
+      - build:
+          context:
+            - zilean
+
+
 jobs:
     build:
         working_directory: ~/zilean/frontend
@@ -7,4 +16,9 @@ jobs:
             - image: "cimg/node:10.16.0"
         steps:
             - checkout
+            - setup_remote_docker
+            - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+            - run: cd frontend && docker build -t $DOCKER_USERNAME/$CIRCLE_BRANCH:latest .
+            - run: docker push $DOCKER_USERNAME/$CIRCLE_BRANCH:latest
+            - run: docker logout
             - run: cd frontend && npm install
