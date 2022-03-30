@@ -7,20 +7,20 @@ from dotenv import load_dotenv
 load_dotenv()
 
 PLOT_SERVICE=os.environ.get('PLOT_SERVICE')
-def nexrad(request_body):
+def nexrad(plot_message):
     return {
-        "user_id": request_body.get('user_id'),
-        "type": request_body.get('type'),
-        "date": request_body.get('date'),
-        "time": request_body.get('time'),
-        "station":request_body.get('station')
+        "user_id":  plot_message.get('user_id'),
+        "request_id": plot_message.get('request_id'),
+        "s3_link": plot_message.get('s3_link'),
+        "original_request": plot_message.get('original_request')
     }
 
-def merra(request_body):
+def merra(plot_message):
     return {
-        "user_id": request_body.get('user_id'),
-        "type": request_body.get('type'),
-        "date": request_body.get('date'),
+        "user_id":  plot_message.get('user_id'),
+        "request_id": plot_message.get('request_id'),
+        "url": plot_message.get('url'),
+        "original_request": plot_message.get('original_request')
     }
 
 def plot_queue(plot_message):
