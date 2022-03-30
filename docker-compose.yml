@@ -116,7 +116,7 @@ services:
 
 
   frontend-container:
-    image: impiyush83/zilean-frontend:latest
+    image: rushikeshpharate/zilean-frontend:latest
     container_name: frontend-container
     restart: always 
     environment:
