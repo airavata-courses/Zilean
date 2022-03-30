@@ -31,7 +31,7 @@ pooch==1.6.0
 py==1.11.0
 pymongo==4.0.1
 pyparsing==3.0.7
-pyproj==1.9.6
+pyproj==2.5.0
 pytest==6.2.5
 python-dateutil==2.8.2
 python-dotenv==0.19.2
