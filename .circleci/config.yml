@@ -1,20 +1,14 @@
 version: 2.1
 
-
-orbs:
-  docker: circleci/docker@1.4.0
-
 workflows:
-  zilean-workflow:
+  build:
     jobs:
-      - zilean-job:
+      - build:
           context:
-            - build-env-vars
-            - docker-hub-creds
             - zilean
 
 jobs:
-    zilean-job:
+    build:
         working_directory: ~/zilean/kafka-data-retrieval-queue
         docker:
             - image: "cimg/python:3.10.4"
