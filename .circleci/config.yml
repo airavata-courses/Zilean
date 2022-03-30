@@ -1,0 +1,10 @@
+version: 2.1
+
+jobs:
+    build:
+        working_directory: ~/zilean/kafka-audit-queue
+        docker:
+            - image: "cimg/python:3.10.4"
+        steps:
+            - checkout
+            - run: cd kafka-audit-queue && pip install -r requirements.txt
