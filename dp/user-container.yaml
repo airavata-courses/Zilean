@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: user-container
+  name: user-container
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: user-container
+  template:
+    metadata:
+      labels:
+        app: user-container
+    spec:
+      containers:
+      - image: impiyush83/zilean-user
+        name: user-container
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5005
+        env:
+          - name: MONGO_URI
+            value: "mongodb://mongodb-container:27017"
+
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: user-container
+  name: user-container
+spec: 
+  type: LoadBalancer
+  selector: 
+    app: user-container
+  ports:
+  - port: 5005
+    targetPort: 5005
+    nodePort: 30005
+
+
