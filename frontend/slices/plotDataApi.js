@@ -9,7 +9,7 @@ export const plotDataApi = createApi({
         postData: builder.mutation({
             query:({access_token, ...data})=>{
             
-                console.log("Inside plotDataAPI post data ",data);
+                // console.log("Inside plotDataAPI post data ",data);
                 
                 return {
                     url:'v1/weather/request',
@@ -27,7 +27,7 @@ export const plotDataApi = createApi({
         getRequestsHistory: builder.query({
             query:(data)=>{
 
-                console.log("inside plorDataApi getRequestsHistory ",data);
+                // console.log("inside plorDataApi getRequestsHistory ",data);
                 return{
                     url:'v1/plots',
                     method:'GET',
