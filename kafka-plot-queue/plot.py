@@ -7,21 +7,39 @@ from dotenv import load_dotenv
 load_dotenv()
 
 PLOT_SERVICE=os.environ.get('PLOT_SERVICE')
+def nexrad(request_body):
+    return {
+        "user_id": request_body.get('user_id'),
+        "type": request_body.get('type'),
+        "date": request_body.get('date'),
+        "time": request_body.get('time'),
+        "station":request_body.get('station')
+    }
+
+def merra(request_body):
+    return {
+        "user_id": request_body.get('user_id'),
+        "type": request_body.get('type'),
+        "date": request_body.get('date'),
+    }
 
 def plot_queue(plot_message):
     try:
         print(plot_message)
+        context_switcher = {
+            'nexrad': nexrad,
+            'merra': merra
+        }
+
+        if plot_message.get('type') not in context_switcher.keys():
+            raise Exception('Invalid request type')
+        
         response = requests.post(
             f'{PLOT_SERVICE}/v1/plots',
             headers={
                 'Content-Type': 'application/json'
             },
-            data=json.dumps({
-                "user_id":  plot_message.get('user_id'),
-                "request_id": plot_message.get('request_id'),
-                "s3_link": plot_message.get('s3_link'),
-                "original_request": plot_message.get('original_request'),
-            })
+            data=json.dumps(context_switcher.get(plot_message.get('type'))(plot_message))
         )
         response.raise_for_status()
     except Exception as err:
