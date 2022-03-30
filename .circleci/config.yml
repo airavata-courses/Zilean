@@ -2,9 +2,9 @@ version: 2.1
 
 jobs:
     build:
-        working_directory: ~/zilean/plot-service
+        working_directory: ~/zilean/frontend
         docker:
-            - image: "cimg/python:3.8.10"
+            - image: "cimg/node:10.16.0"
         steps:
             - checkout
-            - run: cd plot-service && pip install -r requirements.txt && pytest tests
+            - run: cd frontend && npm install
