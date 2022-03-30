@@ -1,10 +1,22 @@
 version: 2.1
 
+workflows:
+  build:
+    jobs:
+      - build:
+          context:
+            - zilean
+
 jobs:
     build:
-        working_directory: ~/zilean/kafka-plot-queue
+        working_directory: ~/zilean/kakfa-plot-queue
         docker:
-            - image: "cimg/python:3.10.4"
+            - image: "cimg/python:3.8.10"
         steps:
             - checkout
-            - run: cd kafka-plot-queue && pip install -r requirements.txt
+            - setup_remote_docker
+            - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+            - run: cd kakfa-plot-queue && docker build -t $DOCKER_USERNAME/$CIRCLE_BRANCH:latest .
+            - run: docker push $DOCKER_USERNAME/$CIRCLE_BRANCH:latest
+            - run: docker logout
+            - run: cd kakfa-plot-queue && pip install -r requirements.txt
