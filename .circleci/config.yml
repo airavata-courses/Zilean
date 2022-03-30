@@ -1,5 +1,13 @@
 version: 2.1
 
+
+workflows:
+  build:
+    jobs:
+      - build:
+          context:
+            - zilean
+
 jobs:
     build:
         working_directory: ~/zilean/kafka-audit-queue
@@ -7,4 +15,9 @@ jobs:
             - image: "cimg/python:3.10.4"
         steps:
             - checkout
+            - setup_remote_docker
+            - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+            - run: cd kafka-audit-queue && docker build -t $DOCKER_USERNAME/$CIRCLE_BRANCH:latest .
+            - run: docker push $DOCKER_USERNAME/$CIRCLE_BRANCH:latest
+            - run: docker logout
             - run: cd kafka-audit-queue && pip install -r requirements.txt
