@@ -28,13 +28,15 @@ def fetch_plot_requests():
     try:
         session_service_response = check_user_session(request.headers.get('Access-Token'))
         user_id = session_service_response.get('user_id')      
+        request_body = json.loads(request.data)
         response = requests.get(
             f'{PLOT_SERVICE}/v1/plots',
             headers={
                 'Content-Type': 'application/json'
             },
             data=json.dumps({
-                "user_id": user_id
+                "user_id": user_id,
+                "type": request_body.get('type') 
             })
         )
         response.raise_for_status()
