@@ -62,6 +62,7 @@ def nexrad(request_data):
         }
 def merra(request_data):
     date = request_data.get("date")
+    hour = request_data.get("hour")
     type = request_data.get("type")
     user_id = request_data.get("user_id")
     year, month, day = date.split("-")
@@ -76,7 +77,8 @@ def merra(request_data):
     finally:
         original_request={
             "date": date,
-            "type":type
+            "type":type,
+            "hour": hour
         }
         request_uuid = str(uuid.uuid4())
         db['requests'].insert_one({

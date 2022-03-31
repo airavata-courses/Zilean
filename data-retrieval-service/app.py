@@ -6,7 +6,7 @@ from routes.drs import drs_api
 # Defines the Flask app
 app = Flask(__name__)
 
-# Cross Origin Resource Sharing (CORS) is enabled for the app
+# Cross Origin Resource Sharing (CORS) is enabled for th
 CORS(app)
 
 app.register_blueprint(drs_api)
