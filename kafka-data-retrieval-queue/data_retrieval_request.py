@@ -24,7 +24,7 @@ def merra(request_body):
         "user_id": request_body.get('user_id'),
         "type": request_body.get('type'),
         "date": request_body.get('date'),
-        "hour": request_body.get('hour')
+        "time": request_body.get('time')
     }
 def data_retrieval_request(dret_req_message):
     try:
