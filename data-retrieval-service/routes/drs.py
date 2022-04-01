@@ -60,10 +60,11 @@ def nexrad(request_data):
         }
 def merra(request_data):
     date = request_data.get("date")
-    hour = request_data.get("hour")
+    time = request_data.get("time")
     type = request_data.get("type")
     user_id = request_data.get("user_id")
     year, month, day = date.split("-")
+    hour, mm = time.split(":")
     urlpart1 = "https://goldsmr4.gesdisc.eosdis.nasa.gov/data/MERRA2/M2I1NXLFO.5.12.4/"
     urlpart2 = year+"/"+month+"/"+"MERRA2_400.inst1_2d_lfo_Nx."+year+month+day+".nc4"
     URL = urlpart1 + urlpart2
