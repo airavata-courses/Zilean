@@ -7,8 +7,6 @@ from bson import json_util
 import uuid
 import nexradaws
 from datetime import timedelta
-import numpy as np
-from netCDF4 import Dataset
 import requests
 
 from utils.kafka_producer import kafka_producer
