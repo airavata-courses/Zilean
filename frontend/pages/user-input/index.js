@@ -285,8 +285,6 @@ function index() {
 
       console.log(submitRequestBody);
       await postData(submitRequestBody);
-
-
     }
 
     // console.log(submitRequestBody);
