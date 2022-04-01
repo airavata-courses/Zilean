@@ -278,6 +278,7 @@ function index() {
     if (requestType == 'MERRA') {
       const submitRequestBody = {
         date: date,
+        time: time,
         type: 'merra',
         access_token: access_token,
       };
@@ -393,6 +394,18 @@ function index() {
                   value={date}
                 ></input>
               </div> 
+              <div className="mt-2 mb-2">
+                <label htmlFor="birthday">Select Time:</label>
+                <span> </span>
+                <input
+                  type="time"
+                  id="birthday"
+                  name="birthday"
+                  onChange={handleTimeChange}
+                  max={`${hour}-${min}`}
+                  value={time}
+                ></input>
+              </div>
               <div className="form-check"></div>
               <button
                 type="submit"
