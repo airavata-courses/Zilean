@@ -16,7 +16,7 @@ spec:
         app: session-container
     spec:
       containers:
-      - image: impiyush83/zilean-session
+      - image: impiyush83/main-session-service
         name: session-container
         imagePullPolicy: Always
         resources: 

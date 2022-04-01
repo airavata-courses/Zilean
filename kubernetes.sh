@@ -10,3 +10,5 @@ kubectl apply -f deployments/postgresql-container.yaml
 kubectl apply -f deployments/mongodb-container.yaml
 kubectl apply -f deployments/localstack-container.yaml
 kubectl apply -f deployments/plot-container.yaml
+kubectl apply -f deployments/kafka-container.yaml
+kubectl apply -f deployments/gateway-container.yaml

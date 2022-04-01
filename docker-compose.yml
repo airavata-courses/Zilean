@@ -29,7 +29,7 @@ services:
       - zilean-network
 
   user-container:
-    image: impiyush83/zilean-user:latest
+    image: impiyush83/main-user-service:latest
     container_name: user-container
     restart: always
     environment:
@@ -42,7 +42,7 @@ services:
       - zilean-network
   
   session-container:
-    image: impiyush83/zilean-session:latest
+    image: impiyush83/main-session-service:latest
     container_name: session-container
     restart: always
     environment:
@@ -55,7 +55,7 @@ services:
       - zilean-network
 
   audit-container:
-    image: impiyush83/zilean-audit:latest
+    image: impiyush83/main-audit-service:latest
     container_name: audit-container
     restart: always
     environment:
@@ -76,7 +76,7 @@ services:
       - zilean-network
 
   kafaq-container:
-    image: impiyush83/zilean-kafaq:latest
+    image: impiyush83/main-kafka-audit-queue:latest
     container_name: kafaq-container
     restart: always
     environment:
@@ -89,7 +89,7 @@ services:
       - zilean-network
 
   kafdq-container:
-    image: rushikeshpharate/zilean-kafdq:latest
+    image: rushikeshpharate/main-kafka-data-retrieval-queue:latest
     container_name: kafdq-container
     restart: always
     environment:
@@ -102,7 +102,7 @@ services:
       - zilean-network
 
   kafpq-container:
-    image: rushikeshpharate/zilean-kafpq:latest
+    image: rushikeshpharate/main-kafka-plot-queue:latest
     container_name: kafpq-container
     restart: always
     environment:
@@ -129,7 +129,7 @@ services:
       - zilean-network
 
   gateway-container:
-    image: impiyush83/zilean-gateway:latest
+    image: impiyush83/main-gateway-service:latest
     container_name: gateway-container
     restart: always 
     environment:
@@ -153,7 +153,7 @@ services:
       - zilean-network
   
   data-retrieval-container:
-    image: impiyush83/zilean-drs:latest
+    image: impiyush83/main-data-retrieval-service:latest
     container_name: data-retrieval-container
     restart: always 
     environment: 
@@ -183,7 +183,7 @@ services:
       - zilean-network
 
   plot-container:
-    image: impiyush83/zilean-plot:latest
+    image: impiyush83/main-plot-service:latest
     container_name: plot-container
     restart: always 
     environment: 

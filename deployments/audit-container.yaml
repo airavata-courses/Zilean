@@ -17,7 +17,7 @@ spec:
         app: audit-container
     spec:
       containers:
-      - image: impiyush83/zilean-audit
+      - image: impiyush83/main-audit-service
         name: audit-container
         imagePullPolicy: Always
         resources: 

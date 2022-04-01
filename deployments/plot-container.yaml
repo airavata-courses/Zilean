@@ -15,7 +15,7 @@ spec:
         app: plot-container
     spec:
       containers:
-      - image: impiyush83/zilean-plot
+      - image: impiyush83/main-plot-service
         name: plot-container
         imagePullPolicy: Always
         ports:
