@@ -1,19 +1,20 @@
-FROM python:3.9-buster
+FROM ubuntu:18.04
 
 WORKDIR /usr/app
 
-# set environment variables
+
+RUN apt update &&  apt -y install software-properties-common && add-apt-repository ppa:deadsnakes/ppa && apt -y install libpq-dev gcc
+RUN apt -y install python3.9 && python3.9 --version
+RUN apt -y install python3-pip && pip3 install --upgrade pip  && pip3 install --upgrade setuptools
+RUN apt -y install libgeos-dev && apt-get -y install libproj-dev
+RUN apt -y install proj-bin
+
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN pip3 install --upgrade pip setuptools wheel
-# Below RUN command is essential for installing some dependencies else pip install -r requirements.txt throws an error.
-RUN apt-get update \
-    && apt-get -y install libpq-dev gcc
-
-COPY ./requirements.txt ./
-RUN pip3 install -r requirements.txt
-
 COPY ./ ./
 
-CMD ["python", "app.py"]
+RUN  pip3 install numpy==1.19.5  && pip3 install cartopy==0.18.0 
+RUN python3 -m pip install -r requirements.txt
+
+CMD ["python3", "app.py"]
