@@ -1,0 +1,23 @@
+version: 2.1
+
+workflows:
+  build:
+    jobs:
+      - build:
+          context:
+            - zilean
+
+
+jobs:
+    build:
+        working_directory: ~/zilean/data-retrieval-service
+        docker:
+            - image: "cimg/python:3.8.10"
+        steps:
+            - checkout
+            - setup_remote_docker
+            - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+            - run: cd data-retrieval-service && docker build -t $DOCKER_USERNAME/$CIRCLE_BRANCH:latest .
+            - run: docker push $DOCKER_USERNAME/$CIRCLE_BRANCH:latest
+            - run: docker logout
+            - run: cd data-retrieval-service && pip install -r requirements.txt && pytest tests
