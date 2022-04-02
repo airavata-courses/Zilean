@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: localstack-container
+  name: localstack-container
+spec:
+  ports:
+    - name: "4566"
+      port: 4566
+      targetPort: 4566
+  selector:
+    io.kompose.service: localstack-container
+
+---
+s
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: localstack-container
+  name: localstack-container
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: localstack-container
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: localstack-container
+    spec:
+      containers:
+        - env:
+            - name: AWS_DEFAULT_REGION
+              value: us-east-1
+            - name: EDGE_PORT
+              value: "4566"
+            - name: SERVICES
+              value: s3
+          image: localstack/localstack:latest
+          name: localstack-container
+          ports:
+            - containerPort: 4566
+          resources: {}
+          volumeMounts:
+            - mountPath: /tmp/localstack
+              name: localstack-container-claim0
+      restartPolicy: Always
+      volumes:
+        - name: localstack-container-claim0
+          persistentVolumeClaim:
+            claimName: localstack-container-claim0
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: localstack-container-claim0
+  name: localstack-container-claim0
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+status: {}

@@ -1,0 +1,35 @@
+version: '2'
+services:
+  kafka-container:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka-container
+    restart: always
+    depends_on:
+      - zookeeper-container
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-container:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-container:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - zilean-network
+
+  zookeeper-container:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper-container
+    restart: always
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+    networks:
+      - zilean-network
+networks:
+  zilean-network:
+    name: zilean-network
+    driver: bridge
