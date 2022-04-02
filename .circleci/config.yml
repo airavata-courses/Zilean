@@ -20,4 +20,4 @@ jobs:
             - run: cd data-retrieval-service && docker build -t $DOCKER_USERNAME/$CIRCLE_BRANCH:latest .
             - run: docker push $DOCKER_USERNAME/$CIRCLE_BRANCH:latest
             - run: docker logout
-            - run: cd data-retrieval-service && pip install -r requirements.txt && pytest test
+            - run: cd data-retrieval-service && pip install -r requirements.txt && pytest tests
