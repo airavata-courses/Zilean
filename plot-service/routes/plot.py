@@ -145,6 +145,16 @@ def merra(request_data):
             return {
                 "message": "Success"
             }   
+        result = requests.get(target_link)
+        try:
+            result.raise_for_status()
+            f = open(FILENAME,'wb')
+            f.write(result.content)
+            f.close()
+            print('contents of URL written to '+FILENAME)
+        except:
+            target_link = 'MERRA-LINK-NOT-FOUND'
+            print('requests.get() returned an error code '+str(result.status_code))
 
         if target_link == 'MERRA-LINK-NOT-FOUND':
             plot_link = 'MERRA-LINK-NOT-FOUND'
@@ -156,17 +166,9 @@ def merra(request_data):
                     user_agent_extra='Resource'
                 )
             )
-            result = requests.get(target_link)
-            try:
-                result.raise_for_status()
-                f = open(FILENAME,'wb')
-                f.write(result.content)
-                f.close()
-                print('contents of URL written to '+FILENAME)
-            except:
-                print('requests.get() returned an error code '+str(result.status_code))
-            FILENAME = convert_merra_data(FILENAME)
-            plot_merra_data(FILENAME, request_id)
+            
+            FILENAME = convert_merra_data(FILENAME,request_data)
+            plot_merra_data(FILENAME, request_data)
             with open(f'{request_id}.png') as pltfile:
                 if bool(os.environ.get('USE_LOCAL')):
                     endpoint_url = os.getenv("S3_HOST") or 'http://localhost:4566'
@@ -246,8 +248,8 @@ def create_plot():
             'merra': merra
         }
     try:
-        drsmessage = context_switcher.get(type)(request_data)
-        return drsmessage
+        plotresponse = context_switcher.get(type)(request_data)
+        return plotresponse
     except Exception as err:
         print(err)
         return {

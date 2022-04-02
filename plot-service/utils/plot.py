@@ -67,12 +67,13 @@ def plot_merra_data(file, request_data):
     # Set contour levels, then draw the plot and a colorbar
     contour_levels = np.arange(230,311,5)
     plt.contourf(lons, lats, T2M, contour_levels, transform=ccrs.PlateCarree(),cmap=plt.cm.jet)
-    plt.title('MERRA-2 Air Temperature at 2m, January 2010', size=14)
+    plt.title('MERRA-2 Air Temperature', size=14)
     color_bar = plt.colorbar(ax=ax, orientation="vertical", pad=0.02, aspect=16, shrink=0.8)
     color_bar.set_label('K',size=12,rotation=0,labelpad=15)
     color_bar.ax.tick_params(labelsize=10)
 
     plt.savefig(f'{request_id}.png')
+    plt.close()
 
 
 def convert_merra_data(file, request_data):
