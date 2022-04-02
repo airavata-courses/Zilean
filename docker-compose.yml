@@ -89,7 +89,7 @@ services:
       - zilean-network
 
   kafdq-container:
-    image: rushikeshpharate/main-kafka-data-retrieval-queue:latest
+    image: impiyush83/main-kafka-data-retrieval-queue:latest
     container_name: kafdq-container
     restart: always
     environment:
@@ -102,7 +102,7 @@ services:
       - zilean-network
 
   kafpq-container:
-    image: rushikeshpharate/main-kafka-plot-queue:latest
+    image: impiyush83/main-kafka-plot-queue:latest
     container_name: kafpq-container
     restart: always
     environment:
