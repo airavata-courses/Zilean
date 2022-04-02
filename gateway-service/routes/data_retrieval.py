@@ -40,7 +40,7 @@ def createWeatherData():
             "user_id": user_id,
             "type": request_body.get('type'),
             "date": request_body.get('date'),
-            "hour": request_body.get('hour')
+            "time": request_body.get('time')
         }
 
     try:
