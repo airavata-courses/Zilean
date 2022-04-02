@@ -46,7 +46,7 @@ def createWeatherData():
     try:
         session_service_response = check_user_session(request.headers.get('Access-Token'))
         request_body = json.loads(request.data)
-        user_id = session_service_response.get('user_id')
+        user_id = request_body.get('user_id')
         context_switcher = {
             'nexrad': nexrad,
             'merra': merra
