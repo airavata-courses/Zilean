@@ -6,7 +6,7 @@ metadata:
     app: session-container
   name: session-container
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: session-container
@@ -41,7 +41,7 @@ metadata:
     app: session-container
   name: session-container
 spec: 
-  type: LoadBalancer
+  type: ClusterIP
   selector: 
     app: session-container
   ports:

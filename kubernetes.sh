@@ -12,3 +12,4 @@ kubectl apply -f deployments/localstack-container.yaml
 kubectl apply -f deployments/plot-container.yaml
 kubectl apply -f deployments/kafka-container.yaml
 kubectl apply -f deployments/gateway-container.yaml
+kubectl apply -f deployments/kafka-misc.yaml

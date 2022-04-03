@@ -5,7 +5,7 @@ metadata:
     app: gateway-container
   name: gateway-container
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: gateway-container
@@ -21,26 +21,16 @@ spec:
         ports:
         - containerPort: 5006
         env:
-          - name: MONGO_URI
-            value: "mongodb://mongodb-container:27017"
-          - name: AWS_ACCESS_KEY_ID
-            valueFrom: 
-              secretKeyRef: 
-                name: awskey
-                key: AWS_ACCESS_KEY_ID
-          - name: AWS_SECRET_ACCESS_KEY
-            valueFrom: 
-              secretKeyRef: 
-                name: awssecret
-                key: AWS_SECRET_ACCESS_KEY
-          - name: AWS_REGION
-            value: "us-east-1"
-          - name: S3_HOST
-            value: "https://s3.amazonaws.com"
-          - name: S3_BUCKET
-            value: "plots-1"
-          - name: USE_LOCAL
-            value: "False"
+          - name: KAFKA_BROKER_URL
+            value: kafka-container:9092
+          - name: AUDIT_SERVICE
+            value: http://audit-container:5001
+          - name: SESSION_SERVICE
+            value: http://session-container:5004
+          - name: USER_SERVICE
+            value: http://user-container:5005  
+          - name: PLOT_SERVICE
+            value: http://plot-container:5002
 
       restartPolicy: Always
 ---

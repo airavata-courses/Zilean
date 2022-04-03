@@ -5,7 +5,7 @@ metadata:
     app: plot-container
   name: plot-container
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: plot-container
@@ -51,7 +51,7 @@ metadata:
     app: plot-container
   name: plot-container
 spec: 
-  type: LoadBalancer
+  type: ClusterIP
   selector: 
     app: plot-container
   ports:
