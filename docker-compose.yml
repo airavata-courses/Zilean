@@ -3,7 +3,7 @@ version: '3.1'
 services:
 
   mongodb-container:
-    image: mongos
+    image: mongo
     container_name: mongodb-container
     restart: always
     volumes:
