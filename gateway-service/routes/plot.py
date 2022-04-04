@@ -35,8 +35,7 @@ def fetch_plot_requests():
                 'Content-Type': 'application/json'
             },
             data=json.dumps({
-                "user_id": user_id,
-                "type": request_body.get('type') 
+                "user_id": user_id
             })
         )
         response.raise_for_status()
