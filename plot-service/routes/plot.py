@@ -169,6 +169,7 @@ def merra(request_data):
             
             FILENAME = convert_merra_data(FILENAME,request_data)
             plot_merra_data(FILENAME, request_data)
+            print(request_data)
             with open(f'{request_id}.png') as pltfile:
                 if bool(os.environ.get('USE_LOCAL')):
                     endpoint_url = os.getenv("S3_HOST") or 'http://localhost:4566'
@@ -198,6 +199,7 @@ def merra(request_data):
                         f'{request_id}.png'
                     )
 
+        print(plot_link)
         stat =  'UNKNOWN_ERROR'
         if plot_link == 'MERRA-LINK-NOT-FOUND':
             stat =  'DATA_RETRIEVAL_FAILURE'
