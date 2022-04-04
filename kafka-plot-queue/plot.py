@@ -1,5 +1,6 @@
 
 from kafka import KafkaConsumer
+from ratelimiter import RateLimiter
 import json
 import os
 import requests
@@ -23,6 +24,7 @@ def merra(plot_message):
         "original_request": plot_message.get('original_request')
     }
 
+@RateLimiter(max_calls=5, period=60)
 def plot_queue(plot_message):
     try:
         print(plot_message)
@@ -54,6 +56,7 @@ def main():
                 plot_message = json.loads(message.value)
                 plot_queue(plot_message)
     except Exception as err:
+        
         print(err)
         
 if __name__ == "__main__":
