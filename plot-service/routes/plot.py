@@ -233,7 +233,9 @@ def merra(request_data):
         })      
         print(err)
         return {
-            "message": str(err)
+            "message": str(err),
+            "request_data": request_data,
+            "plot_link": plot_link
         }
 
 @plot_api.route('/v1/plots', methods=["POST"])
@@ -255,7 +257,8 @@ def create_plot():
     except Exception as err:
         print(err)
         return {
-            "message": str(err)
+            "message": str(err),
+            "request_data": request_data
         }
     
 
