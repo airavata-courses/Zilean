@@ -25,14 +25,14 @@ def nexrad(request_data):
         })
         if existing_plot:
             db['plots'].insert_one({
-            'plot_link': existing_plot['plot_link'],
-            'target_link': existing_plot['target_link'],
-            'user_id': user_id,
-            'created_at': datetime.utcnow(),
-            'updated_at': datetime.utcnow(),
-            'request_id': request_id,
-            'status': existing_plot['status'],
-            'original_request': original_request
+                'plot_link': existing_plot['plot_link'],
+                'target_link': existing_plot['target_link'],
+                'user_id': user_id,
+                'created_at': datetime.utcnow(),
+                'updated_at': datetime.utcnow(),
+                'request_id': request_id,
+                'status': existing_plot['status'],
+                'original_request': original_request
             })
             return {
                 "message": "Success"
@@ -87,16 +87,16 @@ def nexrad(request_data):
             stat = 'IMAGE_PARSING_FAILURE'
         else:
             stat = 'SUCCESS'
-        db['plots'].insert_one({
-            'plot_link': '' if not plot_link else plot_link,
-            'target_link': target_link,
-            'user_id': user_id,
-            'created_at': datetime.utcnow(),
-            'updated_at': datetime.utcnow(),
-            'request_id': request_id,
-            'status': stat,
-            'original_request': original_request
-        })          
+            db['plots'].insert_one({
+                'plot_link': '' if not plot_link else plot_link,
+                'target_link': target_link,
+                'user_id': user_id,
+                'created_at': datetime.utcnow(),
+                'updated_at': datetime.utcnow(),
+                'request_id': request_id,
+                'status': stat,
+                'original_request': original_request
+            })          
         return {
             "message": "Success"
         }
@@ -133,14 +133,14 @@ def merra(request_data):
         })
         if existing_plot:
             db['plots'].insert_one({
-            'plot_link': existing_plot['plot_link'],
-            'target_link': existing_plot['target_link'],
-            'user_id': user_id,
-            'created_at': datetime.utcnow(),
-            'updated_at': datetime.utcnow(),
-            'request_id': request_id,
-            'status': existing_plot['status'],
-            'original_request': original_request
+                'plot_link': existing_plot['plot_link'],
+                'target_link': existing_plot['target_link'],
+                'user_id': user_id,
+                'created_at': datetime.utcnow(),
+                'updated_at': datetime.utcnow(),
+                'request_id': request_id,
+                'status': existing_plot['status'],
+                'original_request': original_request
             })
             return {
                 "message": "Success"
@@ -169,7 +169,6 @@ def merra(request_data):
             
             FILENAME = convert_merra_data(FILENAME,request_data)
             plot_merra_data(FILENAME, request_data)
-            print(request_data)
             with open(f'{request_id}.png') as pltfile:
                 if bool(os.environ.get('USE_LOCAL')):
                     endpoint_url = os.getenv("S3_HOST") or 'http://localhost:4566'
@@ -199,7 +198,6 @@ def merra(request_data):
                         f'{request_id}.png'
                     )
 
-        print(plot_link)
         stat =  'UNKNOWN_ERROR'
         if plot_link == 'MERRA-LINK-NOT-FOUND':
             stat =  'DATA_RETRIEVAL_FAILURE'
@@ -207,18 +205,20 @@ def merra(request_data):
             stat = 'IMAGE_PARSING_FAILURE'
         else:
             stat = 'SUCCESS'
-        db['plots'].insert_one({
-            'plot_link': '' if not plot_link else plot_link,
-            'target_link': target_link,
-            'user_id': user_id,
-            'created_at': datetime.utcnow(),
-            'updated_at': datetime.utcnow(),
-            'request_id': request_id,
-            'status': stat,
-            'original_request': original_request
-        })          
+            db['plots'].insert_one({
+                'plot_link': '' if not plot_link else plot_link,
+                'target_link': target_link,
+                'user_id': user_id,
+                'created_at': datetime.utcnow(),
+                'updated_at': datetime.utcnow(),
+                'request_id': request_id,
+                'status': stat,
+                'original_request': original_request
+            })          
         return {
-            "message": "Success"
+            "message": "Success",
+            "request_data": request_data,
+            "plot_link": plot_link
         }
     except Exception as err:
         db['plots'].insert_one({
