@@ -68,14 +68,14 @@ spec:
       containers:
       - name: zookeeper-container
         # image: digitalwonderland/zookeeper
-        image: confluentinc/cp-kafka:latest
+        image: confluentinc/cp-zookeeper:latest
         ports:
         - containerPort: 2181
         env:
           - name: ZOOKEEPER_CLIENT_PORT
             value: '2181'
           - name: ZOOKEEPER_TICK_TIME
-            value: '2000'
+            value: '30000'
           # - name: ZOOKEEPER_ID
           #   value: "1"
           # - name: ZOOKEEPER_SERVER_1

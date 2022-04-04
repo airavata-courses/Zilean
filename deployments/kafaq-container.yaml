@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kafaq-container
+  name: kafaq-container
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafaq-container
+  template:
+    metadata:
+      labels:
+        app: kafaq-container
+    spec:
+      containers:
+      - image: impiyush83/main-kafka-audit-queue
+        name: kafaq-container
+        imagePullPolicy: Always
+        env:
+          - name: KAFKA_BROKER_URL
+            value: "http://kafka-container:9092"
+          - name: AUDIT_SERVICE
+            value: "http://audit-container:5001"
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafaq-container
+spec:
+  clusterIP: None

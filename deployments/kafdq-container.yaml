@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kafdq-container
+  name: kafdq-container
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafdq-container
+  template:
+    metadata:
+      labels:
+        app: kafdq-container
+    spec:
+      containers:
+      - image: impiyush83/main-kafka-data-retrieval-queue
+        name: kafdq-container
+        imagePullPolicy: Always
+        env:
+          - name: KAFKA_BROKER_URL
+            value: http://kafka-container:9092
+          - name: DATA_RETRIEVAL_SERVICE
+            value: "http://data-retrieval-container:5003"
+      restartPolicy: Always
+
+---
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: kafdq-container
+# spec:
+#   clusterIP: None
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kafdq-container
+  name: kafdq-container
+spec: 
+  type: LoadBalancer
+  selector: 
+    app: kafdq-container
+  ports:
+  - port: 5050
+    targetPort: 5050
+    nodePort: 30050

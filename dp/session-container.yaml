@@ -6,7 +6,7 @@ metadata:
     app: session-container
   name: session-container
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: session-container
@@ -16,16 +16,16 @@ spec:
         app: session-container
     spec:
       containers:
-      - image: impiyush83/zilean-session
+      - image: impiyush83/main-session-service:latest
         name: session-container
         imagePullPolicy: Always
-        resources: 
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits: 
-            memory: "128Mi"
-            cpu: "500m"
+        # resources: 
+        #   requests:
+        #     memory: "64Mi"
+        #     cpu: "250m"
+        #   limits: 
+        #     memory: "128Mi"
+        #     cpu: "500m"
         ports:
         - containerPort: 5004
         env:

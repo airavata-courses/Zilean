@@ -26,16 +26,6 @@ spec:
       containers:
       - name: kafka-container
         image: confluentinc/cp-kafka:latest
-        command:
-        - /bin/sh
-        - -c
-        - |
-          kafka-producer-perf-test \
-            --topic audit-queue  \
-            --record-size 64 \
-            --throughput 1 \
-            --producer.config /mnt/kafka.properties \
-            --num-records 230400
         volumeMounts:
         - name: kafka-properties
           mountPath: /mnt

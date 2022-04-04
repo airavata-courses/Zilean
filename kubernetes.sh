@@ -5,11 +5,19 @@
 
 kubectl apply -f deployments/user-container.yaml
 kubectl apply -f deployments/session-container.yaml
-kubectl apply -f deployments/audit-container.yaml
-kubectl apply -f deployments/postgresql-container.yaml
+# kubectl apply -f deployments/audit-container.yaml
+# kubectl apply -f deployments/postgresql-container.yaml
+
+# kubectl apply -f deployments/localstack-container.yaml
+# kubectl apply -f deployments/plot-container.yaml
+
 kubectl apply -f deployments/mongodb-container.yaml
-kubectl apply -f deployments/localstack-container.yaml
-kubectl apply -f deployments/plot-container.yaml
-kubectl apply -f deployments/kafka-container.yaml
 kubectl apply -f deployments/gateway-container.yaml
+
+kubectl apply -f deployments/kafdq-container.yaml
+kubectl apply -f deployments/kafpq-container.yaml
+kubectl apply -f deployments/kafaq-container.yaml
+kubectl apply -f deployments/data-retrieval-container.yaml
+
+kubectl apply -f deployments/kafka-container.yaml
 kubectl apply -f deployments/kafka-misc.yaml

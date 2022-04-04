@@ -15,7 +15,7 @@ spec:
         app: gateway-container
     spec:
       containers:
-      - image: impiyush83/main-gateway-service
+      - image: impiyush83/main-gateway-service:latest
         name: gateway-container
         imagePullPolicy: Always
         ports:

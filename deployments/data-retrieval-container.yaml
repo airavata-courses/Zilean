@@ -2,56 +2,58 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: user-container
-  name: user-container
+    app: data-retrieval-container
+  name: data-retrieval-container
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-container
+      app: data-retrieval-container
   template:
     metadata:
       labels:
-        app: user-container
+        app: data-retrieval-container
     spec:
       containers:
-      - image: impiyush83/main-user-service
-        name: user-container
+      - image: impiyush83/main-data-retrieval-service
+        name: data-retrieval-container
         imagePullPolicy: Always
         ports:
-        - containerPort: 5005
+        - containerPort: 5003
         env:
           - name: MONGO_URI
             value: "mongodb://mongodb-container:27017"
+          - name: KAFKA_BROKER_URL
+            value: http://kafka-container:9092
 
       restartPolicy: Always
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: user-container
-  name: user-container
+    app: data-retrieval-container
+  name: data-retrieval-container
 spec: 
   type: LoadBalancer
   selector: 
-    app: user-container
+    app: data-retrieval-container
   ports:
-  - port: 5005
-    targetPort: 5005
-    nodePort: 30005
+  - port: 5003
+    targetPort: 5003
+    nodePort: 30011
+
 ---
 
 # apiVersion: autoscaling/v1
 # kind: HorizontalPodAutoscaler
 # metadata:
-#   name: user-container-hpa
+#   name: data-retrieval-container-hpa
 # spec:
 #   scaleTargetRef:
 #     apiVersion: apps/v1
 #     kind: Deployment
-#     name: user-container
+#     name: data-retrieval-container
 #   minReplicas: 1
 #   maxReplicas: 5
 #   targetCPUUtilizationPercentage: 50

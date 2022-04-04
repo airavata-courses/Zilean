@@ -41,7 +41,7 @@ metadata:
     app: session-container
   name: session-container
 spec: 
-  type: ClusterIP
+  type: LoadBalancer
   selector: 
     app: session-container
   ports:
@@ -52,15 +52,15 @@ spec:
 
 ---
 
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: session-container-hpa
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: session-container
-  minReplicas: 1
-  maxReplicas: 5
-  targetCPUUtilizationPercentage: 50
+# apiVersion: autoscaling/v1
+# kind: HorizontalPodAutoscaler
+# metadata:
+#   name: session-container-hpa
+# spec:
+#   scaleTargetRef:
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     name: session-container
+#   minReplicas: 1
+#   maxReplicas: 5
+#   targetCPUUtilizationPercentage: 50
