@@ -53,6 +53,7 @@ def plot_nexrad_data(f, request_id):
 def plot_merra_data(file, request_data):
     merra_data= Dataset(file, mode='r')
     request_id = request_data.get('request_id')
+    print(request_id)
     fig = plt.figure(figsize=(8,4))
     ax = plt.axes(projection=ccrs.Robinson())
     ax.set_global()

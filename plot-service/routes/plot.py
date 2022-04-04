@@ -146,6 +146,7 @@ def merra(request_data):
                 "message": "Success"
             }   
         result = requests.get(target_link)
+        print(result.content)
         try:
             result.raise_for_status()
             f = open(FILENAME,'wb')
@@ -169,7 +170,7 @@ def merra(request_data):
             
             FILENAME = convert_merra_data(FILENAME,request_data)
             plot_merra_data(FILENAME, request_data)
-
+            print(FILENAME)
             with open(f'{request_id}.png') as pltfile:
                 if bool(os.environ.get('USE_LOCAL')):
                     endpoint_url = os.getenv("S3_HOST") or 'http://localhost:4566'
