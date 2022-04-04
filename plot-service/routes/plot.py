@@ -169,6 +169,7 @@ def merra(request_data):
             
             FILENAME = convert_merra_data(FILENAME,request_data)
             plot_merra_data(FILENAME, request_data)
+
             with open(f'{request_id}.png') as pltfile:
                 if bool(os.environ.get('USE_LOCAL')):
                     endpoint_url = os.getenv("S3_HOST") or 'http://localhost:4566'
@@ -218,7 +219,8 @@ def merra(request_data):
             return {
                 "message": "Success",
                 "request_data": request_data,
-                "plot_link": plot_link
+                "plot_link": plot_link,
+                "result":result.content
             }
     except Exception as err:
         db['plots'].insert_one({
@@ -235,7 +237,8 @@ def merra(request_data):
         return {
             "message": str(err),
             "request_data": request_data,
-            "plot_link": plot_link
+            "plot_link": plot_link,
+            "result":result.content
         }
 
 @plot_api.route('/v1/plots', methods=["POST"])
