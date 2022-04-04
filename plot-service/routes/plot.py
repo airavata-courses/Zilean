@@ -97,9 +97,9 @@ def nexrad(request_data):
                 'status': stat,
                 'original_request': original_request
             })          
-        return {
-            "message": "Success"
-        }
+            return {
+                "message": "Success"
+            }
     except Exception as err:
         db['plots'].insert_one({
             'plot_link': 'NEXRAD-S3-LINK-NOT-FOUND',
@@ -215,14 +215,14 @@ def merra(request_data):
                 'status': stat,
                 'original_request': original_request
             })          
-        return {
-            "message": "Success",
-            "request_data": request_data,
-            "plot_link": plot_link
-        }
+            return {
+                "message": "Success",
+                "request_data": request_data,
+                "plot_link": plot_link
+            }
     except Exception as err:
         db['plots'].insert_one({
-            'plot_link': 'NEXRAD-S3-LINK-NOT-FOUND',
+            'plot_link': 'MERRA-LINK-NOT-FOUND',
             'user_id': user_id,
             'target_link': target_link,
             'created_at': datetime.utcnow(),
