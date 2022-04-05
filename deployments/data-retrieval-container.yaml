@@ -24,7 +24,7 @@ spec:
           - name: MONGO_URI
             value: "mongodb://mongodb-container:27017"
           - name: KAFKA_BROKER_URL
-            value: http://kafka-container:9092
+            value: kafka-container:9092
 
       restartPolicy: Always
 ---
