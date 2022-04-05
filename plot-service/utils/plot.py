@@ -80,7 +80,7 @@ def plot_merra_data(file, request_data):
 def convert_merra_data(file, request_data):
 
 #     hour = int(request_data.get('hour'))
-    hour = int(request_data.get('original_request').get('time').split(':')[0])
+    hour = int(request_data.get('original_request').get('hour'))
     merra_data = Dataset(file, mode='r')
     T2M = merra_data.variables['TLML'][:,:,:]
     T2M = T2M[hour,:,:]
