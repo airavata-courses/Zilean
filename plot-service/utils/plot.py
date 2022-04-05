@@ -90,7 +90,7 @@ def convert_merra_data(file, request_data):
     data = np.array(T2M)
 
     np.savetxt(filename, data,delimiter=",")
-    data.close()
+#     data.close()
     os.remove(os.getcwd()+"/"+file)
     print('File Removed')
 
