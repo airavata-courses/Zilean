@@ -174,7 +174,6 @@ def merra(request_data):
             plot_merra_data(FILENAME, request_data)
             print(FILENAME)
             with open(f'{request_id}.png') as pltfile:
-                image = base64.b64encode(pltfile.read()).decode('latin1')
                 if str(os.environ.get('USE_LOCAL'))!='False':
                     endpoint_url = os.getenv("S3_HOST") or 'http://localhost:4566'
                 else:
