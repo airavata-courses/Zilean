@@ -75,8 +75,8 @@ def nexrad(request_data):
                         plot_link = f'http://localhost:4566/plots/{request_id}.png'
                     else:
                         bucket_location = boto3.client('s3').get_bucket_location(Bucket=os.getenv('S3_BUCKET'))                 
-                        plot_link = "https://s3-{0}.amazonaws.com/{1}/{2}".format(
-                            bucket_location['LocationConstraint'],
+                        plot_link = "https://s3.{0}.amazonaws.com/{1}/{2}".format(
+                            bucket_location['LocationConstraint'] or os.environ.get('AWS_REGION'),
                             os.getenv('S3_BUCKET'),
                             f'{request_id}.png'
                         )
@@ -87,7 +87,7 @@ def nexrad(request_data):
         elif plot_link == '' or  plot_link == None:
             stat = 'IMAGE_PARSING_FAILURE'
         else:
-            stat = 'SUCCESS'
+            stat = 'PROCESSED'
             db['plots'].insert_one({
                 'plot_link': '' if not plot_link else plot_link,
                 'target_link': target_link,
@@ -195,8 +195,8 @@ def merra(request_data):
                     plot_link = f'http://localhost:4566/plots/{request_id}.png'
                 else:
                     bucket_location = boto3.client('s3').get_bucket_location(Bucket=os.getenv('S3_BUCKET'))                 
-                    plot_link = "https://s3-{0}.amazonaws.com/{1}/{2}".format(
-                        bucket_location['LocationConstraint'],
+                    plot_link = "https://s3.{0}.amazonaws.com/{1}/{2}".format(
+                        bucket_location['LocationConstraint'] or os.environ.get('AWS_REGION'),
                         os.getenv('S3_BUCKET'),
                         f'{request_id}.png'
                     )
@@ -207,7 +207,7 @@ def merra(request_data):
         elif plot_link == '' or  plot_link == None:
             stat = 'IMAGE_PARSING_FAILURE'
         else:
-            stat = 'SUCCESS'
+            stat = 'PROCESSED'
             db['plots'].insert_one({
                 'plot_link': '' if not plot_link else plot_link,
                 'target_link': target_link,
