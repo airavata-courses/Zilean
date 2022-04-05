@@ -86,8 +86,9 @@ def convert_merra_data(file, request_data):
     T2M = merra_data.variables['TLML'][:,:,:]
     T2M = T2M[hour,:,:]
     fileformat = file.split('.')
+    print(fileformat)
     filename = fileformat[0] + ".csv"
-
+    print(filename)
     data = np.array(T2M)
 
     np.savetxt(filename, data,delimiter=",")

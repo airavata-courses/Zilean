@@ -171,6 +171,7 @@ def merra(request_data):
             )
             
             FILENAME = convert_merra_data(FILENAME,request_data)
+            print(FILENAME)
             plot_merra_data(FILENAME, request_data)
             print(FILENAME)
             with open(f'{request_id}.png') as pltfile:
