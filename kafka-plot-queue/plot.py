@@ -13,6 +13,7 @@ def nexrad(plot_message):
         "user_id":  plot_message.get('user_id'),
         "request_id": plot_message.get('request_id'),
         "s3_link": plot_message.get('s3_link'),
+        "type":plot_message.get('type'),
         "original_request": plot_message.get('original_request')
     }
 
@@ -21,6 +22,7 @@ def merra(plot_message):
         "user_id":  plot_message.get('user_id'),
         "request_id": plot_message.get('request_id'),
         "url": plot_message.get('url'),
+        "type":plot_message.get('type'),
         "original_request": plot_message.get('original_request')
     }
 
