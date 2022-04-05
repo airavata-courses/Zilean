@@ -53,7 +53,7 @@ def nexrad(request_data):
                 f = Level2File(obj.get()['Body'])
                 plot_nexrad_data(f, request_id)
                 with open(f'{request_id}.png') as pltfile:
-                    if bool(os.environ.get('USE_LOCAL')):
+                    if str(os.environ.get('USE_LOCAL'))!='False':
                         endpoint_url = os.getenv("S3_HOST") or 'http://localhost:4566'
                     else:
                         endpoint_url = os.getenv("S3_HOST")
@@ -71,7 +71,7 @@ def nexrad(request_data):
                         ExtraArgs={'ACL': 'public-read'}
                     )
 
-                    if bool(os.environ.get('USE_LOCAL')):
+                    if str(os.environ.get('USE_LOCAL'))!='False':
                         plot_link = f'http://localhost:4566/plots/{request_id}.png'
                     else:
                         bucket_location = boto3.client('s3').get_bucket_location(Bucket=os.getenv('S3_BUCKET'))                 
@@ -173,7 +173,7 @@ def merra(request_data):
             plot_merra_data(FILENAME, request_data)
             print(FILENAME)
             with open(f'{request_id}.png') as pltfile:
-                if bool(os.environ.get('USE_LOCAL')):
+                if str(os.environ.get('USE_LOCAL'))!='False':
                     endpoint_url = os.getenv("S3_HOST") or 'http://localhost:4566'
                 else:
                     endpoint_url = os.getenv("S3_HOST")
@@ -191,7 +191,7 @@ def merra(request_data):
                     ExtraArgs={'ACL': 'public-read'}
                 )
 
-                if bool(os.environ.get('USE_LOCAL')):
+                if str(os.environ.get('USE_LOCAL'))!='False':
                     plot_link = f'http://localhost:4566/plots/{request_id}.png'
                 else:
                     bucket_location = boto3.client('s3').get_bucket_location(Bucket=os.getenv('S3_BUCKET'))                 
