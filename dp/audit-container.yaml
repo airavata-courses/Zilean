@@ -30,24 +30,24 @@ spec:
         ports:
         - containerPort: 5001
         env:
-            - name: DB_CONNECTION
-              value: postgres
-            - name: DB_CONNECTION_POOL_MAX_CONNECTIONS
-              value: "6"
-            - name: DB_CONNECTION_POOL_MIN_CONNECTIONS
-              value: "1"
-            - name: DB_DATABASE
-              value: audit_service_test
-            - name: DB_HOST
-              value: postgresql-container
-            - name: DB_PASSWORD
-              value: audit_service_test
-            - name: DB_PORT
-              value: "5432"
-            - name: DB_USERNAME
-              value: audit_service_test
-            - name: SQL_LOGGING_ENABLED
-              value: "true"
+          - name: DB_CONNECTION
+            value: postgres
+          - name: DB_CONNECTION_POOL_MAX_CONNECTIONS
+            value: "6"
+          - name: DB_CONNECTION_POOL_MIN_CONNECTIONS
+            value: "1"
+          - name: DB_DATABASE
+            value: audit_service_test
+          - name: DB_HOST
+            value: postgresql-container
+          - name: DB_PASSWORD
+            value: audit_service_test
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_USERNAME
+            value: audit_service_test
+          - name: SQL_LOGGING_ENABLED
+            value: "true"
       
       restartPolicy: Always
 ---

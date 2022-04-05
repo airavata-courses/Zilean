@@ -41,27 +41,26 @@ spec:
         io.kompose.service: postgresql-container
     spec:
       containers:
-        - env:
-            - name: POSTGRES_DB
-              value: audit_service_test
-            - name: POSTGRES_PASSWORD
-              value: audit_service_test
-            - name: POSTGRES_USER
-              value: audit_service_test
-          image: postgres
-          name: postgresql-container
-          ports:
-            - containerPort: 5432
-          volumeMounts:
-            - name: postgresql-storage
-              mountPath: /var/lib/postgresql/data
-              subPath: postgres
+      - image: postgres
+        name: postgresql-container
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: postgresql-storage
+          mountPath: /var/lib/postgresql/data
+          subPath: postgres
+        env:
+          - name: POSTGRES_DB
+            value: audit_service_test
+          - name: POSTGRES_PASSWORD
+            value: audit_service_test
+          - name: POSTGRES_USER
+            value: audit_service_test
       restartPolicy: Always
       volumes:
         - name: postgresql-storage
           persistentVolumeClaim:
             claimName: postgresql-container-claim0
-
 
 --- 
 
