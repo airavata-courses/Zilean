@@ -68,38 +68,34 @@ def merra(request_data):
     urlpart1 = "https://goldsmr4.gesdisc.eosdis.nasa.gov/data/MERRA2/M2I1NXLFO.5.12.4/"
     urlpart2 = year+"/"+month+"/"+"MERRA2_400.inst1_2d_lfo_Nx."+year+month+day+".nc4"
     URL = urlpart1 + urlpart2
-    result = requests.get(URL)
-    try:
-        result.raise_for_status()
-    except:
-        print('requests.get() returned an error code '+str(result.status_code))
-    finally:
-        original_request={
-            "date": date,
+#     result = requests.get(URL)
+
+    original_request={
+        "date": date,
+        "type":type,
+        "hour": hour
+    }
+    request_uuid = str(uuid.uuid4())
+    db['requests'].insert_one({
+        'url': URL,
+        'user_id': user_id,
+        'type':type,
+        'created_at': datetime.utcnow(),
+        'updated_at': datetime.utcnow(),
+        'uuid': request_uuid
+        })
+    kafka_producer.send(
+        'plot-queue', 
+        json.dumps({
+            "request_id": request_uuid,
+            "url": URL,
             "type":type,
-            "hour": hour
-        }
-        request_uuid = str(uuid.uuid4())
-        db['requests'].insert_one({
-            'url': URL,
-            'user_id': user_id,
-            'type':type,
-            'created_at': datetime.utcnow(),
-            'updated_at': datetime.utcnow(),
-            'uuid': request_uuid
-            })
-        kafka_producer.send(
-            'plot-queue', 
-            json.dumps({
-                "request_id": request_uuid,
-                "url": URL,
-                "type":type,
-                "user_id": str(user_id),
-                "original_request": original_request,
-                }, default=json_util.default).encode('utf-8'))
-        return {
-            "message": "Success"
-        }
+            "user_id": str(user_id),
+            "original_request": original_request,
+            }, default=json_util.default).encode('utf-8'))
+    return {
+        "message": "Success"
+    }
 @drs_api.route('/v1/retrieve-data', methods=["POST"])
 def retrieve_data():
     """
