@@ -221,8 +221,7 @@ def merra(request_data):
             return {
                 "message": "Success",
                 "request_data": request_data,
-                "plot_link": plot_link,
-                "result":result.content
+                "plot_link": plot_link
             }
     except Exception as err:
         db['plots'].insert_one({
