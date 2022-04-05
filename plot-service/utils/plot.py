@@ -60,12 +60,16 @@ def plot_merra_data(file, request_data):
     ax.set_global()
     ax.coastlines(resolution="110m",linewidth=1)
     ax.gridlines(linestyle='--',color='black')
-
+    
+    print("Check1")
+    
     lons = merra_data.variables['lon'][:]
     lats = merra_data.variables['lat'][:]
     T2M = merra_data.variables['TLML'][:,:,:]  #surface specific humidity 
     T2M = T2M[0,:,:]
-
+    
+    print("Check2")
+    
     # Set contour levels, then draw the plot and a colorbar
     contour_levels = np.arange(230,311,5)
     plt.contourf(lons, lats, T2M, contour_levels, transform=ccrs.PlateCarree(),cmap=plt.cm.jet)
@@ -74,6 +78,7 @@ def plot_merra_data(file, request_data):
     color_bar.set_label('K',size=12,rotation=0,labelpad=15)
     color_bar.ax.tick_params(labelsize=10)
 
+    print("Check3")
     plt.savefig(f'{request_id}.png')
     plt.close()
 
