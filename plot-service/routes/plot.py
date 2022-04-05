@@ -187,16 +187,13 @@ def merra(request_data):
                     endpoint_url=endpoint_url,
                 )
                 response = client.upload_file(
-                    image,
-                    #f'{request_id}.png',
+                    f'{request_id}.png',
                     os.getenv('S3_BUCKET'),
-                    image,
-                    #f'{request_id}.png',
+                    f'{request_id}.png',
                     ExtraArgs={'ACL': 'public-read'}
                 )
 
                 if str(os.environ.get('USE_LOCAL'))!='False':
-                    #plot_link = f'http://localhost:4566/plots/{request_id}.png'
                     plot_link = f'http://localhost:4566/plots/{request_id}.png'
                 else:
                     bucket_location = boto3.client('s3').get_bucket_location(Bucket=os.getenv('S3_BUCKET'))                 
