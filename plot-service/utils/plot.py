@@ -3,6 +3,7 @@ matplotlib.pyplot.switch_backend('agg')
 import matplotlib.pyplot as plt
 from metpy.plots import add_metpy_logo, add_timestamp
 import numpy as np
+import pandas as pd
 from netCDF4 import Dataset
 import os
 import cartopy.crs as ccrs
@@ -52,7 +53,8 @@ def plot_nexrad_data(f, request_id):
 
 def plot_merra_data(file, request_data):
     print(file)
-    merra_data= Dataset(file, mode='r')
+#     merra_data= Dataset(file, mode='r')
+    merra_data=pd.read_csv(file)
     request_id = request_data.get('request_id')
     print(request_id)
     fig = plt.figure(figsize=(8,4))
@@ -63,10 +65,14 @@ def plot_merra_data(file, request_data):
     
     print("Check1")
     
-    lons = merra_data.variables['lon'][:]
-    lats = merra_data.variables['lat'][:]
-    T2M = merra_data.variables['TLML'][:,:,:]  #surface specific humidity 
-    T2M = T2M[0,:,:]
+#     lons = merra_data.variables['lon'][:]
+#     lats = merra_data.variables['lat'][:]
+#     T2M = merra_data.variables['TLML'][:,:,:]  #surface specific humidity 
+#     T2M = T2M[0,:,:]
+    
+    lons = merra_data.iloc[0,1:].to_numpy()
+    lats = merra_data.iloc[1:, 0].to_numpy()
+    T2M = merra_data.iloc[1:,1:].to_numpy()
     
     print("Check2")
     
