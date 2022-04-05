@@ -160,6 +160,7 @@ def merra(request_data):
 
         if target_link == 'MERRA-LINK-NOT-FOUND':
             plot_link = 'MERRA-LINK-NOT-FOUND'
+            print(plot_link)
         else:
             s3 = boto3.resource(
                 's3',
@@ -200,7 +201,7 @@ def merra(request_data):
                         os.getenv('S3_BUCKET'),
                         f'{request_id}.png'
                     )
-
+        print(plot_link)
         stat =  'UNKNOWN_ERROR'
         if plot_link == 'MERRA-LINK-NOT-FOUND':
             stat =  'DATA_RETRIEVAL_FAILURE'
@@ -239,7 +240,6 @@ def merra(request_data):
             "message": str(err),
             "request_data": request_data,
             "plot_link": plot_link,
-            "result":result.content
         }
 
 @plot_api.route('/v1/plots', methods=["POST"])
