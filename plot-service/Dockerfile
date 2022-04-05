@@ -19,7 +19,6 @@ RUN python3 -m pip install -r requirements.txt
 RUN touch $HOME/.netrc 
 RUN echo "machine urs.earthdata.nasa.gov login AishwaryaSinhasane password Aishwarya@4" >> $HOME/.netrc
 RUN chmod 0600 $HOME/.netrc
-RUN touch $HOME/.urs_cookies
 # fixing shapely version issue
 RUN pip install shapely --upgrade --force-reinstall --no-binary shapely 
 
