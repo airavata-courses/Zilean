@@ -16,5 +16,8 @@ COPY ./ ./
 
 RUN  pip3 install numpy==1.19.5  && pip3 install cartopy==0.18.0 
 RUN python3 -m pip install -r requirements.txt
-
+RUN touch $HOME/.netrc 
+RUN echo "machine urs.earthdata.nasa.gov login AishwaryaSinhasane password Aishwarya@4" >> $HOME/.netrc
+RUN chmod 0600 $HOME/.netrc
+RUN touch $HOME/.urs_cookies
 CMD ["python3", "app.py"]
