@@ -206,8 +206,38 @@ def merra(request_data):
         stat =  'UNKNOWN_ERROR'
         if plot_link == 'MERRA-LINK-NOT-FOUND':
             stat =  'DATA_RETRIEVAL_FAILURE'
+            db['plots'].insert_one({
+                'plot_link': plot_link,
+                'target_link': target_link,
+                'user_id': user_id,
+                'created_at': datetime.utcnow(),
+                'updated_at': datetime.utcnow(),
+                'request_id': request_id,
+                'status': stat,
+                'original_request': original_request
+            })          
+            return {
+                "message": "Success",
+                "request_data": request_data,
+                "plot_link": plot_link
+            }
         elif plot_link == '' or  plot_link == None:
             stat = 'IMAGE_PARSING_FAILURE'
+            db['plots'].insert_one({
+                'plot_link': '',
+                'target_link': target_link,
+                'user_id': user_id,
+                'created_at': datetime.utcnow(),
+                'updated_at': datetime.utcnow(),
+                'request_id': request_id,
+                'status': stat,
+                'original_request': original_request
+            })          
+            return {
+                "message": "Success",
+                "request_data": request_data,
+                "plot_link": plot_link
+            }
         else:
             stat = 'PROCESSED'
             db['plots'].insert_one({
