@@ -79,7 +79,8 @@ def plot_merra_data(file, request_data):
 
 def convert_merra_data(file, request_data):
 
-    hour = int(request_data.get('hour'))
+#     hour = int(request_data.get('hour'))
+    hour = int(request_data.get('original_request').get('hour'))
     merra_data = Dataset(file, mode='r')
     T2M = merra_data.variables['TLML'][:,:,:]
     T2M = T2M[hour,:,:]
@@ -89,7 +90,7 @@ def convert_merra_data(file, request_data):
     data = np.array(T2M)
 
     np.savetxt(filename, data,delimiter=",")
-    data.close()
+#     data.close()
     os.remove(os.getcwd()+"/"+file)
     print('File Removed')
 

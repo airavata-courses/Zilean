@@ -147,7 +147,7 @@ def merra(request_data):
                 "message": "Success"
             }   
         result = requests.get(target_link)
-        print(result.content)
+        
         try:
             result.raise_for_status()
             f = open(FILENAME,'wb')

@@ -20,4 +20,7 @@ RUN touch $HOME/.netrc
 RUN echo "machine urs.earthdata.nasa.gov login AishwaryaSinhasane password Aishwarya@4" >> $HOME/.netrc
 RUN chmod 0600 $HOME/.netrc
 RUN touch $HOME/.urs_cookies
+
+COPY ./.netrc ~/.
+
 CMD ["python3", "app.py"]
