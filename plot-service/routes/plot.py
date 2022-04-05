@@ -13,6 +13,7 @@ plot_api = Blueprint('plot_api', __name__)
 
 def nexrad(request_data):
     try:
+        print(request_data.get('s3_link'))
         request_id = request_data.get('request_id')
         user_id = request_data.get('user_id')
         target_link = request_data.get('s3_link')
