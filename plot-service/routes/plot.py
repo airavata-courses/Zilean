@@ -76,7 +76,7 @@ def nexrad(request_data):
                     else:
                         bucket_location = boto3.client('s3').get_bucket_location(Bucket=os.getenv('S3_BUCKET'))                 
                         plot_link = "https://s3-{0}.amazonaws.com/{1}/{2}".format(
-                            bucket_location['LocationConstraint'],
+                            bucket_location['LocationConstraint'] or os.environ.get('AWS_REGION'),
                             os.getenv('S3_BUCKET'),
                             f'{request_id}.png'
                         )
@@ -196,7 +196,7 @@ def merra(request_data):
                 else:
                     bucket_location = boto3.client('s3').get_bucket_location(Bucket=os.getenv('S3_BUCKET'))                 
                     plot_link = "https://s3-{0}.amazonaws.com/{1}/{2}".format(
-                        bucket_location['LocationConstraint'],
+                        bucket_location['LocationConstraint'] or os.environ.get('AWS_REGION'),
                         os.getenv('S3_BUCKET'),
                         f'{request_id}.png'
                     )
