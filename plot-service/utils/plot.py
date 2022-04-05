@@ -53,7 +53,6 @@ def plot_nexrad_data(f, request_id):
 
 def plot_merra_data(file, request_data):
     print(file)
-#     merra_data= Dataset(file, mode='r')
     merra_data=pd.read_csv(file)
     request_id = request_data.get('request_id')
     print(request_id)
@@ -65,10 +64,6 @@ def plot_merra_data(file, request_data):
     
     print("Check1")
     
-#     lons = merra_data.variables['lon'][:]
-#     lats = merra_data.variables['lat'][:]
-#     T2M = merra_data.variables['TLML'][:,:,:]  #surface specific humidity 
-#     T2M = T2M[0,:,:]
     
     lons = merra_data.iloc[0,1:].to_numpy()
     lats = merra_data.iloc[1:, 0].to_numpy()
@@ -91,19 +86,22 @@ def plot_merra_data(file, request_data):
 
 def convert_merra_data(file, request_data):
 
-#     hour = int(request_data.get('hour'))
     hour = int(request_data.get('original_request').get('hour'))
     merra_data = Dataset(file, mode='r')
+    fileformat = file.split('.')
+    filename = fileformat[0] + ".csv"
+    lons = merra_data.variables['lon'][:]
+    lats = merra_data.variables['lat'][:]
     T2M = merra_data.variables['TLML'][:,:,:]
     T2M = T2M[hour,:,:]
-    fileformat = file.split('.')
-    print(fileformat)
-    filename = fileformat[0] + ".csv"
-    print(filename)
     data = np.array(T2M)
 
+    A = np.vstack([lons, data])
+    lats = np.append(0, lats)
+    latsflat = np.reshape(lats, (-1, 1))
+
+    final = np.hstack((latsflat, A))
     np.savetxt(filename, data,delimiter=",")
-#     data.close()
     os.remove(os.getcwd()+"/"+file)
     print('File Removed')
 
