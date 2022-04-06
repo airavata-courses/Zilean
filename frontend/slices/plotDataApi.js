@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const plotDataApi = createApi({
     reducerPath: 'plotDataApi',
-    baseQuery:fetchBaseQuery({ baseUrl: 'http://localhost:5006/' }),
+    baseQuery:fetchBaseQuery({ baseUrl: process.env.GATEWAY_SERVICE_URL || 'http://localhost:5006/v1/' }),
     tagTypes:['requestsHistory'],
     endpoints:  (builder) =>({
 
@@ -12,7 +12,7 @@ export const plotDataApi = createApi({
                 // console.log("Inside plotDataAPI post data ",data);
                 
                 return {
-                    url:'v1/weather/request',
+                    url:'/weather/request',
                     method:'POST',
                     body:data,
                     headers:{
@@ -29,7 +29,7 @@ export const plotDataApi = createApi({
 
                 // console.log("inside plorDataApi getRequestsHistory ",data);
                 return{
-                    url:'v1/plots',
+                    url:'/plots',
                     method:'GET',
                     headers:{
                         "Access-Token": data.access_token,
