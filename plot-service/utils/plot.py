@@ -56,11 +56,7 @@ def plot_merra_data(file, request_data):
     merra_data=pd.read_csv(file)
     request_id = request_data.get('request_id')
     print(request_id)
-    fig = plt.figure(figsize=(8,4))
-    ax = plt.axes(projection=ccrs.Robinson())
-    ax.set_global()
-    ax.coastlines(resolution="110m",linewidth=1)
-    ax.gridlines(linestyle='--',color='black')
+    
     
     print("Check1")
     
@@ -70,7 +66,11 @@ def plot_merra_data(file, request_data):
     T2M = merra_data.iloc[1:,1:].to_numpy()
     
     print("Check2")
-    
+    fig = plt.figure(figsize=(8,4))
+    ax = plt.axes(projection=ccrs.Robinson())
+    ax.set_global()
+    ax.coastlines(resolution="110m",linewidth=1)
+    ax.gridlines(linestyle='--',color='black')
     # Set contour levels, then draw the plot and a colorbar
     contour_levels = np.arange(230,311,5)
     plt.contourf(lons, lats, T2M, contour_levels, transform=ccrs.PlateCarree(),cmap=plt.cm.jet)
