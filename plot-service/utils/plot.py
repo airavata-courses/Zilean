@@ -101,7 +101,7 @@ def convert_merra_data(file, request_data):
     latsflat = np.reshape(lats, (-1, 1))
 
     final = np.hstack((latsflat, A))
-    np.savetxt(filename, data,delimiter=",")
+    np.savetxt(filename, final,delimiter=",")
     os.remove(os.getcwd()+"/"+file)
     print('File Removed')
 
