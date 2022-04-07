@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const authApi = createApi({
     reducerPath: 'authApi',
 //     baseQuery:fetchBaseQuery({ baseUrl: process.env.GATEWAY_SERVICE_URL || 'http://127.0.0.1:5006/v1/' }),
-    baseQuery:fetchBaseQuery({ baseUrl: 'http://gateway-container:30010/v1/' }),
+    baseQuery:fetchBaseQuery({ baseUrl: 'http://149.165.152.187/:30010/v1/' }),
     tagTypes:['login','signup'],
     endpoints:  (builder) =>({
 
