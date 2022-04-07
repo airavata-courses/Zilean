@@ -22,6 +22,6 @@ RUN chmod 0600 $HOME/.netrc
 # fixing shapely version issue
 RUN pip install shapely --upgrade --force-reinstall --no-binary shapely 
 
-COPY ./.netrc ~/.
+# COPY ./.netrc ~/.
 
 CMD ["python3", "app.py"]
