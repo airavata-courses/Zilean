@@ -2,7 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const plotDataApi = createApi({
     reducerPath: 'plotDataApi',
-    baseQuery:fetchBaseQuery({ baseUrl: process.env.GATEWAY_SERVICE_URL || 'http://localhost:5006/v1/' }),
+//     baseQuery:fetchBaseQuery({ baseUrl: process.env.GATEWAY_SERVICE_URL || 'http://localhost:5006/v1/' }),
+    baseQuery:fetchBaseQuery({ baseUrl: 'http://gateway-container:5006/v1/' }),
     tagTypes:['requestsHistory'],
     endpoints:  (builder) =>({
 
