@@ -8,6 +8,8 @@ COPY ./package.json ./
 RUN npm install
 
 COPY ./ ./
+
+EXPOSE 3000
 # Default command that will run when we start an instace of the image
 CMD ["npm","run","start"] 
 
