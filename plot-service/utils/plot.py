@@ -52,8 +52,11 @@ def plot_nexrad_data(f, request_id):
 
 
 def plot_merra_data(file, request_data):
+    nums = []
+    for i in range(0, 577):
+        nums.append(i)
     print(file)
-    merra_data=pd.read_csv(file)
+    merra_data=pd.read_csv(file,names=nums)
     request_id = request_data.get('request_id')
     print(request_id)
     
@@ -80,7 +83,7 @@ def plot_merra_data(file, request_data):
     color_bar.ax.tick_params(labelsize=10)
 
     print("Check3")
-    plt.savefig(f'{request_id}.png')
+    fig.savefig(f'{request_id}.png')
     plt.close()
 
 
@@ -102,6 +105,7 @@ def convert_merra_data(file, request_data):
 
     final = np.hstack((latsflat, A))
     np.savetxt(filename, final,delimiter=",")
+    merra_data.close()
     os.remove(os.getcwd()+"/"+file)
     print('File Removed')
 
