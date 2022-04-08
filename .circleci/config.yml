@@ -1,7 +1,5 @@
 version: 2.1
 
-
-
 workflows:
   build:
     jobs:
@@ -17,7 +15,7 @@ jobs:
         steps:
             - add_ssh_keys:
                 fingerprints:
-                  - "1e:d1:bd:29:93:1f:58:3d:20:7d:55:96:e7:9c:79:f2"
+                  - "ba:14:bc:2a:da:b9:7b:3d:0f:1b:a8:02:39:72:2c:97"
             - checkout
             # - setup_remote_docker
             # - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
@@ -27,7 +25,10 @@ jobs:
             # - run: cd gateway-service && pip install -r requirements.txt && pytest tests
             # - run: ssh -o StrictHostKeyChecking=no $JETSTREAM_USER
             # - run: sudo su
-            - run: ssh -oStrictHostKeyChecking=no $JETSTREAM_USER -q <<'EOL'
-                  sudo su -
-                  cd Zilean/dp
-              EOL
+            - run:
+                  name: Build Success
+                  when: on_success
+                  command: |
+                    ssh -oStrictHostKeyChecking=no rpharate@iu.edu -q <<'EOL'
+                        sudo su -
+                    EOL
