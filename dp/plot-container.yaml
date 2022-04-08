@@ -51,7 +51,7 @@ metadata:
     app: plot-container
   name: plot-container
 spec: 
-  type: LoadBalancer
+  type: NodePort
   selector: 
     app: plot-container
   ports:

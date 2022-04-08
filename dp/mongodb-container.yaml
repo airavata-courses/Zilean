@@ -1,16 +1,16 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  creationTimestamp: null
-  labels:
-    io.kompose.service: mongodb-container-claim0
-  name: mongodb-container-claim0
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2000Mi
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   creationTimestamp: null
+#   labels:
+#     io.kompose.service: mongodb-container-claim0
+#   name: mongodb-container-claim0
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 2000Mi
 
 ---
 
@@ -45,14 +45,14 @@ spec:
           name: mongodb-container
           ports:
             - containerPort: 27017
-          volumeMounts:
-            - mountPath: /data/db
-              name: mongodb-container-claim0
+          # volumeMounts:
+          #   - mountPath: /data/db
+          #     name: mongodb-container-claim0
       restartPolicy: Always
-      volumes:
-        - name: mongodb-container-claim0
-          persistentVolumeClaim:
-            claimName: mongodb-container-claim0
+      # volumes:
+      #   - name: mongodb-container-claim0
+      #     persistentVolumeClaim:
+      #       claimName: mongodb-container-claim0
 
 ---
 

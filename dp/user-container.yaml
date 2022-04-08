@@ -33,7 +33,7 @@ metadata:
     app: user-container
   name: user-container
 spec: 
-  type: LoadBalancer
+  type: NodePort
   selector: 
     app: user-container
   ports:
