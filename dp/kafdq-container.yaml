@@ -24,7 +24,7 @@ spec:
           - name: KAFKA_BROKER_URL
             value: kafka-container:9092 ## https://kafka-container:9092 gives error --> "ValueError: invalid literal for int() with base 10: '//kafka-container'"
           - name: DATA_RETRIEVAL_SERVICE
-            value: http://149.165.152.187:30003
+            value: http://149.165.153.6:30003
 
       restartPolicy: Always
 

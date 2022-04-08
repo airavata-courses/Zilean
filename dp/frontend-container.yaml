@@ -22,7 +22,7 @@ spec:
         - containerPort: 3000
         env:
           - name: GATEWAY_SERVICE_URL
-            value: http://149.165.152.187:30010/v1/
+            value: http://149.165.153.6:30010/v1/
       restartPolicy: Always
 
 ---
