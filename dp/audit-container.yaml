@@ -58,7 +58,7 @@ metadata:
     app: audit-container
   name: audit-container
 spec: 
-  type: LoadBalancer
+  type: NodePort
   selector: 
     app: audit-container
   ports:

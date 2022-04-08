@@ -41,7 +41,7 @@ metadata:
     app: session-container
   name: session-container
 spec: 
-  type: LoadBalancer
+  type: NodePort
   selector: 
     app: session-container
   ports:

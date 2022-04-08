@@ -35,13 +35,13 @@ metadata:
     app: data-retrieval-container
   name: data-retrieval-container
 spec: 
-  type: LoadBalancer
+  type: NodePort
   selector: 
     app: data-retrieval-container
   ports:
   - port: 5003
     targetPort: 5003
-    nodePort: 30011
+    nodePort: 30003
 
 ---
 
