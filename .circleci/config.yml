@@ -15,13 +15,15 @@ jobs:
         docker:
             - image: "cimg/python:3.10.4"
         steps:
+            - add_ssh_keys:
+                fingerprints:
+                  - "1e:d1:bd:29:93:1f:58:3d:20:7d:55:96:e7:9c:79:f2"
             - checkout
-            - setup_remote_docker
-            - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
-            - run: cd gateway-service && docker build -t $DOCKER_USERNAME/$CIRCLE_BRANCH:latest .
-            - run: docker push $DOCKER_USERNAME/$CIRCLE_BRANCH:latest
-            - run: docker logout
-            - run: cd gateway-service && pip install -r requirements.txt && pytest tests
+            # - setup_remote_docker
+            # - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+            # - run: cd gateway-service && docker build -t $DOCKER_USERNAME/$CIRCLE_BRANCH:latest .
+            # - run: docker push $DOCKER_USERNAME/$CIRCLE_BRANCH:latest
+            # - run: docker logout
+            # - run: cd gateway-service && pip install -r requirements.txt && pytest tests
             - run: ssh -o StrictHostKeyChecking=no $JETSTREAM_USER
-            - run: $JETSTREAM_PASSPHRASE
             - run: sudo su
