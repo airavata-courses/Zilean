@@ -16,7 +16,7 @@ jobs:
             - checkout
             - setup_remote_docker
             - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
-            - run: cd frontend && docker build -t $DOCKER_USERNAME/$CIRCLE_BRANCH:latest .
+            - run: cd audit-service && docker build -t $DOCKER_USERNAME/$CIRCLE_BRANCH:latest .
             - run: docker push $DOCKER_USERNAME/$CIRCLE_BRANCH:latest
             - run: docker logout
             - run: cd audit-service && npm install && npm run tests
