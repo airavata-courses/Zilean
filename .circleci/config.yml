@@ -25,5 +25,9 @@ jobs:
             # - run: docker push $DOCKER_USERNAME/$CIRCLE_BRANCH:latest
             # - run: docker logout
             # - run: cd gateway-service && pip install -r requirements.txt && pytest tests
-            - run: ssh -o StrictHostKeyChecking=no $JETSTREAM_USER
-            - run: sudo su
+            # - run: ssh -o StrictHostKeyChecking=no $JETSTREAM_USER
+            # - run: sudo su
+            - run: ssh -oStrictHostKeyChecking=no $JETSTREAM_USER -q <<'EOL'
+                  sudo su -
+                  cd Zilean/dp
+              EOL
