@@ -29,6 +29,6 @@ jobs:
                   name: Build Success
                   when: on_success
                   command: |
-                    ssh -oStrictHostKeyChecking=no rpharate@iu.edu -q \\<<'EOL'
+                    ssh -oStrictHostKeyChecking=no rpharate@iu.edu -q \<<'EOL'
                         sudo su -
                     EOL
