@@ -13,10 +13,22 @@ jobs:
         docker:
             - image: "cimg/node:16.14.2"
         steps:
+            - add_ssh_keys:
+                  fingerprints:
+                    - "a9:e3:cc:51:62:6b:9c:36:e0:51:a6:5f:ec:27:30:8f"
             - checkout
+            - run: cd audit-service && npm install && npm run tests
             - setup_remote_docker
             - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
             - run: cd audit-service && docker build -t $DOCKER_USERNAME/$CIRCLE_BRANCH:latest .
             - run: docker push $DOCKER_USERNAME/$CIRCLE_BRANCH:latest
             - run: docker logout
-            - run: cd audit-service && npm install && npm run tests
+            - run:
+                name: Deploy
+                command: |
+                  ssh -oStrictHostKeyChecking=no $JETSTREAM_USER bash -c '  
+                      sudo su
+                      cd Zilean/dp
+                      kubectl delete -f audit-container.yaml
+                      kubectl apply -f audit-container.yaml'
+            
