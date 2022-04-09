@@ -16,9 +16,18 @@ jobs:
             - image: "cimg/node:10.16.0"
         steps:
             - checkout
+            - run: cd frontend && npm install
             - setup_remote_docker
             - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
             - run: cd frontend && docker build -t $DOCKER_USERNAME/$CIRCLE_BRANCH:latest .
             - run: docker push $DOCKER_USERNAME/$CIRCLE_BRANCH:latest
             - run: docker logout
-            - run: cd frontend && npm install
+            - run:
+                name: Deploy
+                command: |
+                  ssh -oStrictHostKeyChecking=no $JETSTREAM_USER bash -c '  
+                      sudo su
+                      cd Zilean/dp
+                      kubectl delete -f frontend-container.yaml
+                      kubectl apply -f frontend-container.yaml'
+            
