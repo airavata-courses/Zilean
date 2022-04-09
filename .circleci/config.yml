@@ -15,6 +15,9 @@ jobs:
         docker:
             - image: "cimg/node:10.16.0"
         steps:
+            - add_ssh_keys:
+                  fingerprints:
+                    - "a9:e3:cc:51:62:6b:9c:36:e0:51:a6:5f:ec:27:30:8f"
             - checkout
             - run: cd frontend && npm install
             - setup_remote_docker
