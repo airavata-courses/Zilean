@@ -17,7 +17,7 @@ jobs:
             - checkout
             - run: sudo apt-get update 
             - run: sudo apt-get install sshpass
-            - run: sshpass -p $JESTREAM_PASSPHRASE ssh -oStrictHostKeyChecking=no exouser@149.165.153.6
+            - run: sshpass -p $JESTREAM_PASSPHRASE ssh exouser@149.165.153.6
             # - setup_remote_docker
             # - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
             # - run: cd gateway-service && docker build -t $DOCKER_USERNAME/$CIRCLE_BRANCH:latest .
