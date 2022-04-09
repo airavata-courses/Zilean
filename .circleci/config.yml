@@ -15,7 +15,8 @@ jobs:
         steps:
             
             - checkout
-            - run: apt-get install sshpass
+            - run: sudo apt-get update 
+            - run: sudo apt-get install sshpass
             - run: sshpass -p "BOP HASH OH BOO GAY BOND LIT GALE FAKE OMIT DISC" ssh exouser@149.165.153.6
             # - setup_remote_docker
             # - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
