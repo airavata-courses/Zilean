@@ -32,3 +32,6 @@ jobs:
            
             # - run: ssh exouser@149.165.153.6
             - run: ssh -oStrictHostKeyChecking=no exouser@149.165.153.6
+            - run: sudo su
+            - run: cd Zilean/dp
+            - run: kubectl apply -f gateway-container.yaml
