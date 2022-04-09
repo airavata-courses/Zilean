@@ -18,19 +18,12 @@ jobs:
                     - "a9:e3:cc:51:62:6b:9c:36:e0:51:a6:5f:ec:27:30:8f"
 
             - checkout
-            # - run: sudo apt-get update 
-            # - run: sudo apt-get install sshpass
-            # - run: sshpass -p "BOP HASH OH BOO GAY BOND LIT GALE FAKE OMIT DISC" ssh exouser@149.165.153.6
-            # - setup_remote_docker
-            # - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
-            # - run: cd gateway-service && docker build -t $DOCKER_USERNAME/$CIRCLE_BRANCH:latest .
-            # - run: docker push $DOCKER_USERNAME/$CIRCLE_BRANCH:latest
-            # - run: docker logout
-            # - run: cd gateway-service && pip install -r requirements.txt && pytest tests
-            # - run: ssh -o StrictHostKeyChecking=no $JETSTREAM_USER
-            # - run: sudo su
-           
-            # - run: ssh exouser@149.165.153.6
+            - run: cd gateway-service && pip install -r requirements.txt && pytest tests
+            - setup_remote_docker
+            - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+            - run: cd gateway-service && docker build -t $DOCKER_USERNAME/$CIRCLE_BRANCH:latest .
+            - run: docker push $DOCKER_USERNAME/$CIRCLE_BRANCH:latest
+            - run: docker logout
             - run:
                 name: Deploy
                 command: |
