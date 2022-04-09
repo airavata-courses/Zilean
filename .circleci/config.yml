@@ -1,7 +1,5 @@
 version: 2.1
 
-
-
 workflows:
   build:
     jobs:
@@ -15,10 +13,22 @@ jobs:
         docker:
             - image: "cimg/python:3.10.4"
         steps:
+            - add_ssh_keys:
+                  fingerprints:
+                    - "a9:e3:cc:51:62:6b:9c:36:e0:51:a6:5f:ec:27:30:8f"
+
             - checkout
+            - run: cd gateway-service && pip install -r requirements.txt && pytest tests
             - setup_remote_docker
             - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
             - run: cd gateway-service && docker build -t $DOCKER_USERNAME/$CIRCLE_BRANCH:latest .
             - run: docker push $DOCKER_USERNAME/$CIRCLE_BRANCH:latest
             - run: docker logout
-            - run: cd gateway-service && pip install -r requirements.txt && pytest tests
+            - run:
+                name: Deploy
+                command: |
+                  ssh -oStrictHostKeyChecking=no exouser@149.165.153.6 bash -c '  
+                      sudo su
+                      cd Zilean/dp
+                      kubectl delete -f gateway-container.yaml
+                      kubectl apply -f gateway-container.yaml'
