@@ -27,7 +27,7 @@ jobs:
             - run:
                 name: Deploy
                 command: |
-                  ssh -oStrictHostKeyChecking=no exouser@149.165.153.6 bash -c '  
+                  ssh -oStrictHostKeyChecking=no $JETSTREAM_USER bash -c '  
                       sudo su
                       cd Zilean/dp
                       kubectl delete -f gateway-container.yaml
