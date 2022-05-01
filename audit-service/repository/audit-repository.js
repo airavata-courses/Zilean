@@ -19,7 +19,11 @@ auditRepository.getPaginatedAudits = async function (pageInfo) {
     const valuePaginator = new ValuePaginator(db.audits, auditDefaultSort, {}, []);
     return valuePaginator.paginate(pageInfo.cursor, parseInt(pageInfo.limit, 10));
 
-    return await db.audits.findAll();
+    return await db.audits.findAll({
+        where: {
+            user_id: pageInfo.user_id
+        }
+    });
 };
 
 auditRepository.insert = async function (audit) {
