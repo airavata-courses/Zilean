@@ -7,6 +7,7 @@ const auditRepository = require('../repository/audit-repository');
 
 auditService.getAuditList = async (pageInfo) => {
     return await auditRepository.getPaginatedAudits({
+        user_id: pageInfo.user_id,
         cursor: pageInfo.cursor,
         limit: pageInfo.limit || appConfig.default_pagination_limit
     });
