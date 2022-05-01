@@ -30,5 +30,10 @@ jobs:
                       sudo su
                       cd Zilean/dp
                       kubectl delete -f audit-container.yaml
-                      kubectl apply -f audit-container.yaml'
+                      kubectl apply -f audit-container.yaml
+                      sleep 30
+                      POD=$(kubectl get pod -l app=audit-container -o jsonpath="{.items[0].metadata.name}")
+                      kubectl exec -ti $POD sh
+                      npm run db:prod:all:migrate
+                      exit'
             
