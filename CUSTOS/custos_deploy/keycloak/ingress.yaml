@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: keycloak-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /auth/$2
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+   - hosts:
+     - js-156-74.jetstream-cloud.org
+     secretName: tls-keycloak-secret
+
+  rules:
+   - host: js-156-74.jetstream-cloud.org
+     http:
+      paths:
+       - path: /auth(/|$)(.*)    
+         backend:
+          serviceName: keycloak-discovery
+          servicePort: 8080

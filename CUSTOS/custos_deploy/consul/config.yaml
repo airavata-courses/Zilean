@@ -1,0 +1,3 @@
+server:
+  replicas: 2
+  storage: 4Gi
