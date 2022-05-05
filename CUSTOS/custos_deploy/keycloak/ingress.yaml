@@ -9,7 +9,7 @@ metadata:
 spec:
   tls:
    - hosts:
-     - js-156-74.jetstream-cloud.org
+     - js-169-65.jetstream-cloud.org/
      secretName: tls-keycloak-secret
 
   rules:
