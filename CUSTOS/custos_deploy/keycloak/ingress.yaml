@@ -9,11 +9,11 @@ metadata:
 spec:
   tls:
    - hosts:
-     - js-169-65.jetstream-cloud.org/
+     - js-169-65.jetstream-cloud.org
      secretName: tls-keycloak-secret
 
   rules:
-   - host: js-156-74.jetstream-cloud.org
+   - host: js-169-65.jetstream-cloud.org
      http:
       paths:
        - path: /auth(/|$)(.*)    
