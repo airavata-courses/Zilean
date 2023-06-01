@@ -1,6 +1,6 @@
 ![Logo](https://github.com/airavata-courses/Zilean/blob/main/images/assets/zilean-banner.png)
 
-## Team 
+## Team Members
 
 Spring 2022 Project Team
 
